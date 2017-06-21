@@ -1,0 +1,91 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |  34 _BCPD_RE   FF69 GR  |  33 _BCPS_RE   FF68 GR
+ 26 _BGP_REG   FF47 GR  |   5 _DIV_REG   FF04 GR  |  25 _DMA_REG   FF46 GR
+ 2D _HDMA1_R   FF51 GR  |  2E _HDMA2_R   FF52 GR  |  2F _HDMA3_R   FF53 GR
+ 30 _HDMA4_R   FF54 GR  |  31 _HDMA5_R   FF55 GR  |  38 _IE_REG    FFFF GR
+  9 _IF_REG    FF0F GR  |  2B _KEY1_RE   FF4D GR  |  1F _LCDC_RE   FF40 GR
+ 24 _LYC_REG   FF45 GR  |  23 _LY_REG    FF44 GR  |   A _NR10_RE   FF10 GR
+  B _NR11_RE   FF11 GR  |   C _NR12_RE   FF12 GR  |   D _NR13_RE   FF13 GR
+  E _NR14_RE   FF14 GR  |   F _NR21_RE   FF16 GR  |  10 _NR22_RE   FF17 GR
+ 11 _NR23_RE   FF18 GR  |  12 _NR24_RE   FF19 GR  |  13 _NR30_RE   FF1A GR
+ 14 _NR31_RE   FF1B GR  |  15 _NR32_RE   FF1C GR  |  16 _NR33_RE   FF1D GR
+ 17 _NR34_RE   FF1E GR  |  18 _NR41_RE   FF20 GR  |  19 _NR42_RE   FF21 GR
+ 1A _NR43_RE   FF22 GR  |  1B _NR44_RE   FF23 GR  |  1C _NR50_RE   FF24 GR
+ 1D _NR51_RE   FF25 GR  |  1E _NR52_RE   FF26 GR  |  27 _OBP0_RE   FF48 GR
+ 28 _OBP1_RE   FF49 GR  |  36 _OCPD_RE   FF6B GR  |  35 _OCPS_RE   FF6A GR
+  2 _P1_REG    FF00 GR  |  32 _RP_REG    FF56 GR  |   3 _SB_REG    FF01 GR
+ 22 _SCX_REG   FF43 GR  |  21 _SCY_REG   FF42 GR  |   4 _SC_REG    FF02 GR
+ 20 _STAT_RE   FF41 GR  |  37 _SVBK_RE   FF70 GR  |   8 _TAC_REG   FF07 GR
+  6 _TIMA_RE   FF05 GR  |   7 _TMA_REG   FF06 GR  |  2C _VBK_REG   FF4F GR
+ 2A _WX_REG    FF4B GR  |  29 _WY_REG    FF4A GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE      size    0   flags    0
+   1 _SFR       size    0   flags    8
+   2 _SFR0      size    1   flags    8
+   3 _SFR1      size    1   flags    8
+   4 _SFR2      size    1   flags    8
+   5 _SFR3      size    1   flags    8
+   6 _SFR4      size    1   flags    8
+   7 _SFR5      size    1   flags    8
+   8 _SFR6      size    1   flags    8
+   9 _SFR7      size    1   flags    8
+   A _SFR8      size    1   flags    8
+   B _SFR9      size    1   flags    8
+   C _SFRa      size    1   flags    8
+   D _SFRb      size    1   flags    8
+   E _SFRc      size    1   flags    8
+   F _SFRd      size    1   flags    8
+  10 _SFRe      size    1   flags    8
+  11 _SFRf      size    1   flags    8
+  12 _SFR10     size    1   flags    8
+  13 _SFR11     size    1   flags    8
+  14 _SFR12     size    1   flags    8
+  15 _SFR13     size    1   flags    8
+  16 _SFR14     size    1   flags    8
+  17 _SFR15     size    1   flags    8
+  18 _SFR16     size    1   flags    8
+  19 _SFR17     size    1   flags    8
+  1A _SFR18     size    1   flags    8
+  1B _SFR19     size    1   flags    8
+  1C _SFR1a     size    1   flags    8
+  1D _SFR1b     size    1   flags    8
+  1E _SFR1c     size    1   flags    8
+  1F _SFR1d     size    1   flags    8
+  20 _SFR1e     size    1   flags    8
+  21 _SFR1f     size    1   flags    8
+  22 _SFR20     size    1   flags    8
+  23 _SFR21     size    1   flags    8
+  24 _SFR22     size    1   flags    8
+  25 _SFR23     size    1   flags    8
+  26 _SFR24     size    1   flags    8
+  27 _SFR25     size    1   flags    8
+  28 _SFR26     size    1   flags    8
+  29 _SFR27     size    1   flags    8
+  2A _SFR28     size    1   flags    8
+  2B _SFR29     size    1   flags    8
+  2C _SFR2a     size    1   flags    8
+  2D _SFR2b     size    1   flags    8
+  2E _SFR2c     size    1   flags    8
+  2F _SFR2d     size    1   flags    8
+  30 _SFR2e     size    1   flags    8
+  31 _SFR2f     size    1   flags    8
+  32 _SFR30     size    1   flags    8
+  33 _SFR31     size    1   flags    8
+  34 _SFR32     size    1   flags    8
+  35 _SFR33     size    1   flags    8
+  36 _SFR34     size    1   flags    8
+  37 _SFR35     size    1   flags    8
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
+
+Area Table
+
+  38 _SFR36     size    1   flags    8
+

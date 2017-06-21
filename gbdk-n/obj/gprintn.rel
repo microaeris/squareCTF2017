@@ -1,0 +1,47 @@
+XL
+H 7 areas 8 global symbols
+M gprintn
+O -mgbz80
+S __moduchar_rrx_s Ref0000
+S .__.ABS. Def0000
+S __divuchar_rrx_s Ref0000
+S _digits Ref0000
+S _wrtchr Ref0000
+A _CODE size 62 flags 0 addr 0
+S _gprintn Def0000
+S _gprintn_start Def0000
+S _gprintn_end Def0062
+A _DATA size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00
+R 00 00 00 00
+T 00 00 3E 00 5F F8 02 7E 57 7E CB 7F 28 13 23 23
+R 00 00 00 00
+T 0E 00 7E B7 28 0D 3E 2D F5 33 CD 00 00 33 AF F8
+R 00 00 00 00 02 0B 04 00
+T 1C 00 02 96 77
+R 00 00 00 00
+T 1F 00
+R 00 00 00 00
+T 1F 00 F8 02 56 23 5E D5 7B F5 33 D5 33 CD 00 00
+R 00 00 00 00 02 0E 02 00
+T 2D 00 F1 7B D1 47 B7 28 11 D5 AF F5 33 F8 06 7E
+R 00 00 00 00
+T 3B 00 F5 33 C5 33 CD 00 00 E8 03 D1
+R 00 00 00 00 00 07 00 00
+T 45 00
+R 00 00 00 00
+T 45 00 7B F5 33 D5 33 CD 00 00 F1 43 21 00 00 7E
+R 00 00 00 00 02 08 00 00 02 0D 03 00
+T 53 00 80 4F 23 7E CE 00 47 0A F5 33 CD 00 00 33
+R 00 00 00 00 02 0D 04 00
+T 61 00 C9
+R 00 00 00 00
+T 62 00
+R 00 00 00 00

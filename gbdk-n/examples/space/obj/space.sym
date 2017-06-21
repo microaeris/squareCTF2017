@@ -1,0 +1,81 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    .A      =  0010     |     .B      =  0020     |     .BANKOV =  0002 
+    .BCPD   =  0069     |     .BCPS   =  0068     |     .BGP    =  0047 
+    .CLOSED =  0000     |     .CLOSING=  0003     |     .DIV    =  0004 
+    .DMA    =  0046     |     .DOWN   =  0008     |     .DT_IDLE=  0066 
+    .DT_RECE=  0055     |     .FADESTE=  0010     |     .G_MODE =  0001 
+    .HDMA1  =  0051     |     .HDMA2  =  0052     |     .HDMA3  =  0053 
+    .HDMA4  =  0054     |     .HDMA5  =  0055     |     .IE     =  00FF 
+    .IF     =  000F     |     .IO_ERRO=  0004     |     .IO_IDLE=  0000 
+    .IO_RECE=  0002     |     .IO_SEND=  0001     |     .JOY_IFL=  0010 
+    .KEY1   =  004D     |     .LCDC   =  0040     |     .LCD_IFL=  0002 
+    .LEFT   =  0002     |     .LY     =  0044     |     .LYC    =  0045 
+    .MAXCURS=  0013     |     .MAXCURS=  0011     |     .MAXWINX=  00A6 
+    .MAXWINY=  008F     |     .MAXWNDP=  00A6     |     .MAXWNDP=  008F 
+    .MBC1_RO=  2000     |     .MINWINX=  0027     |     .MINWINY=  0040 
+    .MINWNDP=  0007     |     .MINWNDP=  0000     |     .MODE_TA=  01E0 
+    .M_NO_IN=  0008     |     .M_NO_SC=  0004     |     .NBDFRAM=  0030 
+    .NBSFRAM=  0007     |     .NEAR_CA=  0001     |     .NR10   =  0010 
+    .NR11   =  0011     |     .NR12   =  0012     |     .NR13   =  0013 
+    .NR14   =  0014     |     .NR21   =  0016     |     .NR22   =  0017 
+    .NR23   =  0018     |     .NR24   =  0019     |     .NR30   =  001A 
+    .NR31   =  001B     |     .NR32   =  001C     |     .NR33   =  001D 
+    .NR34   =  001E     |     .NR41   =  0020     |     .NR42   =  0021 
+    .NR43   =  0022     |     .NR44   =  0023     |     .NR50   =  0024 
+    .NR51   =  0025     |     .NR52   =  0026     |     .OAM    =  C000 
+    .OBP0   =  0048     |     .OBP1   =  0049     |     .OCPD   =  006B 
+    .OCPS   =  006A     |     .OPENED =  0002     |     .OPENING=  0001 
+    .P1     =  0000     |     .RIGHT  =  0001     |     .RP     =  0056 
+    .SB     =  0001     |     .SC     =  0002     |     .SCREENH=  0090 
+    .SCREENW=  00A0     |     .SCX    =  0043     |     .SCY    =  0042 
+    .SELECT =  0040     |     .SIO_IFL=  0008     |     .STACK  =  E000 
+    .START  =  0080     |     .STARTFA=  0060     |     .STAT   =  0041 
+    .SVBK   =  0070     |     .TAC    =  0007     |     .TIMA   =  0005 
+    .TIM_IFL=  0004     |     .TMA    =  0006     |     .T_MODE =  0002 
+    .T_MODE_=  0003     |     .T_MODE_=  0002     |     .UP     =  0004 
+    .VBK    =  004F     |     .VBL_IFL=  0001     |     .WINSZX =  0080 
+    .WINSZY =  0050     |     .WX     =  004B     |     .WY     =  004A 
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     .add_JOY   **** GX  |     .add_LCD   **** GX
+    .add_SIO   **** GX  |     .add_TIM   **** GX  |     .add_VBL   **** GX
+  0 .animate   049E R   |   2 .bkg_dat   0410 R   |   2 .bkg_til   06E0 R
+  1 .bposx     0005 R   |   1 .bposy     0007 R   |   1 .bspx      0009 R
+  1 .bspy      000B R   |   0 .close_d   0479 R   |   1 .color     0003 R
+    .copy_vr   **** GX  |     .display   **** GX  |   0 .door      0444 R
+  2 .door1_d   0350 R   |   2 .door1_t   0B8E R   |   2 .door2_d   0380 R
+  2 .door2_t   0C1E R   |   2 .door3_d   03C0 R   |   2 .door3_t   0CA2 R
+  2 .door4_d   0400 R   |   2 .door4_t   0D26 R   |   1 .doorpos   0002 R
+  1 .doorsta   0001 R   |   2 .earth_d   0040 R   |   2 .earth_t   0AE0 R
+  2 .endfilm   0DDA R   |   2 .endtp0    0040 R   |   2 .endtp1    0200 R
+  2 .endtp2    0410 R   |   2 .endtp3    06E0 R   |   0 .fade      02B8 R
+  2 .film      0DAA R   |   2 .frame_d   0200 R   |   2 .frame_t   0AEE R
+    .init   =  0000     |     .init_bt   **** GX  |     .init_vr   **** GX
+    .init_wt   **** GX  |     .jpad      **** GX  |     .mode      **** GX
+    .mv_spri   **** GX  |   0 .open_do   0452 R   |   0 .place_s   04D0 R
+    .refresh=  FF80     |     .reset     **** GX  |   0 .scroll    02F6 R
+    .set_mod   **** GX  |     .set_spr   **** GX  |     .set_spr   **** GX
+    .set_xy_   **** GX  |   1 .sframe    0004 R   |   1 .sposx     0015 R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+
+Symbol Table
+
+  1 .sposy     0017 R   |   1 .sspx      0019 R   |   1 .sspy      001B R
+  2 .std_dat   0000 R   |   0 .tile_sp   04B4 R   |   1 .time      0000 R
+  2 .tp0       0000 R   |   2 .tp1       0040 R   |   2 .tp2       0200 R
+  2 .tp3       0410 R   |     .wait_vb   **** GX  |   1 .wposx     000D R
+  1 .wposy     000F R   |   1 .wspx      0011 R   |   1 .wspy      0013 R
+    __RGBDS_=  0000     |     __cpu      **** GX  |     __io_in    **** GX
+    __io_out   **** GX  |     __io_sta   **** GX  |   0 _main      0000 GR
+    banked_c   **** GX  |     banked_r   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
+
+Area Table
+
+   0 _CODE      size  4E9   flags    0
+   1 _BSS       size   1D   flags    0
+   2 _LIT       size  DDC   flags    0
+
