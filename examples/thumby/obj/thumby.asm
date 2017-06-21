@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.3.0 #8604 (Dec 30 2013) (Linux)
-; This file was generated Tue Jun 20 23:42:02 2017
+; This file was generated Wed Jun 21 02:47:38 2017
 ;--------------------------------------------------------
 	.module thumby
 	.optsdcc -mgbz80
@@ -13,6 +13,7 @@
 	.globl _move_sprite
 	.globl _get_sprite_tile
 	.globl _set_sprite_tile
+	.globl _get_sprite_data
 	.globl _set_sprite_data
 	.globl _move_win
 	.globl _set_win_tiles
@@ -27,6 +28,8 @@
 	.globl _joypad
 	.globl _strlen
 	.globl _memset
+	.globl _memcmp
+	.globl _python_puzzle
 	.globl _text_map
 	.globl _arrow_tile
 	.globl _alphabet
@@ -69,6 +72,8 @@ _arrow_tile::
 	.ds 16
 _text_map::
 	.ds 32
+_python_puzzle::
+	.ds 84
 ;--------------------------------------------------------
 ; absolute external ram data
 ;--------------------------------------------------------
@@ -6217,30 +6222,30 @@ _text_map::
 	ld	bc,#_arrow_tile + 4
 	xor	a, a
 	ld	(bc),a
-	ld	hl,#(_arrow_tile + 0x0005)
-	ld	(hl),#0x7E
-	ld	hl,#(_arrow_tile + 0x0006)
-	ld	(hl),#0x7E
+	ld	bc,#_arrow_tile + 5
+	xor	a, a
+	ld	(bc),a
+	ld	bc,#_arrow_tile + 6
+	xor	a, a
+	ld	(bc),a
 	ld	hl,#(_arrow_tile + 0x0007)
 	ld	(hl),#0x7E
 	ld	hl,#(_arrow_tile + 0x0008)
 	ld	(hl),#0x7E
 	ld	hl,#(_arrow_tile + 0x0009)
-	ld	(hl),#0x5A
+	ld	(hl),#0x7E
 	ld	hl,#(_arrow_tile + 0x000a)
-	ld	(hl),#0x3C
+	ld	(hl),#0x7E
 	ld	hl,#(_arrow_tile + 0x000b)
-	ld	(hl),#0x3C
+	ld	(hl),#0x7E
 	ld	hl,#(_arrow_tile + 0x000c)
-	ld	(hl),#0x18
+	ld	(hl),#0x3C
 	ld	hl,#(_arrow_tile + 0x000d)
+	ld	(hl),#0x3C
+	ld	hl,#(_arrow_tile + 0x000e)
 	ld	(hl),#0x18
-	ld	bc,#_arrow_tile + 14
-	xor	a, a
-	ld	(bc),a
-	ld	bc,#_arrow_tile + 15
-	xor	a, a
-	ld	(bc),a
+	ld	hl,#(_arrow_tile + 0x000f)
+	ld	(hl),#0x18
 ;thumby.c:434: unsigned char text_map[] =
 	ld	hl,#_text_map
 	ld	(hl),#0x16
@@ -6306,6 +6311,176 @@ _text_map::
 	ld	(hl),#0x04
 	ld	hl,#(_text_map + 0x001f)
 	ld	(hl),#0x04
+;thumby.c:441: unsigned char python_puzzle[] =
+	ld	hl,#_python_puzzle
+	ld	(hl),#0x69
+	ld	hl,#(_python_puzzle + 0x0001)
+	ld	(hl),#0x6D
+	ld	hl,#(_python_puzzle + 0x0002)
+	ld	(hl),#0x70
+	ld	hl,#(_python_puzzle + 0x0003)
+	ld	(hl),#0x6F
+	ld	hl,#(_python_puzzle + 0x0004)
+	ld	(hl),#0x72
+	ld	hl,#(_python_puzzle + 0x0005)
+	ld	(hl),#0x74
+	ld	hl,#(_python_puzzle + 0x0006)
+	ld	(hl),#0x20
+	ld	hl,#(_python_puzzle + 0x0007)
+	ld	(hl),#0x73
+	ld	hl,#(_python_puzzle + 0x0008)
+	ld	(hl),#0x79
+	ld	hl,#(_python_puzzle + 0x0009)
+	ld	(hl),#0x73
+	ld	hl,#(_python_puzzle + 0x000a)
+	ld	(hl),#0x3B
+	ld	hl,#(_python_puzzle + 0x000b)
+	ld	(hl),#0x6B
+	ld	hl,#(_python_puzzle + 0x000c)
+	ld	(hl),#0x3D
+	ld	hl,#(_python_puzzle + 0x000d)
+	ld	(hl),#0x69
+	ld	hl,#(_python_puzzle + 0x000e)
+	ld	(hl),#0x6E
+	ld	hl,#(_python_puzzle + 0x000f)
+	ld	(hl),#0x74
+	ld	hl,#(_python_puzzle + 0x0010)
+	ld	(hl),#0x28
+	ld	hl,#(_python_puzzle + 0x0011)
+	ld	(hl),#0x73
+	ld	hl,#(_python_puzzle + 0x0012)
+	ld	(hl),#0x79
+	ld	hl,#(_python_puzzle + 0x0013)
+	ld	(hl),#0x73
+	ld	hl,#(_python_puzzle + 0x0014)
+	ld	(hl),#0x2E
+	ld	hl,#(_python_puzzle + 0x0015)
+	ld	(hl),#0x61
+	ld	hl,#(_python_puzzle + 0x0016)
+	ld	(hl),#0x72
+	ld	hl,#(_python_puzzle + 0x0017)
+	ld	(hl),#0x67
+	ld	hl,#(_python_puzzle + 0x0018)
+	ld	(hl),#0x76
+	ld	hl,#(_python_puzzle + 0x0019)
+	ld	(hl),#0x5B
+	ld	hl,#(_python_puzzle + 0x001a)
+	ld	(hl),#0x31
+	ld	hl,#(_python_puzzle + 0x001b)
+	ld	(hl),#0x5D
+	ld	hl,#(_python_puzzle + 0x001c)
+	ld	(hl),#0x29
+	ld	hl,#(_python_puzzle + 0x001d)
+	ld	(hl),#0x3B
+	ld	hl,#(_python_puzzle + 0x001e)
+	ld	(hl),#0x70
+	ld	hl,#(_python_puzzle + 0x001f)
+	ld	(hl),#0x72
+	ld	hl,#(_python_puzzle + 0x0020)
+	ld	(hl),#0x69
+	ld	hl,#(_python_puzzle + 0x0021)
+	ld	(hl),#0x6E
+	ld	hl,#(_python_puzzle + 0x0022)
+	ld	(hl),#0x74
+	ld	hl,#(_python_puzzle + 0x0023)
+	ld	(hl),#0x28
+	ld	hl,#(_python_puzzle + 0x0024)
+	ld	(hl),#0x22
+	ld	hl,#(_python_puzzle + 0x0025)
+	ld	(hl),#0x22
+	ld	hl,#(_python_puzzle + 0x0026)
+	ld	(hl),#0x2E
+	ld	hl,#(_python_puzzle + 0x0027)
+	ld	(hl),#0x6A
+	ld	hl,#(_python_puzzle + 0x0028)
+	ld	(hl),#0x6F
+	ld	hl,#(_python_puzzle + 0x0029)
+	ld	(hl),#0x69
+	ld	hl,#(_python_puzzle + 0x002a)
+	ld	(hl),#0x6E
+	ld	hl,#(_python_puzzle + 0x002b)
+	ld	(hl),#0x28
+	ld	hl,#(_python_puzzle + 0x002c)
+	ld	(hl),#0x63
+	ld	hl,#(_python_puzzle + 0x002d)
+	ld	(hl),#0x68
+	ld	hl,#(_python_puzzle + 0x002e)
+	ld	(hl),#0x72
+	ld	hl,#(_python_puzzle + 0x002f)
+	ld	(hl),#0x28
+	ld	hl,#(_python_puzzle + 0x0030)
+	ld	(hl),#0x6F
+	ld	hl,#(_python_puzzle + 0x0031)
+	ld	(hl),#0x72
+	ld	hl,#(_python_puzzle + 0x0032)
+	ld	(hl),#0x64
+	ld	hl,#(_python_puzzle + 0x0033)
+	ld	(hl),#0x28
+	ld	hl,#(_python_puzzle + 0x0034)
+	ld	(hl),#0x63
+	ld	hl,#(_python_puzzle + 0x0035)
+	ld	(hl),#0x29
+	ld	hl,#(_python_puzzle + 0x0036)
+	ld	(hl),#0x5E
+	ld	hl,#(_python_puzzle + 0x0037)
+	ld	(hl),#0x6B
+	ld	hl,#(_python_puzzle + 0x0038)
+	ld	(hl),#0x29
+	ld	hl,#(_python_puzzle + 0x0039)
+	ld	(hl),#0x20
+	ld	hl,#(_python_puzzle + 0x003a)
+	ld	(hl),#0x66
+	ld	hl,#(_python_puzzle + 0x003b)
+	ld	(hl),#0x6F
+	ld	hl,#(_python_puzzle + 0x003c)
+	ld	(hl),#0x72
+	ld	hl,#(_python_puzzle + 0x003d)
+	ld	(hl),#0x20
+	ld	hl,#(_python_puzzle + 0x003e)
+	ld	(hl),#0x63
+	ld	hl,#(_python_puzzle + 0x003f)
+	ld	(hl),#0x20
+	ld	hl,#(_python_puzzle + 0x0040)
+	ld	(hl),#0x69
+	ld	hl,#(_python_puzzle + 0x0041)
+	ld	(hl),#0x6E
+	ld	hl,#(_python_puzzle + 0x0042)
+	ld	(hl),#0x20
+	ld	hl,#(_python_puzzle + 0x0043)
+	ld	(hl),#0x22
+	ld	hl,#(_python_puzzle + 0x0044)
+	ld	(hl),#0x59
+	ld	hl,#(_python_puzzle + 0x0045)
+	ld	(hl),#0x4F
+	ld	hl,#(_python_puzzle + 0x0046)
+	ld	(hl),#0x49
+	ld	hl,#(_python_puzzle + 0x0047)
+	ld	(hl),#0x58
+	ld	hl,#(_python_puzzle + 0x0048)
+	ld	(hl),#0x4F
+	ld	hl,#(_python_puzzle + 0x0049)
+	ld	(hl),#0x5E
+	ld	hl,#(_python_puzzle + 0x004a)
+	ld	(hl),#0x0A
+	ld	hl,#(_python_puzzle + 0x004b)
+	ld	(hl),#0x49
+	ld	hl,#(_python_puzzle + 0x004c)
+	ld	(hl),#0x45
+	ld	hl,#(_python_puzzle + 0x004d)
+	ld	(hl),#0x4E
+	ld	hl,#(_python_puzzle + 0x004e)
+	ld	(hl),#0x4F
+	ld	hl,#(_python_puzzle + 0x004f)
+	ld	(hl),#0x22
+	ld	hl,#(_python_puzzle + 0x0050)
+	ld	(hl),#0x29
+	ld	hl,#(_python_puzzle + 0x0051)
+	ld	(hl),#0x29
+	ld	hl,#(_python_puzzle + 0x0052)
+	ld	(hl),#0x3B
+	ld	bc,#_python_puzzle + 83
+	xor	a, a
+	ld	(bc),a
 ;--------------------------------------------------------
 ; Home
 ;--------------------------------------------------------
@@ -6315,14 +6490,14 @@ _text_map::
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;thumby.c:449: void set_text_map(char *text, UBYTE len)
+;thumby.c:453: void set_text_map(char *text, UBYTE len)
 ;	---------------------------------
 ; Function set_text_map
 ; ---------------------------------
 _set_text_map_start::
 _set_text_map:
 	add	sp, #-5
-;thumby.c:458: memset(text_map, 4, text_map_width*text_map_height);
+;thumby.c:462: memset(text_map, 4, text_map_width*text_map_height);
 	ld	de,#_text_map
 	ld	hl,#0x0020
 	push	hl
@@ -6331,7 +6506,7 @@ _set_text_map:
 	push	de
 	call	_memset
 	add	sp, #6
-;thumby.c:461: if (!text || len > 32 || len <= 0) {
+;thumby.c:465: if (!text || len > 32 || len <= 0) {
 	ldhl	sp,#8
 	ld	a,(hl-)
 	or	a,(hl)
@@ -6343,8 +6518,8 @@ _set_text_map:
 	jp	C,00129$
 	ld	a,(hl)
 	or	a, a
-;thumby.c:462: return;
-;thumby.c:468: for (i = 0; i < len; ++i) {
+;thumby.c:466: return;
+;thumby.c:472: for (i = 0; i < len; ++i) {
 	jp	Z,00129$
 	ldhl	sp,#0
 	ld	(hl),#0x00
@@ -6354,29 +6529,12 @@ _set_text_map:
 	ldhl	sp,#9
 	sub	a, (hl)
 	jp	NC,00125$
-;thumby.c:470: if (text[i] >= 'A' && text[i] <= 'Z') {
+;thumby.c:474: if (text[i] >= 'A' && text[i] <= 'Z') {
 	dec	hl
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#0
-	ld	l,(hl)
-	ld	h,#0x00
-	add	hl,de
-	ld	a,l
-	ld	d,h
-	ldhl	sp,#3
-	ld	(hl+),a
-	ld	(hl),d
-	dec	hl
-	ld	e,(hl)
-	inc	hl
-	ld	d,(hl)
-	ld	a,(de)
-	ld	c,a
-;thumby.c:471: text_map[i] = text[i] - 'A' + 0xF; // eg. character A - ascii value of A + index of A in VRAM
-	ld	de,#_text_map
 	ldhl	sp,#0
 	ld	l,(hl)
 	ld	h,#0x00
@@ -6386,7 +6544,25 @@ _set_text_map:
 	ldhl	sp,#1
 	ld	(hl+),a
 	ld	(hl),d
-;thumby.c:470: if (text[i] >= 'A' && text[i] <= 'Z') {
+	dec	hl
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	ld	a,(de)
+	ld	c,a
+;thumby.c:475: text_map[i] = text[i] - 'A' + 0xF; // eg. character A - ascii value of A + index of A in VRAM
+	ld	de,#_text_map
+	dec	hl
+	dec	hl
+	ld	l,(hl)
+	ld	h,#0x00
+	add	hl,de
+	ld	a,l
+	ld	d,h
+	ldhl	sp,#3
+	ld	(hl+),a
+	ld	(hl),d
+;thumby.c:474: if (text[i] >= 'A' && text[i] <= 'Z') {
 	ld	a,#0x41
 	ld	e,a
 	ld	a,c
@@ -6413,18 +6589,18 @@ _set_text_map:
 	scf
 00172$:
 	jr	C,00106$
-;thumby.c:471: text_map[i] = text[i] - 'A' + 0xF; // eg. character A - ascii value of A + index of A in VRAM
+;thumby.c:475: text_map[i] = text[i] - 'A' + 0xF; // eg. character A - ascii value of A + index of A in VRAM
 	ld	a,c
 	add	a, #0xCE
 	ld	b,a
-	ldhl	sp,#1
+	ldhl	sp,#3
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),b
 00106$:
-;thumby.c:475: if (text[i] >= '0' && text[i] <= '9') {
-	ldhl	sp,#4
+;thumby.c:479: if (text[i] >= '0' && text[i] <= '9') {
+	ldhl	sp,#2
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -6457,18 +6633,18 @@ _set_text_map:
 	scf
 00174$:
 	jr	C,00109$
-;thumby.c:476: text_map[i] = text[i] - '0' + 0x5;
+;thumby.c:480: text_map[i] = text[i] - '0' + 0x5;
 	ld	a,b
 	add	a, #0xD5
 	ld	b,a
-	ldhl	sp,#1
+	ldhl	sp,#3
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),b
 00109$:
-;thumby.c:480: if (text[i] == '.') {
-	ldhl	sp,#4
+;thumby.c:484: if (text[i] == '.') {
+	ldhl	sp,#2
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -6477,67 +6653,67 @@ _set_text_map:
 	ld	b,a
 	sub	a, #0x2E
 	jr	NZ,00123$
-;thumby.c:481: text_map[i] = 0x29;
-	ldhl	sp,#1
+;thumby.c:485: text_map[i] = 0x29;
+	inc	hl
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x29
 	jr	00128$
 00123$:
-;thumby.c:482: } else if (text[i] == ',') {
+;thumby.c:486: } else if (text[i] == ',') {
 	ld	a,b
 	sub	a, #0x2C
 	jr	NZ,00120$
-;thumby.c:483: text_map[i] = 0x2A;
-	ldhl	sp,#1
+;thumby.c:487: text_map[i] = 0x2A;
+	ldhl	sp,#3
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2A
 	jr	00128$
 00120$:
-;thumby.c:484: } else if (text[i] == '!') {
+;thumby.c:488: } else if (text[i] == '!') {
 	ld	a,b
 	sub	a, #0x21
 	jr	NZ,00117$
-;thumby.c:485: text_map[i] = 0x2B;
-	ldhl	sp,#1
+;thumby.c:489: text_map[i] = 0x2B;
+	ldhl	sp,#3
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2B
 	jr	00128$
 00117$:
-;thumby.c:486: } else if (text[i] == '?') {
+;thumby.c:490: } else if (text[i] == '?') {
 	ld	a,b
 	sub	a, #0x3F
 	jr	NZ,00114$
-;thumby.c:487: text_map[i] = 0x2C;
-	ldhl	sp,#1
+;thumby.c:491: text_map[i] = 0x2C;
+	ldhl	sp,#3
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2C
 	jr	00128$
 00114$:
-;thumby.c:488: } else if (text[i] == '~') {
+;thumby.c:492: } else if (text[i] == '~') {
 	ld	a,b
 	sub	a, #0x7E
 	jr	NZ,00128$
-;thumby.c:489: text_map[i] = 0x2D;
-	ldhl	sp,#1
+;thumby.c:493: text_map[i] = 0x2D;
+	ldhl	sp,#3
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2D
 00128$:
-;thumby.c:468: for (i = 0; i < len; ++i) {
+;thumby.c:472: for (i = 0; i < len; ++i) {
 	ldhl	sp,#0
 	inc	(hl)
 	jp	00127$
 00125$:
-;thumby.c:494: text_map[len] = arrow_address;
+;thumby.c:498: text_map[len] = arrow_address;
 	ld	de,#_text_map
 	ldhl	sp,#9
 	ld	l,(hl)
@@ -6551,13 +6727,13 @@ _set_text_map:
 	add	sp,#5
 	ret
 _set_text_map_end::
-;thumby.c:499: void clear_window()
+;thumby.c:503: void clear_window()
 ;	---------------------------------
 ; Function clear_window
 ; ---------------------------------
 _clear_window_start::
 _clear_window:
-;thumby.c:502: memset(text_map, 4, text_map_width*text_map_height);
+;thumby.c:506: memset(text_map, 4, text_map_width*text_map_height);
 	ld	de,#_text_map
 	ld	hl,#0x0020
 	push	hl
@@ -6566,7 +6742,7 @@ _clear_window:
 	push	de
 	call	_memset
 	add	sp, #6
-;thumby.c:503: set_win_tiles(2, 2, text_map_width, text_map_height, text_map);
+;thumby.c:507: set_win_tiles(2, 2, text_map_width, text_map_height, text_map);
 	ld	de,#_text_map
 	push	de
 	ld	hl,#0x0210
@@ -6577,34 +6753,34 @@ _clear_window:
 	add	sp, #6
 	ret
 _clear_window_end::
-;thumby.c:506: UBYTE divide_ubyte(UBYTE a, UBYTE b)
+;thumby.c:510: UBYTE divide_ubyte(UBYTE a, UBYTE b)
 ;	---------------------------------
 ; Function divide_ubyte
 ; ---------------------------------
 _divide_ubyte_start::
 _divide_ubyte:
-;thumby.c:510: while (a >= b) {
+;thumby.c:514: while (a >= b) {
 	ld	b,#0x00
 00101$:
 	ldhl	sp,#2
 	ld	a,(hl+)
 	sub	a, (hl)
 	jr	C,00103$
-;thumby.c:511: a -= b;
+;thumby.c:515: a -= b;
 	dec	hl
 	ld	a,(hl+)
 	sub	a, (hl)
 	dec	hl
 	ld	(hl),a
-;thumby.c:512: result++;
+;thumby.c:516: result++;
 	inc	b
 	jr	00101$
 00103$:
-;thumby.c:514: return result;
+;thumby.c:518: return result;
 	ld	e,b
 	ret
 _divide_ubyte_end::
-;thumby.c:522: void scroll_text(UBYTE len)
+;thumby.c:526: void scroll_text(UBYTE len)
 ;	---------------------------------
 ; Function scroll_text
 ; ---------------------------------
@@ -6612,20 +6788,20 @@ _scroll_text_start::
 _scroll_text:
 	push	af
 	dec	sp
-;thumby.c:525: for (counter = 0; counter < len; ++counter) {
+;thumby.c:529: for (counter = 0; counter < len; ++counter) {
 	ld	b,#0x00
 00103$:
 	ld	a,b
 	ldhl	sp,#5
 	sub	a, (hl)
 	jp	NC,00105$
-;thumby.c:526: x = 2 + (counter % 16);
+;thumby.c:530: x = 2 + (counter % 16);
 	ld	a,b
 	and	a, #0x0F
 	add	a, #0x02
 	ldhl	sp,#0
 	ld	(hl),a
-;thumby.c:527: y = 2 + divide_ubyte(counter, 16);
+;thumby.c:531: y = 2 + divide_ubyte(counter, 16);
 	push	bc
 	ld	a,#0x10
 	push	af
@@ -6638,7 +6814,7 @@ _scroll_text:
 	ld	c,e
 	inc	c
 	inc	c
-;thumby.c:531: set_win_tiles(x, y, 1, 1, &text_map[counter]);
+;thumby.c:535: set_win_tiles(x, y, 1, 1, &text_map[counter]);
 	ld	de,#_text_map
 	ld	l,b
 	ld	h,#0x00
@@ -6666,80 +6842,81 @@ _scroll_text:
 	call	_set_win_tiles
 	add	sp, #6
 	pop	bc
-;thumby.c:532: sleep(8);
+;thumby.c:536: sleep(4);
 	push	bc
-	ld	a,#0x08
+	ld	a,#0x04
 	push	af
 	inc	sp
 	call	_sleep
 	inc	sp
 	pop	bc
-;thumby.c:525: for (counter = 0; counter < len; ++counter) {
+;thumby.c:529: for (counter = 0; counter < len; ++counter) {
 	inc	b
 	jp	00103$
 00105$:
 	add	sp,#3
 	ret
 _scroll_text_end::
-;thumby.c:536: void sleep(UBYTE cycles)
+;thumby.c:540: void sleep(UBYTE cycles)
 ;	---------------------------------
 ; Function sleep
 ; ---------------------------------
 _sleep_start::
 _sleep:
-;thumby.c:539: for(counter = 0; counter < cycles; counter++){
+;thumby.c:543: for(counter = 0; counter < cycles; counter++){
 	ld	b,#0x00
 00103$:
 	ld	a,b
 	ldhl	sp,#2
 	sub	a, (hl)
 	ret	NC
-;thumby.c:540: wait_vbl_done();
+;thumby.c:544: wait_vbl_done();
 	push	bc
 	call	_wait_vbl_done
 	pop	bc
-;thumby.c:539: for(counter = 0; counter < cycles; counter++){
+;thumby.c:543: for(counter = 0; counter < cycles; counter++){
 	inc	b
 	jr	00103$
 	ret
 _sleep_end::
-;thumby.c:544: void process_button_press(UBYTE *x, UBYTE *y)
+;thumby.c:548: void process_button_press(UBYTE *x, UBYTE *y)
 ;	---------------------------------
 ; Function process_button_press
 ; ---------------------------------
 _process_button_press_start::
 _process_button_press:
 	add	sp, #-6
-;thumby.c:546: UBYTE input = joypad();
+;thumby.c:550: UBYTE input = joypad();
 	call	_joypad
-;thumby.c:547: UBYTE move = 1;
+;thumby.c:551: UBYTE move = 1;
 	ldhl	sp,#0
 	ld	(hl),#0x01
-;thumby.c:550: if(input & J_A)
-	ldhl	sp,#4
+;thumby.c:554: if(input & J_A)
+	inc	hl
+	inc	hl
 	ld	(hl),e
 	inc	hl
 	ld	(hl),#0x00
 	dec	hl
 	bit	4, (hl)
 	jr	Z,00102$
-;thumby.c:551: move += 2;
+;thumby.c:555: move += 2;
 	ldhl	sp,#0
 	ld	(hl),#0x03
 00102$:
-;thumby.c:555: *y -= move;
+;thumby.c:559: *y -= move;
 	ldhl	sp,#10
 	ld	a,(hl+)
 	ld	e, (hl)
-	ldhl	sp,#2
+	ldhl	sp,#4
 	ld	(hl+),a
 	ld	(hl),e
-;thumby.c:554: if(input & J_UP)
-	inc	hl
+;thumby.c:558: if(input & J_UP)
+	ldhl	sp,#2
 	bit	2, (hl)
 	jr	Z,00104$
-;thumby.c:555: *y -= move;
-	ldhl	sp,#3
+;thumby.c:559: *y -= move;
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -6749,19 +6926,18 @@ _process_button_press:
 	ldhl	sp,#0
 	sub	a, (hl)
 	ld	b,a
-	inc	hl
-	inc	hl
+	ldhl	sp,#4
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),b
 00104$:
-;thumby.c:556: if(input & J_DOWN)
-	ldhl	sp,#4
+;thumby.c:560: if(input & J_DOWN)
+	ldhl	sp,#2
 	bit	3, (hl)
 	jr	Z,00106$
-;thumby.c:557: *y += move;
-	ldhl	sp,#3
+;thumby.c:561: *y += move;
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -6771,24 +6947,23 @@ _process_button_press:
 	ldhl	sp,#0
 	add	a, (hl)
 	ld	b,a
-	inc	hl
-	inc	hl
+	ldhl	sp,#4
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),b
 00106$:
-;thumby.c:559: *x -= move;
+;thumby.c:563: *x -= move;
 	ldhl	sp,#9
 	dec	hl
 	ld	c,(hl)
 	inc	hl
 	ld	b,(hl)
-;thumby.c:558: if(input & J_LEFT)
-	ldhl	sp,#4
+;thumby.c:562: if(input & J_LEFT)
+	ldhl	sp,#2
 	bit	1, (hl)
 	jr	Z,00108$
-;thumby.c:559: *x -= move;
+;thumby.c:563: *x -= move;
 	ld	a,(bc)
 	ldhl	sp,#1
 	ld	(hl),a
@@ -6796,44 +6971,43 @@ _process_button_press:
 	sub	a, (hl)
 	ld	(bc),a
 00108$:
-;thumby.c:560: if(input & J_RIGHT)
-	ldhl	sp,#4
+;thumby.c:564: if(input & J_RIGHT)
+	ldhl	sp,#2
 	bit	0, (hl)
 	jr	Z,00110$
-;thumby.c:561: *x += move;
+;thumby.c:565: *x += move;
 	ld	a,(bc)
 	ld	d,a
 	ldhl	sp,#0
 	add	a, (hl)
 	ld	(bc),a
 00110$:
-;thumby.c:567: *x = MAX(7, *x);
+;thumby.c:571: *x = MAX(7, *x);
 	ld	a,(bc)
 	ldhl	sp,#1
 	ld	(hl),a
 	ld	a,(hl)
 	sub	a, #0x07
 	jr	NC,00113$
-	ldhl	sp,#4
+	inc	hl
 	ld	(hl),#0x07
 	jr	00114$
 00113$:
 	push	hl
 	ldhl	sp,#3
-	ld	a,(hl)
-	ldhl	sp,#6
+	ld	a,(hl+)
 	ld	(hl),a
 	pop	hl
 00114$:
-	ldhl	sp,#4
+	ldhl	sp,#2
 	ld	a,(hl)
 	ld	(bc),a
-;thumby.c:568: *x = MIN(160, *x);
+;thumby.c:572: *x = MIN(160, *x);
 	ld	a,(bc)
-	ldhl	sp,#1
+	dec	hl
 	ld	(hl),a
 	ld	a,#0xA0
-	ldhl	sp,#4
+	inc	hl
 	sub	a, (hl)
 	jr	NC,00115$
 	ld	a,#0xA0
@@ -6843,8 +7017,8 @@ _process_button_press:
 	ld	a,(hl)
 00116$:
 	ld	(bc),a
-;thumby.c:569: *y = MAX(7, *y);
-	ldhl	sp,#3
+;thumby.c:573: *y = MAX(7, *y);
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -6855,13 +7029,13 @@ _process_button_press:
 	jr	NC,00117$
 	ld	b,#0x07
 00117$:
-	ldhl	sp,#2
+	ldhl	sp,#4
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),b
-;thumby.c:570: *y = MIN(144, *y);
-	ldhl	sp,#3
+;thumby.c:574: *y = MIN(144, *y);
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -6873,7 +7047,7 @@ _process_button_press:
 	jr	NC,00119$
 	ld	c,#0x90
 00119$:
-	ldhl	sp,#2
+	ldhl	sp,#4
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
@@ -6881,20 +7055,20 @@ _process_button_press:
 	add	sp,#6
 	ret
 _process_button_press_end::
-;thumby.c:573: void set_girl_sprite()
+;thumby.c:577: void set_girl_sprite()
 ;	---------------------------------
 ; Function set_girl_sprite
 ; ---------------------------------
 _set_girl_sprite_start::
 _set_girl_sprite:
-;thumby.c:576: for (counter = 0; counter < 8; ++counter) {
+;thumby.c:580: for (counter = 0; counter < 8; ++counter) {
 	ld	b,#0x00
 00102$:
-;thumby.c:579: counter++;
+;thumby.c:583: counter++;
 	inc	b
-;thumby.c:580: counter--;
+;thumby.c:584: counter--;
 	dec	b
-;thumby.c:581: set_sprite_tile(counter, counter*2);
+;thumby.c:585: set_sprite_tile(counter, counter*2);
 	ld	a,b
 	add	a, a
 	push	bc
@@ -6905,20 +7079,20 @@ _set_girl_sprite:
 	call	_set_sprite_tile
 	pop	af
 	pop	bc
-;thumby.c:576: for (counter = 0; counter < 8; ++counter) {
+;thumby.c:580: for (counter = 0; counter < 8; ++counter) {
 	inc	b
 	ld	a,b
 	sub	a, #0x08
 	jr	C,00102$
 	ret
 _set_girl_sprite_end::
-;thumby.c:586: void update_girl_sprite(UBYTE x, UBYTE y)
+;thumby.c:590: void update_girl_sprite(UBYTE x, UBYTE y)
 ;	---------------------------------
 ; Function update_girl_sprite
 ; ---------------------------------
 _update_girl_sprite_start::
 _update_girl_sprite:
-;thumby.c:589: move_sprite(0,x+(0%4)*8,y+(0/4)*16);
+;thumby.c:593: move_sprite(0,x+(0%4)*8,y+(0/4)*16);
 	ldhl	sp,#3
 	ld	a,(hl)
 	push	af
@@ -6932,7 +7106,7 @@ _update_girl_sprite:
 	inc	sp
 	call	_move_sprite
 	add	sp, #3
-;thumby.c:590: move_sprite(1,x+(1%4)*8,y+0*16);
+;thumby.c:594: move_sprite(1,x+(1%4)*8,y+0*16);
 	ldhl	sp,#2
 	ld	a,(hl)
 	add	a, #0x08
@@ -6950,7 +7124,7 @@ _update_girl_sprite:
 	call	_move_sprite
 	add	sp, #3
 	pop	de
-;thumby.c:591: move_sprite(2,x+(0%4)*8,y+(1)*16);
+;thumby.c:595: move_sprite(2,x+(0%4)*8,y+(1)*16);
 	ldhl	sp,#3
 	ld	a,(hl)
 	add	a, #0x10
@@ -6970,7 +7144,7 @@ _update_girl_sprite:
 	add	sp, #3
 	pop	de
 	pop	bc
-;thumby.c:592: move_sprite(3,x+(1%4)*8,y+(1)*16);
+;thumby.c:596: move_sprite(3,x+(1%4)*8,y+(1)*16);
 	push	bc
 	push	bc
 	inc	sp
@@ -6982,7 +7156,7 @@ _update_girl_sprite:
 	call	_move_sprite
 	add	sp, #3
 	pop	bc
-;thumby.c:594: move_sprite(4,x+(2%4)*8,y+(0/4)*16);
+;thumby.c:598: move_sprite(4,x+(2%4)*8,y+(0/4)*16);
 	ldhl	sp,#2
 	ld	a,(hl)
 	add	a, #0x10
@@ -6998,7 +7172,7 @@ _update_girl_sprite:
 	call	_move_sprite
 	add	sp, #3
 	pop	bc
-;thumby.c:595: move_sprite(5,x+(3%4)*8,y+0*16);
+;thumby.c:599: move_sprite(5,x+(3%4)*8,y+0*16);
 	ldhl	sp,#2
 	ld	a,(hl)
 	add	a, #0x18
@@ -7018,7 +7192,7 @@ _update_girl_sprite:
 	add	sp, #3
 	pop	de
 	pop	bc
-;thumby.c:596: move_sprite(6,x+(2%4)*8,y+(1)*16);
+;thumby.c:600: move_sprite(6,x+(2%4)*8,y+(1)*16);
 	push	bc
 	push	de
 	push	bc
@@ -7030,7 +7204,7 @@ _update_girl_sprite:
 	add	sp, #3
 	pop	de
 	pop	bc
-;thumby.c:597: move_sprite(7,x+(3%4)*8,y+(1)*16);
+;thumby.c:601: move_sprite(7,x+(3%4)*8,y+(1)*16);
 	push	bc
 	inc	sp
 	push	de
@@ -7042,21 +7216,21 @@ _update_girl_sprite:
 	add	sp, #3
 	ret
 _update_girl_sprite_end::
-;thumby.c:601: void check_level_one()
+;thumby.c:605: void check_level_one()
 ;	---------------------------------
 ; Function check_level_one
 ; ---------------------------------
 _check_level_one_start::
 _check_level_one:
-	add	sp, #-28
-;thumby.c:603: UBYTE counter, result = 1;
-	ldhl	sp,#1
+	add	sp, #-29
+;thumby.c:607: UBYTE counter, result = 1;
+	ldhl	sp,#0
 	ld	(hl),#0x01
-;thumby.c:604: UBYTE tile_data[24] = {0};
-	ldhl	sp,#2
+;thumby.c:608: UBYTE tile_data[24] = {0};
+	ldhl	sp,#1
 	ld	a,l
 	ld	d,h
-	ldhl	sp,#26
+	ldhl	sp,#27
 	ld	(hl+),a
 	ld	(hl),d
 	dec	hl
@@ -7064,7 +7238,7 @@ _check_level_one:
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x00
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	c,(hl)
 	inc	hl
@@ -7099,7 +7273,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7110,7 +7284,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7121,7 +7295,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7132,7 +7306,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7143,7 +7317,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7154,7 +7328,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7165,7 +7339,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7176,7 +7350,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7187,7 +7361,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7198,7 +7372,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7209,7 +7383,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7220,7 +7394,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7231,7 +7405,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7242,7 +7416,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7253,7 +7427,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7264,7 +7438,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7275,7 +7449,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7286,7 +7460,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7297,7 +7471,7 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-	ldhl	sp,#27
+	ldhl	sp,#28
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -7308,12 +7482,12 @@ _check_level_one:
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-;thumby.c:607: for (counter = 0; counter < 8; ++counter) {
-	ldhl	sp,#0
+;thumby.c:611: for (counter = 0; counter < 8; ++counter) {
+	ldhl	sp,#25
 	ld	(hl),#0x00
 00104$:
-;thumby.c:608: result &= (get_sprite_tile(counter) == (0x10U + counter));
-	ldhl	sp,#0
+;thumby.c:612: result &= (get_sprite_tile(counter) == (0x10U + counter));
+	ldhl	sp,#25
 	ld	a,(hl)
 	push	af
 	inc	sp
@@ -7321,7 +7495,7 @@ _check_level_one:
 	inc	sp
 	ldhl	sp,#26
 	ld	(hl),e
-	ldhl	sp,#0
+	ldhl	sp,#25
 	ld	c,(hl)
 	ld	b,#0x00
 	ld	hl,#0x0010
@@ -7343,51 +7517,81 @@ _check_level_one:
 	xor	a,a
 00119$:
 	ld	d,a
-	ldhl	sp,#1
+	ldhl	sp,#0
 	ld	a,(hl)
 	and	a, d
-;thumby.c:607: for (counter = 0; counter < 8; ++counter) {
-	ld	(hl-),a
+	ld	(hl),a
+;thumby.c:611: for (counter = 0; counter < 8; ++counter) {
+	ldhl	sp,#25
 	inc	(hl)
 	ld	a,(hl)
 	sub	a, #0x08
 	jr	C,00104$
-;thumby.c:619: if (result == 1) {
+;thumby.c:616: get_sprite_data(6, 2, tile_data);
+	ldhl	sp,#28
+	dec	hl
+	ld	e,(hl)
 	inc	hl
+	ld	d,(hl)
+	push	de
+	ld	hl,#0x0206
+	push	hl
+	call	_get_sprite_data
+	add	sp, #4
+;thumby.c:618: result |= (memcmp(tile_data, &(girl_tiles[16*3]), 16) == 0);
+	ldhl	sp,#28
+	dec	hl
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	ld	hl,#0x0010
+	push	hl
+	ld	hl,#(_girl_tiles + 0x0030)
+	push	hl
+	push	de
+	call	_memcmp
+	add	sp, #6
+	ld	a,e
+	or	a, d
+	jr	NZ,00120$
+	ld	a,#0x01
+	jr	00121$
+00120$:
+	xor	a,a
+00121$:
+	ld	d,a
+	ldhl	sp,#0
+	ld	a,(hl)
+	or	a, d
+	ld	(hl),a
+;thumby.c:623: if (result == 1) {
 	ld	a,(hl)
 	dec	a
 	jr	NZ,00106$
-;thumby.c:620: pass_level_one();
+;thumby.c:624: pass_level_one();
 	call	_pass_level_one
 00106$:
-	add	sp,#28
+	add	sp,#29
 	ret
 _check_level_one_end::
-;thumby.c:626: void pass_level_one()
+;thumby.c:630: void pass_level_one()
 ;	---------------------------------
 ; Function pass_level_one
 ; ---------------------------------
 _pass_level_one_start::
 _pass_level_one:
-;thumby.c:630: show_text("YOU PASS!");
+;thumby.c:632: SHOW_WIN;
+	ld	de,#0xFF40
+	ld	a,(de)
+	ld	e,a
+	ld	d,#0x00
+	ld	a,e
+	set	5, a
+	ld	b,a
+	ld	hl,#0xFF40
+	ld	(hl),b
+;thumby.c:634: show_text("DO YOU SEE MY   NEW OUTFIT?");
 	ld	de,#__str_0
-	push	de
-	call	_show_text
-	pop	af
-;thumby.c:631: waitpad(J_A);
-	ld	a,#0x10
-	push	af
-	inc	sp
-	call	_waitpad
-	inc	sp
-;thumby.c:632: sleep(32);
-	ld	a,#0x20
-	push	af
-	inc	sp
-	call	_sleep
-	inc	sp
-;thumby.c:634: show_text("LOOK ON MY SHAWL.");
-	ld	de,#__str_1
 	push	de
 	call	_show_text
 	pop	af
@@ -7397,32 +7601,72 @@ _pass_level_one:
 	inc	sp
 	call	_waitpad
 	inc	sp
-;thumby.c:637: show_text("THANKS FOR TRYING THE DEMO!");
+;thumby.c:637: show_text("IS IT NOT CUTE?");
+	ld	de,#__str_1
+	push	de
+	call	_show_text
+	pop	af
+;thumby.c:638: waitpad(J_A);
+	ld	a,#0x10
+	push	af
+	inc	sp
+	call	_waitpad
+	inc	sp
+;thumby.c:641: show_text("I WONDER IF IT  ENCODES...");
 	ld	de,#__str_2
 	push	de
 	call	_show_text
 	pop	af
-;thumby.c:638: while(1) {}
+;thumby.c:642: waitpad(J_A);
+	ld	a,#0x10
+	push	af
+	inc	sp
+	call	_waitpad
+	inc	sp
+;thumby.c:643: show_text("A SECRET FLAG!");
+	ld	de,#__str_3
+	push	de
+	call	_show_text
+	pop	af
+;thumby.c:644: waitpad(J_A);
+	ld	a,#0x10
+	push	af
+	inc	sp
+	call	_waitpad
+	inc	sp
+;thumby.c:645: HIDE_WIN;
+	ld	de,#0xFF40
+	ld	a,(de)
+	ld	b,a
+	ld	d,#0x00
+	res	5, b
+	ld	d,#0x00
+	ld	hl,#0xFF40
+	ld	(hl),b
+;thumby.c:647: while(1) {}
 00102$:
 	jr	00102$
 	ret
 _pass_level_one_end::
 __str_0:
-	.ascii "YOU PASS!"
+	.ascii "DO YOU SEE MY   NEW OUTFIT?"
 	.db 0x00
 __str_1:
-	.ascii "LOOK ON MY SHAWL."
+	.ascii "IS IT NOT CUTE?"
 	.db 0x00
 __str_2:
-	.ascii "THANKS FOR TRYING THE DEMO!"
+	.ascii "I WONDER IF IT  ENCODES..."
 	.db 0x00
-;thumby.c:642: void show_text(char *text)
+__str_3:
+	.ascii "A SECRET FLAG!"
+	.db 0x00
+;thumby.c:651: void show_text(char *text)
 ;	---------------------------------
 ; Function show_text
 ; ---------------------------------
 _show_text_start::
 _show_text:
-;thumby.c:644: UBYTE text_len = strlen(text);
+;thumby.c:653: UBYTE text_len = strlen(text);
 	pop	bc
 	pop	hl
 	push	hl
@@ -7431,11 +7675,11 @@ _show_text:
 	call	_strlen
 	pop	af
 	ld	d,e
-;thumby.c:645: clear_window();
+;thumby.c:654: clear_window();
 	push	de
 	call	_clear_window
 	pop	de
-;thumby.c:646: set_text_map(text, text_len);
+;thumby.c:655: set_text_map(text, text_len);
 	push	de
 	push	de
 	inc	sp
@@ -7447,7 +7691,7 @@ _show_text:
 	call	_set_text_map
 	add	sp, #3
 	pop	de
-;thumby.c:648: scroll_text((text_len + 1));
+;thumby.c:658: scroll_text((text_len + 1));
 	inc	d
 	push	de
 	inc	sp
@@ -7455,31 +7699,31 @@ _show_text:
 	inc	sp
 	ret
 _show_text_end::
-;thumby.c:651: void main()
+;thumby.c:661: void main()
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main_start::
 _main:
 	push	af
-;thumby.c:654: x=40;
-	ldhl	sp,#0
+;thumby.c:664: x=40;
+	ldhl	sp,#1
 	ld	(hl),#0x28
-;thumby.c:655: y=40;
-	inc	hl
+;thumby.c:665: y=40;
+	dec	hl
 	ld	(hl),#0x28
-;thumby.c:657: disable_interrupts();
+;thumby.c:667: disable_interrupts();
 	call	_disable_interrupts
-;thumby.c:658: DISPLAY_OFF;
+;thumby.c:668: DISPLAY_OFF;
 	call	_display_off
-;thumby.c:661: set_bkg_data(0, grass_tiles_len, grass_tiles);
+;thumby.c:671: set_bkg_data(0, grass_tiles_len, grass_tiles);
 	ld	de,#_grass_tiles
 	push	de
 	ld	hl,#0x0500
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
-;thumby.c:663: set_bkg_tiles(0, 0, grass_field_width, grass_field_height, grass_field);
+;thumby.c:672: set_bkg_tiles(0, 0, grass_field_width, grass_field_height, grass_field);
 	ld	de,#_grass_field
 	push	de
 	ld	hl,#0x2020
@@ -7488,7 +7732,7 @@ _main:
 	push	hl
 	call	_set_bkg_tiles
 	add	sp, #6
-;thumby.c:667: SPRITES_8x16;
+;thumby.c:675: SPRITES_8x16;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -7498,35 +7742,35 @@ _main:
 	ld	b,a
 	ld	hl,#0xFF40
 	ld	(hl),b
-;thumby.c:668: set_sprite_data(0, girl_pj_tiles_len, girl_pj_tiles);
+;thumby.c:676: set_sprite_data(0, girl_pj_tiles_len, girl_pj_tiles);
 	ld	de,#_girl_pj_tiles
 	push	de
 	ld	hl,#0x1000
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-;thumby.c:669: set_sprite_data(16, girl_tiles_len, girl_tiles);
+;thumby.c:677: set_sprite_data(16, girl_tiles_len, girl_tiles);
 	ld	de,#_girl_tiles
 	push	de
 	ld	hl,#0x1010
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-;thumby.c:670: set_girl_sprite();
+;thumby.c:678: set_girl_sprite();
 	call	_set_girl_sprite
-;thumby.c:671: update_girl_sprite(x, y);
+;thumby.c:679: update_girl_sprite(x, y);
 	ld	hl,#0x2828
 	push	hl
 	call	_update_girl_sprite
 	pop	af
-;thumby.c:674: set_win_data(0x80, window_border_len, window_border);
+;thumby.c:682: set_win_data(0x80, window_border_len, window_border);
 	ld	de,#_window_border
 	push	de
 	ld	hl,#0x0980
 	push	hl
 	call	_set_win_data
 	add	sp, #4
-;thumby.c:675: set_win_tiles(0, 0, text_box_width, text_box_height, text_box);
+;thumby.c:683: set_win_tiles(0, 0, text_box_width, text_box_height, text_box);
 	ld	de,#_text_box
 	push	de
 	ld	hl,#0x0614
@@ -7535,19 +7779,19 @@ _main:
 	push	hl
 	call	_set_win_tiles
 	add	sp, #6
-;thumby.c:676: move_win(7,96);
+;thumby.c:684: move_win(7,96);
 	ld	hl,#0x6007
 	push	hl
 	call	_move_win
 	pop	af
-;thumby.c:679: set_win_data(5U, alphabet_len, alphabet);
+;thumby.c:687: set_win_data(5U, alphabet_len, alphabet);
 	ld	de,#_alphabet
 	push	de
 	ld	hl,#0x2F05
 	push	hl
 	call	_set_win_data
 	add	sp, #4
-;thumby.c:680: set_win_tiles(2U, 2U, text_map_width, text_map_height, text_map);
+;thumby.c:688: set_win_tiles(2U, 2U, text_map_width, text_map_height, text_map);
 	ld	de,#_text_map
 	push	de
 	ld	hl,#0x0210
@@ -7556,14 +7800,21 @@ _main:
 	push	hl
 	call	_set_win_tiles
 	add	sp, #6
-;thumby.c:683: set_win_data(arrow_address, 1U, arrow_tile);
+;thumby.c:691: set_win_data(arrow_address, 1U, arrow_tile);
 	ld	de,#_arrow_tile
 	push	de
 	ld	hl,#0x0134
 	push	hl
 	call	_set_win_data
 	add	sp, #4
-;thumby.c:685: SHOW_BKG;
+;thumby.c:695: set_sprite_data(32, 10, python_puzzle); // starting at tile 32 for 10 tiles
+	ld	de,#_python_puzzle
+	push	de
+	ld	hl,#0x0A20
+	push	hl
+	call	_set_sprite_data
+	add	sp, #4
+;thumby.c:697: SHOW_BKG;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -7573,7 +7824,7 @@ _main:
 	ld	b,a
 	ld	hl,#0xFF40
 	ld	(hl),b
-;thumby.c:686: SHOW_SPRITES;
+;thumby.c:698: SHOW_SPRITES;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -7583,17 +7834,7 @@ _main:
 	ld	b,a
 	ld	l, #0x40
 	ld	(hl),b
-;thumby.c:687: SHOW_WIN;
-	ld	de,#0xFF40
-	ld	a,(de)
-	ld	e,a
-	ld	d,#0x00
-	ld	a,e
-	set	5, a
-	ld	b,a
-	ld	l, #0x40
-	ld	(hl),b
-;thumby.c:688: DISPLAY_ON;
+;thumby.c:699: DISPLAY_ON;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -7603,108 +7844,94 @@ _main:
 	ld	b,a
 	ld	l, #0x40
 	ld	(hl),b
-;thumby.c:689: enable_interrupts();
+;thumby.c:700: enable_interrupts();
 	call	_enable_interrupts
-;thumby.c:692: check_level_one();
+;thumby.c:703: check_level_one();
 	call	_check_level_one
-;thumby.c:695: clear_window();
-	call	_clear_window
-;thumby.c:696: set_text_map("MORNING...", 11);
-	ld	de,#__str_3
-	ld	a,#0x0B
-	push	af
-	inc	sp
-	push	de
-	call	_set_text_map
-	add	sp, #3
-;thumby.c:697: scroll_text(11);
-	ld	a,#0x0B
-	push	af
-	inc	sp
-	call	_scroll_text
-	inc	sp
-;thumby.c:698: waitpad(J_A);
-	ld	a,#0x10
-	push	af
-	inc	sp
-	call	_waitpad
-	inc	sp
-;thumby.c:699: sleep(32);
-	ld	a,#0x20
-	push	af
-	inc	sp
-	call	_sleep
-	inc	sp
-;thumby.c:701: clear_window();
-	call	_clear_window
-;thumby.c:702: set_text_map("HELP ME GET DRESSED.", 21);
+;thumby.c:705: SHOW_WIN;
+	ld	de,#0xFF40
+	ld	a,(de)
+	ld	e,a
+	ld	d,#0x00
+	ld	a,e
+	set	5, a
+	ld	b,a
+	ld	hl,#0xFF40
+	ld	(hl),b
+;thumby.c:706: show_text("MORNING...");
 	ld	de,#__str_4
-	ld	a,#0x15
-	push	af
-	inc	sp
 	push	de
-	call	_set_text_map
-	add	sp, #3
-;thumby.c:703: scroll_text(21);
-	ld	a,#0x15
-	push	af
-	inc	sp
-	call	_scroll_text
-	inc	sp
-;thumby.c:704: waitpad(J_A);
+	call	_show_text
+	pop	af
+;thumby.c:707: waitpad(J_A);
 	ld	a,#0x10
 	push	af
 	inc	sp
 	call	_waitpad
 	inc	sp
-;thumby.c:706: clear_window();
-	call	_clear_window
-;thumby.c:707: set_text_map("MY CLOTHES ARE  IN VRAM.", 25);
+;thumby.c:708: show_text("HELP ME GET DRESSED.");
 	ld	de,#__str_5
-	ld	a,#0x19
-	push	af
-	inc	sp
 	push	de
-	call	_set_text_map
-	add	sp, #3
-;thumby.c:708: scroll_text(25);
-	ld	a,#0x19
+	call	_show_text
+	pop	af
+;thumby.c:709: waitpad(J_A);
+	ld	a,#0x10
 	push	af
 	inc	sp
-	call	_scroll_text
+	call	_waitpad
 	inc	sp
-;thumby.c:710: while(1) {
+;thumby.c:710: show_text("MY CLOTHES ARE  IN VRAM.");
+	ld	de,#__str_6
+	push	de
+	call	_show_text
+	pop	af
+;thumby.c:711: waitpad(J_A);
+	ld	a,#0x10
+	push	af
+	inc	sp
+	call	_waitpad
+	inc	sp
+;thumby.c:712: HIDE_WIN;
+	ld	de,#0xFF40
+	ld	a,(de)
+	ld	b,a
+	ld	d,#0x00
+	res	5, b
+	ld	d,#0x00
+	ld	hl,#0xFF40
+	ld	(hl),b
+;thumby.c:714: while(1) {
 00103$:
-;thumby.c:712: for(counter = 0; counter < 4; counter++){
+;thumby.c:716: for(counter = 0; counter < 4; counter++){
 	ld	b,#0x04
 00107$:
-;thumby.c:713: wait_vbl_done();
+;thumby.c:717: wait_vbl_done();
 	push	bc
 	call	_wait_vbl_done
 	pop	bc
 	ld	a,b
 	dec	b
-;thumby.c:712: for(counter = 0; counter < 4; counter++){
+;thumby.c:716: for(counter = 0; counter < 4; counter++){
 	ld	a,b
 	or	a, a
 	jr	NZ,00107$
-;thumby.c:715: process_button_press(&x, &y);
-	ldhl	sp,#1
+;thumby.c:719: process_button_press(&x, &y);
+	ldhl	sp,#0
 	ld	c,l
 	ld	b,h
-	ldhl	sp,#0
+	ldhl	sp,#1
 	ld	e,l
 	ld	d,h
 	push	bc
 	push	de
 	call	_process_button_press
 	add	sp, #4
-;thumby.c:716: update_girl_sprite(x, y);
-	ldhl	sp,#1
+;thumby.c:720: update_girl_sprite(x, y);
+	ldhl	sp,#0
 	ld	a,(hl)
 	push	af
 	inc	sp
-	dec	hl
+	inc	hl
 	ld	a,(hl)
 	push	af
 	inc	sp
@@ -7714,13 +7941,13 @@ _main:
 	add	sp,#2
 	ret
 _main_end::
-__str_3:
+__str_4:
 	.ascii "MORNING..."
 	.db 0x00
-__str_4:
+__str_5:
 	.ascii "HELP ME GET DRESSED."
 	.db 0x00
-__str_5:
+__str_6:
 	.ascii "MY CLOTHES ARE  IN VRAM."
 	.db 0x00
 	.area _CODE

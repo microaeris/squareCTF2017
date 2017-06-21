@@ -425,8 +425,8 @@ unsigned char alphabet[] =
 #define arrow_address 0x34U
 unsigned char arrow_tile[] =
 {
-  0x00,0x00,0x00,0x00,0x00,0x7E,0x7E,0x7E,
-  0x7E,0x5A,0x3C,0x3C,0x18,0x18,0x00,0x00
+  0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x7E,
+  0x7E,0x7E,0x7E,0x7E,0x3C,0x3C,0x18,0x18
 };
 
 #define text_map_width 16
@@ -436,6 +436,10 @@ unsigned char text_map[] =
     22,23,41,04,04,04,04,04,04,04,04,04,04,04,04,04,
     04,04,04,04,04,04,04,04,04,04,04,04,04,04,04,04
 };
+
+// FIXME remove this lol
+unsigned char python_puzzle[] =
+"import sys;k=int(sys.argv[1]);print(\"\".join(chr(ord(c)^k) for c in \"YOIXO^\nIENO\"));";
 
 
 // Edits the text map
@@ -498,7 +502,7 @@ void set_text_map(char *text, UBYTE len)
 // This function will edit the text map
 void clear_window()
 {
-    // FIXME more hardcoded tile indices
+    // FIXME more hard coded tile indices
     memset(text_map, 4, text_map_width*text_map_height);
     set_win_tiles(2, 2, text_map_width, text_map_height, text_map);
 }
@@ -608,14 +612,19 @@ void check_level_one()
         result &= (get_sprite_tile(counter) == (0x10U + counter));
     }
 
+    // Solution 3: Jump over the check sprite condition, but you won't see the flag OTL....
+    if (result == 1) {
+        pass_level_one();
+    }
+
     // Solution 2: Overwrite girl_pj_tiles with girl_tiles (eg modify 21 10 10 -> 21 00 10)
-    // get_sprite_data(6, 2, tile_data);
-    // result |= (memcmp(tile_data, &(girl_tiles[24*3]), 24) == 0);
+    get_sprite_data(6, 2, tile_data);
+    // 16 is the size in bytes of a 8*16 tile.
+    result = (memcmp(tile_data, &(girl_tiles[16*3]), 16) == 0);
 
-    // Can i check ROM directly?
+    // Can I check ROM directly? to see if the bytes were edited? That seems too specific...
 
-
-    // Solution 3: Jump over the check sprite condition, but you won't see the flag lmao
+    // Solution 3: Jump over the check sprite condition, but you won't see the flag OTL....
     if (result == 1) {
         pass_level_one();
     }
@@ -625,16 +634,21 @@ void check_level_one()
 
 void pass_level_one()
 {
-    // ALICE FIXME this can't be plain English
-    // Remove the words "you pass" because that's too obvious.
-    show_text("YOU PASS!");
-    waitpad(J_A);
-    sleep(32);
+    SHOW_WIN;
 
-    show_text("LOOK ON MY SHAWL.");
+    show_text("DO YOU SEE MY   NEW OUTFIT?");
     waitpad(J_A);
 
-    show_text("THANKS FOR TRYING THE DEMO!");
+    show_text("IS IT NOT CUTE?");
+    waitpad(J_A);
+
+    // FIXME make the most obvious hint not plain english
+    show_text("I WONDER IF IT  ENCODES...");
+    waitpad(J_A);
+    show_text("A SECRET FLAG!");
+    waitpad(J_A);
+    HIDE_WIN;
+
     while(1) {}
     // FIXME Should start level 2 here
 }
@@ -644,6 +658,7 @@ void show_text(char *text)
     UBYTE text_len = strlen(text);
     clear_window();
     set_text_map(text, text_len);
+
     // Plus one to account for the extra arrow character.
     scroll_text((text_len + 1));
 }
@@ -659,9 +674,7 @@ void main()
 
     // load background
     set_bkg_data(0, grass_tiles_len, grass_tiles);
-    //for(counter = 0; counter <= 16; counter += 2) {
     set_bkg_tiles(0, 0, grass_field_width, grass_field_height, grass_field);
-    //}
 
     // load sprite
     SPRITES_8x16;
@@ -682,30 +695,26 @@ void main()
     // Set the arrow in memory
     set_win_data(arrow_address, 1U, arrow_tile);
 
+    // FIXME delete this
+    // Set some python as sprite data??
+    set_sprite_data(32, 10, python_puzzle); // starting at tile 32 for 10 tiles
+
     SHOW_BKG;
     SHOW_SPRITES;
-    SHOW_WIN;
     DISPLAY_ON;
     enable_interrupts();
 
     // Check if this game has been solved.
     check_level_one();
 
-    // set_text_map("SQUARE CTF 2017!", 16);
-    clear_window();
-    set_text_map("MORNING...", 11);
-    scroll_text(11);
+    SHOW_WIN;
+    show_text("MORNING...");
     waitpad(J_A);
-    sleep(32);
-
-    clear_window();
-    set_text_map("HELP ME GET DRESSED.", 21);
-    scroll_text(21);
+    show_text("HELP ME GET DRESSED.");
     waitpad(J_A);
-
-    clear_window();
-    set_text_map("MY CLOTHES ARE  IN VRAM.", 25);
-    scroll_text(25);
+    show_text("MY CLOTHES ARE  IN VRAM.");
+    waitpad(J_A);
+    HIDE_WIN;
 
     while(1) {
         /* Skip four VBLs (slow down animation) */

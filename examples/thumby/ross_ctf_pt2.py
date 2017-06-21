@@ -1,0 +1,1 @@
+import sys;k=int(sys.argv[1]);print("".join(chr(ord(c)^k) for c in "YOIXO^\nIENO"));

@@ -2,12 +2,12 @@
 -i ./obj/thumby.ihx
 -b _CODE = 0x0200
 -b _DATA = 0xc0a0
--k /home/ahris/Dropbox/LinuxDocuments/AdultWork/CTF2017/gbdk-n/bin/../lib
+-k /home/ahris/Dropbox/LinuxDocuments/AdultWork/CTF2017/squareCTF2017/bin/../lib
 -k /usr/bin/../share/sdcc/lib/gbz80
 -k /usr/share/sdcc/lib/gbz80
 -l gb.lib
 -l gbz80
-/home/ahris/Dropbox/LinuxDocuments/AdultWork/CTF2017/gbdk-n/bin/../lib/crt0.rel
+/home/ahris/Dropbox/LinuxDocuments/AdultWork/CTF2017/squareCTF2017/bin/../lib/crt0.rel
 ./obj/thumby.rel
 
 -e

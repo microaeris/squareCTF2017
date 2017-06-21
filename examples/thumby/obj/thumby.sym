@@ -6,88 +6,93 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 __str_0                                                        04F3 R
-  0 __str_1                                                        04FD R
-  0 __str_2                                                        050F R
-  0 __str_3                                                        06CE R
-  0 __str_4                                                        06D9 R
-  0 __str_5                                                        06EE R
+  0 __str_0                                                        0550 R
+  0 __str_1                                                        056C R
+  0 __str_2                                                        057C R
+  0 __str_3                                                        0597 R
+  0 __str_4                                                        0736 R
+  0 __str_5                                                        0741 R
+  0 __str_6                                                        0756 R
   1 _alphabet                                                      0758 GR
   1 _arrow_tile                                                    0A48 GR
-  0 _check_level_one                                               0338 GR
-  0 _check_level_one_end                                           04C0 GR
-  0 _check_level_one_start                                         0338 GR
-  0 _clear_window                                                  0123 GR
-  0 _clear_window_end                                              0144 GR
-  0 _clear_window_start                                            0123 GR
+  0 _check_level_one                                               0333 GR
+  0 _check_level_one_end                                           04EF GR
+  0 _check_level_one_start                                         0333 GR
+  0 _clear_window                                                  0122 GR
+  0 _clear_window_end                                              0143 GR
+  0 _clear_window_start                                            0122 GR
     _disable_interrupts                                            **** GX
     _display_off                                                   **** GX
-  0 _divide_ubyte                                                  0144 GR
-  0 _divide_ubyte_end                                              0156 GR
-  0 _divide_ubyte_start                                            0144 GR
+  0 _divide_ubyte                                                  0143 GR
+  0 _divide_ubyte_end                                              0155 GR
+  0 _divide_ubyte_start                                            0143 GR
     _enable_interrupts                                             **** GX
+    _get_sprite_data                                               **** GX
     _get_sprite_tile                                               **** GX
   1 _girl_pj_tiles                                                 0550 GR
   1 _girl_tiles                                                    0450 GR
   1 _grass_field                                                   0050 GR
   1 _grass_tiles                                                   0000 GR
     _joypad                                                        **** GX
-  0 _main                                                          0551 GR
-  0 _main_end                                                      06CE GR
-  0 _main_start                                                    0551 GR
+  0 _main                                                          05CC GR
+  0 _main_end                                                      0736 GR
+  0 _main_start                                                    05CC GR
+    _memcmp                                                        **** GX
     _memset                                                        **** GX
     _move_sprite                                                   **** GX
     _move_win                                                      **** GX
-  0 _pass_level_one                                                04C0 GR
-  0 _pass_level_one_end                                            04F3 GR
-  0 _pass_level_one_start                                          04C0 GR
-  0 _process_button_press                                          01BE GR
-  0 _process_button_press_end                                      0286 GR
-  0 _process_button_press_start                                    01BE GR
-  0 _scroll_text                                                   0156 GR
-  0 _scroll_text_end                                               01AE GR
-  0 _scroll_text_start                                             0156 GR
+  0 _pass_level_one                                                04EF GR
+  0 _pass_level_one_end                                            0550 GR
+  0 _pass_level_one_start                                          04EF GR
+  0 _process_button_press                                          01BD GR
+  0 _process_button_press_end                                      0281 GR
+  0 _process_button_press_start                                    01BD GR
+  1 _python_puzzle                                                 0A78 GR
+  0 _scroll_text                                                   0155 GR
+  0 _scroll_text_end                                               01AD GR
+  0 _scroll_text_start                                             0155 GR
     _set_bkg_data                                                  **** GX
     _set_bkg_tiles                                                 **** GX
-  0 _set_girl_sprite                                               0286 GR
-  0 _set_girl_sprite_end                                           029D GR
-  0 _set_girl_sprite_start                                         0286 GR
+  0 _set_girl_sprite                                               0281 GR
+  0 _set_girl_sprite_end                                           0298 GR
+  0 _set_girl_sprite_start                                         0281 GR
     _set_sprite_data                                               **** GX
     _set_sprite_tile                                               **** GX
-  0 _set_text_map                                                  0000 GR
-  0 _set_text_map_end                                              0123 GR
-  0 _set_text_map_start                                            0000 GR
-    _set_win_data                                                  **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 
 Symbol Table
 
+  0 _set_text_map                                                  0000 GR
+  0 _set_text_map_end                                              0122 GR
+  0 _set_text_map_start                                            0000 GR
+    _set_win_data                                                  **** GX
     _set_win_tiles                                                 **** GX
-  0 _show_text                                                     052B GR
-  0 _show_text_end                                                 0551 GR
-  0 _show_text_start                                               052B GR
-  0 _sleep                                                         01AE GR
-  0 _sleep_end                                                     01BE GR
-  0 _sleep_start                                                   01AE GR
+  0 _show_text                                                     05A6 GR
+  0 _show_text_end                                                 05CC GR
+  0 _show_text_start                                               05A6 GR
+  0 _sleep                                                         01AD GR
+  0 _sleep_end                                                     01BD GR
+  0 _sleep_start                                                   01AD GR
     _strlen                                                        **** GX
   1 _text_box                                                      06E0 GR
   1 _text_map                                                      0A58 GR
-  0 _update_girl_sprite                                            029D GR
-  0 _update_girl_sprite_end                                        0338 GR
-  0 _update_girl_sprite_start                                      029D GR
+  0 _update_girl_sprite                                            0298 GR
+  0 _update_girl_sprite_end                                        0333 GR
+  0 _update_girl_sprite_start                                      0298 GR
     _wait_vbl_done                                                 **** GX
     _waitpad                                                       **** GX
   1 _window_border                                                 0650 GR
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
 
 Area Table
 
-   0 _CODE                                      size  707   flags    0
-   1 _DATA                                      size  A78   flags    0
+   0 _CODE                                      size  76F   flags    0
+   1 _DATA                                      size  ACC   flags    0
    2 _DABS                                      size    0   flags    8
    3 _HOME                                      size    0   flags    0
-   4 _GSINIT                                    size 3458   flags    0
+   4 _GSINIT                                    size 35FC   flags    0
    5 _GSFINAL                                   size    0   flags    0
    6 _CABS                                      size    0   flags    8
 
