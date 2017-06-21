@@ -1,0 +1,80 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  0 _change_icon                                                   0B4F GR
+  0 _change_icon_end                                               0C56 GR
+  0 _change_icon_start                                             0B4F GR
+  0 _colors                                                        08F8 GR
+  1 _current_color                                                 0301 GR
+  1 _current_cursor                                                0303 GR
+  1 _current_mode                                                  0302 GR
+  1 _current_tool                                                  0300 GR
+  1 _cursor_x                                                      0305 GR
+  1 _cursor_y                                                      0306 GR
+  0 _cursors                                                       078A GR
+  0 _cursors_data                                                  07A8 GR
+  0 _data                                                          018A GR
+  1 _data_buffer                                                   0000 GR
+  0 _icons                                                         00D6 GR
+    _joypad                                                        **** GX
+  0 _main                                                          1234 GR
+  0 _main_end                                                      1262 GR
+  0 _main_start                                                    1234 GR
+  0 _menu                                                          0E3D GR
+  1 _menu_cursor_pos                                               0304 GR
+  0 _menu_end                                                      10DE GR
+  0 _menu_start                                                    0E3D GR
+  0 _modes                                                         08FC GR
+  0 _move_cursor                                                   0900 GR
+  0 _move_cursor_end                                               09BE GR
+  0 _move_cursor_start                                             0900 GR
+  0 _move_menu_cursor                                              09BE GR
+  0 _move_menu_cursor_end                                          0A1C GR
+  0 _move_menu_cursor_start                                        09BE GR
+    _move_sprite                                                   **** GX
+    _plot                                                          **** GX
+  0 _reset_icon                                                    0C56 GR
+  0 _reset_icon_end                                                0D3F GR
+  0 _reset_icon_start                                              0C56 GR
+  0 _run                                                           10DE GR
+  0 _run_end                                                       1234 GR
+  0 _run_start                                                     10DE GR
+  0 _selected_data                                                 048A GR
+  0 _set_cursor                                                    0000 GR
+  0 _set_cursor_end                                                00D6 GR
+  0 _set_cursor_start                                              0000 GR
+  0 _set_icon                                                      0A1C GR
+  0 _set_icon_end                                                  0B4F GR
+  0 _set_icon_start                                                0A1C GR
+    _set_sprite_data                                               **** GX
+    _set_sprite_prop                                               **** GX
+    _set_sprite_tile                                               **** GX
+  0 _splash                                                        0D3F GR
+  0 _splash_end                                                    0E3D GR
+  0 _splash_start                                                  0D3F GR
+    _switch_data                                                   **** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+
+Symbol Table
+
+    _wait_vbl_done                                                 **** GX
+    _waitpadup                                                     **** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
+
+Area Table
+
+   0 _CODE                                      size 1262   flags    0
+   1 _DATA                                      size  307   flags    0
+   2 _DABS                                      size    0   flags    8
+   3 _HOME                                      size    0   flags    0
+   4 _GSINIT                                    size    0   flags    0
+   5 _GSFINAL                                   size    0   flags    0
+   6 _CABS                                      size    0   flags    8
+
