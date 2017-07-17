@@ -1,0 +1,60 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  0 ___str_0                                                       0470 R
+  0 ___str_1                                                       047D R
+  0 ___str_2                                                       0485 R
+  0 ___str_3                                                       04D5 R
+  0 ___str_4                                                       04DE R
+  1 _alphabet                                                      0108 GR
+  1 _arrow_tile                                                    03E8 GR
+  0 _check_sequence                                                03E2 GR
+  0 _clear_window                                                  0288 GR
+    _delay                                                         **** GX
+    _disable_interrupts                                            **** GX
+    _display_off                                                   **** GX
+  0 _divide_UINT8                                                  0000 GR
+    _enable_interrupts                                             **** GX
+  0 _fail_level_1                                                  04A4 GR
+  0 _girl_tiles                                                    0012 GR
+  1 _input_seq                                                     0428 GR
+  1 _input_seq_ctr                                                 0438 GR
+    _joypad                                                        **** GX
+  0 _main                                                          04FA GR
+    _memset                                                        **** GX
+    _move_win                                                      **** GX
+  0 _pass_level_1                                                  0434 GR
+  0 _process_button_press                                          03BB GR
+  0 _scroll_text                                                   0352 GR
+  0 _set_text_map                                                  0122 GR
+    _set_win_data                                                  **** GX
+    _set_win_tiles                                                 **** GX
+  0 _show_text                                                     02A9 GR
+  0 _sleep                                                         03AB GR
+  0 _solution_seq                                                  0112 GR
+    _strlen                                                        **** GX
+  1 _text_box                                                      0090 GR
+  1 _text_map                                                      0408 GR
+    _wait_vbl_done                                                 **** GX
+  1 _window_border                                                 0000 GR
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size  595   flags    0
+   1 _DATA                                      size  439   flags    0
+   2 _DABS                                      size    0   flags    8
+   3 _HOME                                      size    0   flags    0
+   4 _GSINIT                                    size 14CD   flags    0
+   5 _GSFINAL                                   size    0   flags    0
+   6 _CABS                                      size    0   flags    8
+

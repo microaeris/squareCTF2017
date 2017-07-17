@@ -422,11 +422,15 @@ unsigned char alphabet[] =
     0x3C,0x3C,0x24,0x24,0x18,0x18,0x00,0x00
   };
 
-#define arrow_address 0x34U
+#define arrow_address_1 0x34U
+#define arrow_address_2 0x35U
+#define arrow_tile_len 2U // number of 8*8 tiles
 unsigned char arrow_tile[] =
 {
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x7E,
-  0x7E,0x7E,0x7E,0x7E,0x3C,0x3C,0x18,0x18
+  0x7E,0x7E,0x7E,0x7E,0x3C,0x3C,0x18,0x18,
+  0x00,0x00,0x00,0x00,0x00,0x7E,0x7E,0x7E,
+  0x7E,0x7E,0x3C,0x3C,0x18,0x18,0x00,0x00
 };
 
 #define text_map_width 16
@@ -495,7 +499,7 @@ void set_text_map(char *text, UBYTE len)
     }
 
     // Write the arrow as the last character.
-    text_map[len] = arrow_address;
+    text_map[len] = arrow_address_1;
 }
 
 // CAREFUL
@@ -655,12 +659,33 @@ void pass_level_one()
 
 void show_text(char *text)
 {
+    UBYTE x, y;
+    UBYTE cursor_state = 0;
     UBYTE text_len = strlen(text);
+
     clear_window();
     set_text_map(text, text_len);
 
     // Plus one to account for the extra arrow character.
-    scroll_text((text_len + 1));
+    text_len++;
+    scroll_text(text_len);
+
+    // Animate the cursor while waiting for text to advance
+    // from button input.
+    x = 2 + (text_len % 16);
+    y = 2 + divide_ubyte(text_len, 16);
+    // FIXME why wouldn't division work? same issue as above...
+    while (~(joypad() & J_A)) {
+        if (cursor_state == 0) {
+            text_map[text_len] = arrow_address_2;
+        } else {
+            text_map[text_len] = arrow_address_1;
+        }
+
+        set_win_tiles(x, y, 1, 1, &text_map[text_len]);
+        cursor_state = !cursor_state;
+        delay(8);
+    }
 }
 
 void main()
@@ -693,7 +718,7 @@ void main()
     set_win_tiles(2U, 2U, text_map_width, text_map_height, text_map);
 
     // Set the arrow in memory
-    set_win_data(arrow_address, 1U, arrow_tile);
+    set_win_data(arrow_address_1, arrow_tile_len, arrow_tile);
 
     // FIXME delete this
     // Set some python as sprite data??
@@ -705,15 +730,12 @@ void main()
     enable_interrupts();
 
     // Check if this game has been solved.
-    check_level_one();
+    // check_level_one();
 
     SHOW_WIN;
     show_text("MORNING...");
-    waitpad(J_A);
     show_text("HELP ME GET DRESSED.");
-    waitpad(J_A);
     show_text("MY CLOTHES ARE  IN VRAM.");
-    waitpad(J_A);
     HIDE_WIN;
 
     while(1) {

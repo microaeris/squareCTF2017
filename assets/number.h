@@ -1,8 +1,8 @@
 /*
 
- ARROW.C
+ NUMBER.H
 
- Tile Source File.
+ Include File.
 
  Info:
   Form                 : All tiles as one unit.
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 1
+  Tiles                : 0 to 9
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -22,13 +22,10 @@
 
 */
 
-/* Start of tile array. */
-unsigned char arrow_tile[] =
-{
-  0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x7E,
-  0x7E,0x7E,0x7E,0x7E,0x3C,0x3C,0x18,0x18,
-  0x00,0x00,0x00,0x00,0x00,0x7E,0x7E,0x7E,
-  0x7E,0x7E,0x3C,0x3C,0x18,0x18,0x00,0x00
-};
 
-/* End of ARROW.C */
+/* Bank of tiles. */
+#define numberBank 0
+/* Start of tile array. */
+extern unsigned char number[];
+
+/* End of NUMBER.H */

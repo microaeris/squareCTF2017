@@ -1,0 +1,71 @@
+# CTF Ideas
+
+To Do
+* encode the final flag - so you can't  find the pw with strings
+* scatter the key around the ROM
+
+Once i get the art
+* load in the background
+* write out the dialog
+* figure out best way to load dialog into game (probably hard coded character maps)
+* fix the win screen
+
+Nice to have
+* fix (unsigned blah) to const UINT8.
+* Change all UBYTE and UWORD to UINT8 etc
+* change all consts to be defined with 0xFFU
+* show sequence of what you've already pressed on screen
+* Level 2 logic!
+* make the encryption optimized for the GBA
+
+Done
+* figure out the password
+* have a way to store button presses
+* read in the buttons
+* check for the right sequence
+* debounce the buttons, potentially? is it needed? YES
+* make a new text system so im not translating ascii to character map in the game
+* decide on the flag
+* update the font data - now with a comma!
+* have a way to show the answer was wrong.
+* show the winning screen
+
+Won't Do
+* randomize how the tiles are loaded in vram
+
+---
+
+Players have to find the solution sequence to open the door.
+I don't want players to just jump to the final pass function or find the
+solution in ROM, so I'm encrypting the flag and scattering the key
+around the ROM so force the player to execute all of the ROM. LOL Jor called
+that white box crypto.
+
+---
+
+Password:
+    S N N S E N S W N W W N S N E N
+    16 directional characters
+
+    S W A N B A N S S A N E W E B S
+    D L A U B A U D     D A U R L R B D
+    16 button presses
+
+Flag:
+    girl power? some feminist message?
+    something about hacking?
+    TR1AL_4ND_3RR0R
+    V3RY_G00D_GU3SS
+    N0_H4RM_DONE
+    F0R_0UR_FUTUR3
+    SUP3R_S3CUR3_1 *
+
+
+---
+
+## Story
+
+She is a hired pen tester. Hacking her way through this VR world.
+Level 1. street, match the password
+Level 2. computer, fake the network packets to the GB
+Level 3. edit the rom in some way lmao
