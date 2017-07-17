@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Mar 24 2016) (Linux)
-; This file was generated Sun Jul 16 22:50:56 2017
+; This file was generated Mon Jul 17 00:10:32 2017
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mgbz80
@@ -10,6 +10,9 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
+	.globl _move_sprite
+	.globl _set_sprite_tile
+	.globl _set_sprite_data
 	.globl _move_win
 	.globl _set_win_tiles
 	.globl _set_win_data
@@ -23,6 +26,7 @@
 	.globl _memset
 	.globl _strcat
 	.globl _strcpy
+	.globl _memcpy
 	.globl _key_b
 	.globl _key_a
 	.globl _flag_b
@@ -35,7 +39,7 @@
 	.globl _text_box
 	.globl _window_border
 	.globl _solution_seq
-	.globl _girl_tiles
+	.globl _agent
 	.globl _divide_UINT8
 	.globl _set_text_map
 	.globl _clear_window
@@ -85,7 +89,7 @@ _key_b::
 	.area _GSINIT
 	.area _GSFINAL
 	.area _GSINIT
-;main.c:70: unsigned char window_border[] =
+;main.c:47: unsigned char window_border[] =
 	ld	hl,#_window_border
 	ld	(hl),#0x1F
 	ld	hl,#(_window_border + 0x0001)
@@ -411,7 +415,7 @@ _key_b::
 	ld	bc,#_window_border + 143
 	xor	a, a
 	ld	(bc),a
-;main.c:96: unsigned char text_box[] =
+;main.c:73: unsigned char text_box[] =
 	ld	hl,#_text_box
 	ld	(hl),#0x80
 	ld	hl,#(_text_box + 0x0001)
@@ -652,7 +656,7 @@ _key_b::
 	ld	(hl),#0x84
 	ld	hl,#(_text_box + 0x0077)
 	ld	(hl),#0x85
-;main.c:115: unsigned char alphabet[] =
+;main.c:92: unsigned char alphabet[] =
 	ld	hl,#_alphabet
 	ld	(hl),#0x7C
 	ld	hl,#(_alphabet + 0x0001)
@@ -2299,7 +2303,7 @@ _key_b::
 	ld	bc,#_alphabet + 735
 	xor	a, a
 	ld	(bc),a
-;main.c:217: unsigned char arrow_tile[] =
+;main.c:194: unsigned char arrow_tile[] =
 	ld	hl,#_arrow_tile
 	ld	(hl),#0x00
 	ld	bc,#_arrow_tile + 1
@@ -2377,7 +2381,7 @@ _key_b::
 	ld	bc,#_arrow_tile + 31
 	xor	a, a
 	ld	(bc),a
-;main.c:227: unsigned char text_map[] =
+;main.c:204: unsigned char text_map[] =
 	ld	hl,#_text_map
 	ld	(hl),#0x16
 	ld	hl,#(_text_map + 0x0001)
@@ -2442,10 +2446,10 @@ _key_b::
 	ld	(hl),#0x04
 	ld	hl,#(_text_map + 0x001f)
 	ld	(hl),#0x04
-;main.c:246: UINT8 input_seq_ctr = 0;
+;main.c:223: UINT8 input_seq_ctr = 0;
 	ld	hl,#_input_seq_ctr
 	ld	(hl),#0x00
-;main.c:250: UINT8 flag_a[] =
+;main.c:227: UINT8 flag_a[] =
 	ld	hl,#_flag_a
 	ld	(hl),#0x12
 	ld	hl,#(_flag_a + 0x0001)
@@ -2462,7 +2466,7 @@ _key_b::
 	ld	(hl),#0x8A
 	ld	hl,#(_flag_a + 0x0007)
 	ld	(hl),#0x5A
-;main.c:254: UINT8 flag_b[] =
+;main.c:231: UINT8 flag_b[] =
 	ld	hl,#_flag_b
 	ld	(hl),#0xE1
 	ld	hl,#(_flag_b + 0x0001)
@@ -2479,72 +2483,6 @@ _key_b::
 	ld	(hl),#0x30
 	ld	hl,#(_flag_b + 0x0007)
 	ld	(hl),#0x5F
-;main.c:264: UINT32 key_a[4] = { 0xc2bb5c5b, 0x93373628,
-	ld	hl,#_key_a
-	ld	(hl),#0x5B
-	inc	hl
-	ld	(hl),#0x5C
-	inc	hl
-	ld	(hl),#0xBB
-	inc	hl
-	ld	(hl),#0xC2
-	ld	hl,#(_key_a + 0x0004)
-	ld	(hl),#0x28
-	inc	hl
-	ld	(hl),#0x36
-	inc	hl
-	ld	(hl),#0x37
-	inc	hl
-	ld	(hl),#0x93
-	ld	hl,#(_key_a + 0x0008)
-	ld	(hl),#0xF3
-	inc	hl
-	ld	(hl),#0x9A
-	inc	hl
-	ld	(hl),#0x84
-	inc	hl
-	ld	(hl),#0xD0
-	ld	hl,#(_key_a + 0x000c)
-	ld	(hl),#0xC4
-	inc	hl
-	ld	(hl),#0x3A
-	inc	hl
-	ld	(hl),#0x18
-	inc	hl
-	ld	(hl),#0x04
-;main.c:268: UINT32 key_b[4] = { 0x72ae38ba, 0xa106f553,
-	ld	hl,#_key_b
-	ld	(hl),#0xBA
-	inc	hl
-	ld	(hl),#0x38
-	inc	hl
-	ld	(hl),#0xAE
-	inc	hl
-	ld	(hl),#0x72
-	ld	hl,#(_key_b + 0x0004)
-	ld	(hl),#0x53
-	inc	hl
-	ld	(hl),#0xF5
-	inc	hl
-	ld	(hl),#0x06
-	inc	hl
-	ld	(hl),#0xA1
-	ld	hl,#(_key_b + 0x0008)
-	ld	(hl),#0x53
-	inc	hl
-	ld	(hl),#0x7C
-	inc	hl
-	ld	(hl),#0xA9
-	inc	hl
-	ld	(hl),#0x1E
-	ld	hl,#(_key_b + 0x000c)
-	ld	(hl),#0xB3
-	inc	hl
-	ld	(hl),#0xE0
-	inc	hl
-	ld	(hl),#0xA8
-	inc	hl
-	ld	(hl),#0xCF
 ;--------------------------------------------------------
 ; Home
 ;--------------------------------------------------------
@@ -2554,288 +2492,160 @@ _key_b::
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;main.c:271: UINT8 divide_UINT8(UINT8 a, UINT8 b)
+;main.c:249: UINT8 divide_UINT8(UINT8 a, UINT8 b)
 ;	---------------------------------
 ; Function divide_UINT8
 ; ---------------------------------
 _divide_UINT8::
-;main.c:275: while (a >= b) {
+;main.c:253: while (a >= b) {
 	ld	b,#0x00
 00101$:
 	ldhl	sp,#2
 	ld	a,(hl+)
 	sub	a, (hl)
 	jr	C,00103$
-;main.c:276: a -= b;
+;main.c:254: a -= b;
 	dec	hl
 	ld	a,(hl+)
 	sub	a, (hl)
 	dec	hl
 	ld	(hl),a
-;main.c:277: result++;
+;main.c:255: result++;
 	inc	b
 	jr	00101$
 00103$:
-;main.c:279: return result;
+;main.c:257: return result;
 	ld	e,b
 	ret
-_girl_tiles:
+_agent:
 	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x01	; 1
-	.db #0x01	; 1
-	.db #0x03	; 3
-	.db #0x03	; 3
-	.db #0x02	; 2
-	.db #0x03	; 3
-	.db #0x02	; 2
-	.db #0x03	; 3
-	.db #0x02	; 2
-	.db #0x03	; 3
-	.db #0x02	; 2
-	.db #0x03	; 3
-	.db #0x03	; 3
-	.db #0x02	; 2
-	.db #0x02	; 2
-	.db #0x03	; 3
-	.db #0x01	; 1
-	.db #0x01	; 1
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x1F	; 31
-	.db #0x1F	; 31
-	.db #0x70	; 112	'p'
-	.db #0x7F	; 127
-	.db #0xC0	; 192
-	.db #0xFF	; 255
-	.db #0x80	; 128
-	.db #0xFF	; 255
-	.db #0x40	; 64
-	.db #0xBF	; 191
-	.db #0xD0	; 208
-	.db #0x3F	; 63
-	.db #0x89	; 137
-	.db #0x7F	; 127
-	.db #0x34	; 52	'4'
-	.db #0xEF	; 239
-	.db #0x7B	; 123
-	.db #0xD6	; 214
-	.db #0x5F	; 95
-	.db #0xCF	; 207
-	.db #0x47	; 71	'G'
-	.db #0xC0	; 192
-	.db #0x40	; 64
-	.db #0xC0	; 192
-	.db #0xD8	; 216
-	.db #0xD8	; 216
-	.db #0x64	; 100	'd'
-	.db #0x64	; 100	'd'
-	.db #0x38	; 56	'8'
-	.db #0x20	; 32
-	.db #0x70	; 112	'p'
-	.db #0x71	; 113	'q'
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x01	; 1
-	.db #0x01	; 1
-	.db #0x02	; 2
-	.db #0x02	; 2
-	.db #0x05	; 5
-	.db #0x04	; 4
-	.db #0x02	; 2
-	.db #0x02	; 2
-	.db #0x01	; 1
-	.db #0x01	; 1
-	.db #0x03	; 3
-	.db #0x02	; 2
-	.db #0x02	; 2
-	.db #0x02	; 2
-	.db #0x04	; 4
-	.db #0x04	; 4
-	.db #0x04	; 4
-	.db #0x04	; 4
 	.db #0x07	; 7
-	.db #0x04	; 4
-	.db #0x03	; 3
-	.db #0x03	; 3
 	.db #0x00	; 0
+	.db #0x0F	; 15
 	.db #0x00	; 0
+	.db #0x0F	; 15
 	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x8F	; 143
-	.db #0x8F	; 143
-	.db #0x00	; 0
-	.db #0x05	; 5
-	.db #0x80	; 128
-	.db #0x07	; 7
-	.db #0x40	; 64
-	.db #0x05	; 5
-	.db #0xA0	; 160
-	.db #0x00	; 0
-	.db #0x50	; 80	'P'
-	.db #0x00	; 0
-	.db #0xF8	; 248
-	.db #0xF8	; 248
-	.db #0xFF	; 255
-	.db #0x47	; 71	'G'
 	.db #0x7F	; 127
-	.db #0x42	; 66	'B'
-	.db #0x7F	; 127
-	.db #0x7F	; 127
-	.db #0xAA	; 170
-	.db #0xB7	; 183
-	.db #0xAA	; 170
-	.db #0xB5	; 181
-	.db #0x3F	; 63
-	.db #0x3F	; 63
-	.db #0x12	; 18
-	.db #0x12	; 18
-	.db #0x12	; 18
-	.db #0x12	; 18
-	.db #0x3E	; 62
-	.db #0x3E	; 62
-	.db #0xF0	; 240
-	.db #0xF0	; 240
-	.db #0x1C	; 28
-	.db #0xFC	; 252
-	.db #0x26	; 38
-	.db #0xDE	; 222
-	.db #0x1B	; 27
-	.db #0xE7	; 231
-	.db #0x09	; 9
-	.db #0xF7	; 247
-	.db #0x05	; 5
-	.db #0xFB	; 251
 	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x80	; 128
-	.db #0xFF	; 255
-	.db #0x49	; 73	'I'
-	.db #0xFE	; 254
-	.db #0xB5	; 181
+	.db #0x6F	; 111	'o'
+	.db #0x01	; 1
 	.db #0x6E	; 110	'n'
-	.db #0xFD	; 253
-	.db #0xFF	; 255
-	.db #0x7F	; 127
+	.db #0x01	; 1
+	.db #0xEE	; 238
+	.db #0x00	; 0
+	.db #0x0F	; 15
+	.db #0x00	; 0
+	.db #0x03	; 3
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x00	; 0
 	.db #0x07	; 7
-	.db #0x36	; 54	'6'
-	.db #0x36	; 54	'6'
-	.db #0x4C	; 76	'L'
-	.db #0x4C	; 76	'L'
-	.db #0x38	; 56	'8'
-	.db #0x08	; 8
-	.db #0x1C	; 28
-	.db #0x1C	; 28
 	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0xE2	; 226
-	.db #0xE2	; 226
+	.db #0x0F	; 15
 	.db #0x01	; 1
-	.db #0x41	; 65	'A'
-	.db #0x02	; 2
-	.db #0x40	; 64
-	.db #0x05	; 5
-	.db #0x40	; 64
-	.db #0x0A	; 10
+	.db #0x0E	; 14
 	.db #0x00	; 0
-	.db #0x15	; 21
+	.db #0x1F	; 31
 	.db #0x01	; 1
-	.db #0x3F	; 63
-	.db #0x3E	; 62
-	.db #0xFE	; 254
-	.db #0xC4	; 196
+	.db #0x1E	; 30
+	.db #0x00	; 0
+	.db #0xF8	; 248
+	.db #0x00	; 0
 	.db #0xFC	; 252
-	.db #0x84	; 132
+	.db #0x00	; 0
 	.db #0xFC	; 252
-	.db #0xFC	; 252
-	.db #0xAB	; 171
-	.db #0xDA	; 218
-	.db #0xAB	; 171
-	.db #0x5B	; 91
-	.db #0xF8	; 248
-	.db #0xF8	; 248
-	.db #0x90	; 144
-	.db #0x90	; 144
-	.db #0x90	; 144
-	.db #0x90	; 144
-	.db #0xF8	; 248
-	.db #0xF8	; 248
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x40	; 64
-	.db #0x40	; 64
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x80	; 128
-	.db #0x40	; 64
-	.db #0x40	; 64
-	.db #0x40	; 64
-	.db #0x40	; 64
+	.db #0x3C	; 60
 	.db #0xC0	; 192
-	.db #0x40	; 64
-	.db #0x80	; 128
-	.db #0x80	; 128
+	.db #0x3C	; 60
+	.db #0xC8	; 200
+	.db #0xBC	; 188
+	.db #0x50	; 80	'P'
+	.db #0xBC	; 188
+	.db #0x50	; 80	'P'
+	.db #0x6C	; 108	'l'
+	.db #0x90	; 144
+	.db #0x38	; 56	'8'
+	.db #0xC0	; 192
+	.db #0xF0	; 240
 	.db #0x00	; 0
 	.db #0x00	; 0
+	.db #0xC0	; 192
+	.db #0x00	; 0
+	.db #0xF0	; 240
+	.db #0x00	; 0
+	.db #0xF8	; 248
+	.db #0x00	; 0
+	.db #0xF8	; 248
+	.db #0x00	; 0
+	.db #0xF8	; 248
+	.db #0x00	; 0
+	.db #0xF8	; 248
+	.db #0x00	; 0
+	.db #0x1F	; 31
+	.db #0x1D	; 29
+	.db #0x02	; 2
+	.db #0x1C	; 28
+	.db #0x03	; 3
+	.db #0x1C	; 28
+	.db #0x03	; 3
+	.db #0x1C	; 28
+	.db #0x03	; 3
+	.db #0x1E	; 30
+	.db #0x01	; 1
+	.db #0x1E	; 30
+	.db #0x01	; 1
+	.db #0x1E	; 30
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x0F	; 15
+	.db #0x00	; 0
+	.db #0x0F	; 15
+	.db #0x0F	; 15
 	.db #0x00	; 0
 	.db #0x00	; 0
+	.db #0x1E	; 30
+	.db #0x00	; 0
+	.db #0x1E	; 30
+	.db #0x00	; 0
+	.db #0x3E	; 62
+	.db #0x00	; 0
+	.db #0x3E	; 62
+	.db #0x00	; 0
+	.db #0x3F	; 63
+	.db #0x00	; 0
+	.db #0xF8	; 248
+	.db #0x00	; 0
+	.db #0xF8	; 248
+	.db #0x00	; 0
+	.db #0xFC	; 252
+	.db #0x00	; 0
+	.db #0xFC	; 252
+	.db #0x02	; 2
+	.db #0xFC	; 252
+	.db #0x02	; 2
+	.db #0xFC	; 252
+	.db #0x02	; 2
+	.db #0xFC	; 252
+	.db #0x02	; 2
+	.db #0xFC	; 252
+	.db #0x00	; 0
+	.db #0x3C	; 60
+	.db #0x00	; 0
+	.db #0x3C	; 60
+	.db #0x3C	; 60
 	.db #0x00	; 0
 	.db #0x00	; 0
+	.db #0x3C	; 60
 	.db #0x00	; 0
+	.db #0x3C	; 60
 	.db #0x00	; 0
+	.db #0x3C	; 60
+	.db #0x00	; 0
+	.db #0x3E	; 62
+	.db #0x00	; 0
+	.db #0x3F	; 63
 _solution_seq:
 	.db #0x08	; 8
 	.db #0x02	; 2
@@ -2853,13 +2663,13 @@ _solution_seq:
 	.db #0x01	; 1
 	.db #0x20	; 32
 	.db #0x08	; 8
-;main.c:290: void set_text_map(char *text, UINT8 len)
+;main.c:268: void set_text_map(char *text, UINT8 len)
 ;	---------------------------------
 ; Function set_text_map
 ; ---------------------------------
 _set_text_map::
 	add	sp, #-5
-;main.c:299: memset(text_map, EMPTY_TILE_ADDR, text_map_width*text_map_height);
+;main.c:277: memset(text_map, EMPTY_TILE_ADDR, text_map_width*text_map_height);
 	ld	de,#_text_map
 	ld	hl,#0x0020
 	push	hl
@@ -2868,7 +2678,7 @@ _set_text_map::
 	push	de
 	call	_memset
 	add	sp, #6
-;main.c:302: if (!text || len > 0x20U || len <= 0x0U) {
+;main.c:280: if (!text || len > 0x20U || len <= 0x0U) {
 	ldhl	sp,#8
 	ld	a,(hl-)
 	or	a,(hl)
@@ -2884,8 +2694,8 @@ _set_text_map::
 	jp	C,00141$
 	ld	a,(hl)
 	or	a, a
-;main.c:303: return;
-;main.c:309: for (i = 0; i < len; ++i) {
+;main.c:281: return;
+;main.c:287: for (i = 0; i < len; ++i) {
 	jp	Z,00141$
 	ldhl	sp,#0
 	ld	(hl),#0x00
@@ -2895,7 +2705,7 @@ _set_text_map::
 	ldhl	sp,#9
 	sub	a, (hl)
 	jp	NC,00137$
-;main.c:311: if (text[i] >= 'A' && text[i] <= 'Z') {
+;main.c:289: if (text[i] >= 'A' && text[i] <= 'Z') {
 	dec	hl
 	dec	hl
 	ld	e,(hl)
@@ -2907,7 +2717,7 @@ _set_text_map::
 	add	hl,de
 	ld	a,l
 	ld	d,h
-	ldhl	sp,#1
+	ldhl	sp,#3
 	ld	(hl+),a
 	ld	(hl),d
 	dec	hl
@@ -2916,19 +2726,18 @@ _set_text_map::
 	ld	d,(hl)
 	ld	a,(de)
 	ld	b,a
-;main.c:312: text_map[i] = text[i] - 'A' + 0xAU; // eg. character A - ascii value of A + index of A in VRAM
+;main.c:290: text_map[i] = text[i] - 'A' + 0xAU; // eg. character A - ascii value of A + index of A in VRAM
 	ld	de,#_text_map
-	dec	hl
-	dec	hl
+	ldhl	sp,#0
 	ld	l,(hl)
 	ld	h,#0x00
 	add	hl,de
 	ld	a,l
 	ld	d,h
-	ldhl	sp,#3
+	ldhl	sp,#1
 	ld	(hl+),a
 	ld	(hl),d
-;main.c:311: if (text[i] >= 'A' && text[i] <= 'Z') {
+;main.c:289: if (text[i] >= 'A' && text[i] <= 'Z') {
 	ld	a,#0x41
 	ld	e,a
 	ld	a,b
@@ -2955,18 +2764,18 @@ _set_text_map::
 	scf
 00213$:
 	jr	C,00106$
-;main.c:312: text_map[i] = text[i] - 'A' + 0xAU; // eg. character A - ascii value of A + index of A in VRAM
+;main.c:290: text_map[i] = text[i] - 'A' + 0xAU; // eg. character A - ascii value of A + index of A in VRAM
 	ld	a,b
 	add	a, #0xC9
 	ld	b,a
-	ldhl	sp,#3
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),b
 00106$:
-;main.c:316: if (text[i] >= '0' && text[i] <= '9') {
-	ldhl	sp,#2
+;main.c:294: if (text[i] >= '0' && text[i] <= '9') {
+	ldhl	sp,#4
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -2999,18 +2808,18 @@ _set_text_map::
 	scf
 00215$:
 	jr	C,00109$
-;main.c:317: text_map[i] = text[i] - '0';
+;main.c:295: text_map[i] = text[i] - '0';
 	ld	a,b
 	add	a,#0xD0
 	ld	b,a
-	ldhl	sp,#3
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),b
 00109$:
-;main.c:321: if (text[i] == '~') {
-	ldhl	sp,#2
+;main.c:299: if (text[i] == '~') {
+	ldhl	sp,#4
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -3019,115 +2828,115 @@ _set_text_map::
 	ld	b,a
 	sub	a, #0x7E
 	jr	NZ,00135$
-;main.c:322: text_map[i] = 0x25U;
-	inc	hl
+;main.c:300: text_map[i] = 0x25U;
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x25
 	jp	00140$
 00135$:
-;main.c:323: } else if (text[i] == '_') {
+;main.c:301: } else if (text[i] == '_') {
 	ld	a,b
 	sub	a, #0x5F
 	jr	NZ,00132$
-;main.c:324: text_map[i] = 0x26U;
-	ldhl	sp,#3
+;main.c:302: text_map[i] = 0x26U;
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x26
 	jp	00140$
 00132$:
-;main.c:325: } else if (text[i] == '!') {
+;main.c:303: } else if (text[i] == '!') {
 	ld	a,b
 	sub	a, #0x21
 	jr	NZ,00129$
-;main.c:326: text_map[i] = 0x27U;
-	ldhl	sp,#3
+;main.c:304: text_map[i] = 0x27U;
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x27
 	jp	00140$
 00129$:
-;main.c:327: } else if (text[i] == '?') {
+;main.c:305: } else if (text[i] == '?') {
 	ld	a,b
 	sub	a, #0x3F
 	jr	NZ,00126$
-;main.c:328: text_map[i] = 0x28U;
-	ldhl	sp,#3
+;main.c:306: text_map[i] = 0x28U;
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x28
 	jp	00140$
 00126$:
-;main.c:329: } else if (text[i] == '\'') {
+;main.c:307: } else if (text[i] == '\'') {
 	ld	a,b
 	sub	a, #0x27
 	jr	NZ,00123$
-;main.c:330: text_map[i] = 0x29U;
-	ldhl	sp,#3
+;main.c:308: text_map[i] = 0x29U;
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x29
 	jp	00140$
 00123$:
-;main.c:331: } else if (text[i] == '.') {
+;main.c:309: } else if (text[i] == '.') {
 	ld	a,b
 	sub	a, #0x2E
 	jr	NZ,00120$
-;main.c:332: text_map[i] = 0x2AU;
-	ldhl	sp,#3
+;main.c:310: text_map[i] = 0x2AU;
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2A
 	jr	00140$
 00120$:
-;main.c:333: } else if (text[i] == ',') {
+;main.c:311: } else if (text[i] == ',') {
 	ld	a,b
 	sub	a, #0x2C
 	jr	NZ,00117$
-;main.c:334: text_map[i] = 0x2BU;
-	ldhl	sp,#3
+;main.c:312: text_map[i] = 0x2BU;
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2B
 	jr	00140$
 00117$:
-;main.c:335: } else if (text[i] == '…') {
+;main.c:313: } else if (text[i] == '…') {
 	ld	a,b
 	sub	a, #0xE2
 	jr	NZ,00114$
-;main.c:336: text_map[i] = 0x2CU;
-	ldhl	sp,#3
+;main.c:314: text_map[i] = 0x2CU;
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2C
 	jr	00140$
 00114$:
-;main.c:337: } else if (text[i] == ':') {
+;main.c:315: } else if (text[i] == ':') {
 	ld	a,b
 	sub	a, #0x3A
 	jr	NZ,00140$
-;main.c:338: text_map[i] = 0x2DU;
-	ldhl	sp,#3
+;main.c:316: text_map[i] = 0x2DU;
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2D
 00140$:
-;main.c:309: for (i = 0; i < len; ++i) {
+;main.c:287: for (i = 0; i < len; ++i) {
 	ldhl	sp,#0
 	inc	(hl)
 	jp	00139$
 00137$:
-;main.c:343: text_map[len] = arrow_address_1;
+;main.c:321: text_map[len] = arrow_address_1;
 	ld	de,#_text_map
 	ldhl	sp,#9
 	ld	l,(hl)
@@ -3140,12 +2949,12 @@ _set_text_map::
 00141$:
 	add	sp, #5
 	ret
-;main.c:348: void clear_window()
+;main.c:326: void clear_window()
 ;	---------------------------------
 ; Function clear_window
 ; ---------------------------------
 _clear_window::
-;main.c:351: memset(text_map, EMPTY_TILE_ADDR, text_map_width * text_map_height);
+;main.c:329: memset(text_map, EMPTY_TILE_ADDR, text_map_width * text_map_height);
 	ld	de,#_text_map
 	ld	hl,#0x0020
 	push	hl
@@ -3154,7 +2963,7 @@ _clear_window::
 	push	de
 	call	_memset
 	add	sp, #6
-;main.c:352: set_win_tiles(0x2U, 0x2U, text_map_width, text_map_height, text_map);
+;main.c:330: set_win_tiles(0x2U, 0x2U, text_map_width, text_map_height, text_map);
 	ld	de,#_text_map
 	push	de
 	ld	hl,#0x0210
@@ -3164,16 +2973,16 @@ _clear_window::
 	call	_set_win_tiles
 	add	sp, #6
 	ret
-;main.c:355: void show_text(char *text)
+;main.c:333: void show_text(char *text)
 ;	---------------------------------
 ; Function show_text
 ; ---------------------------------
 _show_text::
 	add	sp, #-3
-;main.c:358: UINT8 cursor_state = 0;
-	ldhl	sp,#2
+;main.c:336: UINT8 cursor_state = 0;
+	ldhl	sp,#1
 	ld	(hl),#0x00
-;main.c:359: UINT8 text_len = strlen(text);
+;main.c:337: UINT8 text_len = strlen(text);
 	ldhl	sp,#5
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -3182,13 +2991,13 @@ _show_text::
 	call	_strlen
 	add	sp, #2
 	ld	b,e
-;main.c:360: UINT8 cursor_index = text_len;
+;main.c:338: UINT8 cursor_index = text_len;
 	ld	c,b
-;main.c:362: clear_window();
+;main.c:340: clear_window();
 	push	bc
 	call	_clear_window
 	pop	bc
-;main.c:363: set_text_map(text, text_len);
+;main.c:341: set_text_map(text, text_len);
 	push	bc
 	push	bc
 	inc	sp
@@ -3200,22 +3009,22 @@ _show_text::
 	call	_set_text_map
 	add	sp, #3
 	pop	bc
-;main.c:366: text_len++;
+;main.c:344: text_len++;
 	inc	b
-;main.c:367: scroll_text(text_len);
+;main.c:345: scroll_text(text_len);
 	push	bc
 	push	bc
 	inc	sp
 	call	_scroll_text
 	inc	sp
 	pop	bc
-;main.c:371: x = 2 + (cursor_index % 16);
+;main.c:349: x = 2 + (cursor_index % 16);
 	ld	a,c
 	and	a, #0x0F
 	add	a, #0x02
 	ldhl	sp,#0
 	ld	(hl),a
-;main.c:373: y = 2 + divide_UINT8(cursor_index, 16);
+;main.c:351: y = 2 + divide_UINT8(cursor_index, 16);
 	push	bc
 	ld	a,#0x10
 	push	af
@@ -3228,9 +3037,9 @@ _show_text::
 	ld	a,e
 	pop	bc
 	add	a, #0x02
-	ldhl	sp,#1
+	ldhl	sp,#2
 	ld	(hl),a
-;main.c:375: while (!joypad()) {
+;main.c:353: while (!joypad()) {
 	ld	a,#<(_text_map)
 	add	a, c
 	ld	c,a
@@ -3244,31 +3053,32 @@ _show_text::
 	pop	bc
 	or	a, a
 	jp	NZ,00107$
-;main.c:376: if (cursor_state == 0) {
-	ldhl	sp,#2
+;main.c:354: if (cursor_state == 0) {
+	ldhl	sp,#1
 	ld	a,(hl)
 	or	a, a
 	jr	NZ,00102$
-;main.c:377: text_map[cursor_index] = arrow_address_2;
+;main.c:355: text_map[cursor_index] = arrow_address_2;
 	ld	a,#0x2F
 	ld	(bc),a
 	jr	00103$
 00102$:
-;main.c:379: text_map[cursor_index] = arrow_address_1;
+;main.c:357: text_map[cursor_index] = arrow_address_1;
 	ld	a,#0x2E
 	ld	(bc),a
 00103$:
-;main.c:382: set_win_tiles(x, y, 1, 1, &text_map[cursor_index]);
+;main.c:360: set_win_tiles(x, y, 1, 1, &text_map[cursor_index]);
 	ld	e, c
 	ld	d, b
 	push	bc
 	push	de
 	ld	hl,#0x0101
 	push	hl
-	ldhl	sp,#7
+	ldhl	sp,#8
 	ld	a,(hl)
 	push	af
 	inc	sp
+	dec	hl
 	dec	hl
 	ld	a,(hl)
 	push	af
@@ -3276,21 +3086,21 @@ _show_text::
 	call	_set_win_tiles
 	add	sp, #6
 	pop	bc
-;main.c:383: cursor_state = !cursor_state;
-	ldhl	sp,#2
+;main.c:361: cursor_state = !cursor_state;
+	ldhl	sp,#1
 	ld	a,(hl)
 	sub	a,#0x01
 	ld	a,#0x00
 	rla
 	ld	(hl),a
-;main.c:384: delay(50);
+;main.c:362: delay(50);
 	push	bc
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
 	pop	bc
-;main.c:385: sleep(4);
+;main.c:363: sleep(4);
 	push	bc
 	ld	a,#0x04
 	push	af
@@ -3302,26 +3112,26 @@ _show_text::
 00107$:
 	add	sp, #3
 	ret
-;main.c:394: void scroll_text(UINT8 len)
+;main.c:372: void scroll_text(UINT8 len)
 ;	---------------------------------
 ; Function scroll_text
 ; ---------------------------------
 _scroll_text::
 	add	sp, #-3
-;main.c:397: for (counter = 0; counter < len; ++counter) {
+;main.c:375: for (counter = 0; counter < len; ++counter) {
 	ld	b,#0x00
 00103$:
 	ld	a,b
 	ldhl	sp,#5
 	sub	a, (hl)
 	jp	NC,00105$
-;main.c:398: x = 2 + (counter % 16);
+;main.c:376: x = 2 + (counter % 16);
 	ld	a,b
 	and	a, #0x0F
 	add	a, #0x02
 	ldhl	sp,#0
 	ld	(hl),a
-;main.c:399: y = 2 + divide_UINT8(counter, 16);
+;main.c:377: y = 2 + divide_UINT8(counter, 16);
 	push	bc
 	ld	a,#0x10
 	push	af
@@ -3334,7 +3144,7 @@ _scroll_text::
 	ld	c,e
 	inc	c
 	inc	c
-;main.c:403: set_win_tiles(x, y, 1, 1, &text_map[counter]);
+;main.c:381: set_win_tiles(x, y, 1, 1, &text_map[counter]);
 	ld	de,#_text_map
 	ld	l,b
 	ld	h,#0x00
@@ -3362,7 +3172,7 @@ _scroll_text::
 	call	_set_win_tiles
 	add	sp, #6
 	pop	bc
-;main.c:404: sleep(4);
+;main.c:382: sleep(4);
 	push	bc
 	ld	a,#0x04
 	push	af
@@ -3370,44 +3180,44 @@ _scroll_text::
 	call	_sleep
 	inc	sp
 	pop	bc
-;main.c:397: for (counter = 0; counter < len; ++counter) {
+;main.c:375: for (counter = 0; counter < len; ++counter) {
 	inc	b
 	jp	00103$
 00105$:
 	add	sp, #3
 	ret
-;main.c:408: void sleep(UINT8 cycles)
+;main.c:386: void sleep(UINT8 cycles)
 ;	---------------------------------
 ; Function sleep
 ; ---------------------------------
 _sleep::
-;main.c:411: for(counter = 0; counter < cycles; ++counter){
+;main.c:389: for(counter = 0; counter < cycles; ++counter){
 	ld	b,#0x00
 00103$:
 	ld	a,b
 	ldhl	sp,#2
 	sub	a, (hl)
 	ret	NC
-;main.c:412: wait_vbl_done();
+;main.c:390: wait_vbl_done();
 	push	bc
 	call	_wait_vbl_done
 	pop	bc
-;main.c:411: for(counter = 0; counter < cycles; ++counter){
+;main.c:389: for(counter = 0; counter < cycles; ++counter){
 	inc	b
 	jr	00103$
 	ret
-;main.c:416: void process_button_press()
+;main.c:394: void process_button_press()
 ;	---------------------------------
 ; Function process_button_press
 ; ---------------------------------
 _process_button_press::
-;main.c:418: UINT8 input = joypad();
+;main.c:396: UINT8 input = joypad();
 	call	_joypad
 	ld	a,e
-;main.c:419: if (input) {
+;main.c:397: if (input) {
 	or	a, a
 	ret	Z
-;main.c:420: input_seq[input_seq_ctr] = joypad();
+;main.c:398: input_seq[input_seq_ctr] = joypad();
 	ld	a,#<(_input_seq)
 	ld	hl,#_input_seq_ctr
 	add	a, (hl)
@@ -3420,28 +3230,28 @@ _process_button_press::
 	ld	a,e
 	pop	bc
 	ld	(bc),a
-;main.c:422: input_seq_ctr++;
+;main.c:400: input_seq_ctr++;
 	ld	hl,#_input_seq_ctr
 	inc	(hl)
-;main.c:426: delay(50);
+;main.c:404: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
 	ret
-;main.c:430: void check_sequence()
+;main.c:408: void check_sequence()
 ;	---------------------------------
 ; Function check_sequence
 ; ---------------------------------
 _check_sequence::
 	add	sp, #-3
-;main.c:435: for (i = 0; i < SEQ_LEN; ++i) {
+;main.c:413: for (i = 0; i < SEQ_LEN; ++i) {
 	ldhl	sp,#0
 	ld	(hl),#0x00
 	inc	hl
 	ld	(hl),#0x00
 00107$:
-;main.c:437: key_b[0] = 0x72ae38ba;
+;main.c:415: key_b[0] = 0x72ae38ba;
 	ld	hl,#_key_b
 	ld	(hl),#0xBA
 	inc	hl
@@ -3450,7 +3260,7 @@ _check_sequence::
 	ld	(hl),#0xAE
 	inc	hl
 	ld	(hl),#0x72
-;main.c:438: if (input_seq[i] & solution_seq[i]) {
+;main.c:416: if (input_seq[i] & solution_seq[i]) {
 	ld	de,#_input_seq
 	ldhl	sp,#1
 	ld	l,(hl)
@@ -3472,11 +3282,11 @@ _check_sequence::
 	ldhl	sp,#2
 	and	a,(hl)
 	jr	Z,00108$
-;main.c:439: pass++;
+;main.c:417: pass++;
 	dec	hl
 	dec	hl
 	inc	(hl)
-;main.c:441: key_b[1] = 0xa106f553;
+;main.c:419: key_b[1] = 0xa106f553;
 	ld	hl,#(_key_b + 0x0004)
 	ld	(hl),#0x53
 	inc	hl
@@ -3486,7 +3296,7 @@ _check_sequence::
 	inc	hl
 	ld	(hl),#0xA1
 00108$:
-;main.c:435: for (i = 0; i < SEQ_LEN; ++i) {
+;main.c:413: for (i = 0; i < SEQ_LEN; ++i) {
 	ldhl	sp,#1
 	inc	(hl)
 	ld	b,(hl)
@@ -3496,7 +3306,7 @@ _check_sequence::
 	ld	a,c
 	sbc	a, #0x00
 	jp	C,00107$
-;main.c:445: if (pass == SEQ_LEN) {
+;main.c:423: if (pass == SEQ_LEN) {
 	dec	hl
 	ld	e,(hl)
 	ld	d,#0x00
@@ -3506,7 +3316,7 @@ _check_sequence::
 	ld	a,d
 	or	a, a
 	jr	NZ,00105$
-;main.c:448: key_b[2] = 0x1ea97c53;
+;main.c:426: key_b[2] = 0x1ea97c53;
 	ld	hl,#(_key_b + 0x0008)
 	ld	(hl),#0x53
 	inc	hl
@@ -3515,22 +3325,22 @@ _check_sequence::
 	ld	(hl),#0xA9
 	inc	hl
 	ld	(hl),#0x1E
-;main.c:455: pass_level_1();
+;main.c:433: pass_level_1();
 	call	_pass_level_1
 	jr	00109$
 00105$:
-;main.c:461: fail_level_1();
+;main.c:439: fail_level_1();
 	call	_fail_level_1
 00109$:
 	add	sp, #3
 	ret
-;main.c:465: void pass_level_1()
+;main.c:443: void pass_level_1()
 ;	---------------------------------
 ; Function pass_level_1
 ; ---------------------------------
 _pass_level_1::
-	add	sp, #-31
-;main.c:470: key_b[3] = 0xcfa8e0b3;
+	add	sp, #-33
+;main.c:448: key_b[3] = 0xcfa8e0b3;
 	ld	hl,#(_key_b + 0x000c)
 	ld	(hl),#0xB3
 	inc	hl
@@ -3539,23 +3349,23 @@ _pass_level_1::
 	ld	(hl),#0xA8
 	inc	hl
 	ld	(hl),#0xCF
-;main.c:473: decrypt((UINT32 *)flag_a, key_a);
+;main.c:451: decrypt((UINT32 *)flag_a, key_a);
 	ld	de,#_key_a+0
 	ld	bc,#_flag_a
 	push	de
 	push	bc
 	call	_decrypt
 	add	sp, #4
-;main.c:474: decrypt((UINT32 *)flag_b, key_b);
+;main.c:452: decrypt((UINT32 *)flag_b, key_b);
 	ld	de,#_key_b
 	ld	bc,#_flag_b
 	push	de
 	push	bc
 	call	_decrypt
 	add	sp, #4
-;main.c:477: remove_flag_padding();
+;main.c:455: remove_flag_padding();
 	call	_remove_flag_padding
-;main.c:480: strcpy((char *)flag_string, "1ST FLAG IS     ");
+;main.c:458: strcpy((char *)flag_string, "1ST FLAG IS     ");
 	ldhl	sp,#0
 	ld	c,l
 	ld	b,h
@@ -3568,17 +3378,41 @@ _pass_level_1::
 	call	_strcpy
 	add	sp, #4
 	pop	bc
-;main.c:481: strcat((char *)flag_string, flag_a);
-	ld	e, c
-	ld	d, b
+;main.c:459: memcpy(flag_string + 0x10U, flag_a, FLAG_LEN);
+	ld	hl,#0x0010
+	add	hl,bc
+	ld	a,l
+	ld	d,h
+	ldhl	sp,#31
+	ld	(hl+),a
+	ld	(hl),d
+	dec	hl
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
 	push	bc
+	ld	hl,#0x0008
+	push	hl
 	ld	hl,#_flag_a
 	push	hl
 	push	de
-	call	_strcat
-	add	sp, #4
+	call	_memcpy
+	add	sp, #6
 	pop	bc
-;main.c:482: strcat((char *)flag_string, flag_b);
+;main.c:460: flag_string[0x18U] = '\0';
+	ld	hl,#0x0018
+	add	hl,bc
+	ld	a,l
+	ld	d,h
+	ldhl	sp,#31
+	ld	(hl+),a
+	ld	(hl),d
+	dec	hl
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	ld	(hl),#0x00
+;main.c:461: strcat((char *)flag_string, flag_b);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -3588,7 +3422,7 @@ _pass_level_1::
 	call	_strcat
 	add	sp, #4
 	pop	bc
-;main.c:483: strcat((char *)flag_string, ".");
+;main.c:462: strcat((char *)flag_string, ".");
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -3598,7 +3432,7 @@ _pass_level_1::
 	call	_strcat
 	add	sp, #4
 	pop	bc
-;main.c:485: SHOW_WIN;
+;main.c:464: SHOW_WIN;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	d,a
@@ -3608,25 +3442,25 @@ _pass_level_1::
 	ld	d,a
 	ld	de,#0xFF40
 	ld	(de),a
-;main.c:486: show_text("THAT WORKED.");
+;main.c:465: show_text("THAT WORKED.");
 	ld	de,#___str_2+0
 	push	bc
 	push	de
 	call	_show_text
 	add	sp, #2
 	pop	bc
-;main.c:487: show_text("I\'M IN.");
+;main.c:466: show_text("I\'M IN.");
 	ld	de,#___str_3+0
 	push	bc
 	push	de
 	call	_show_text
 	add	sp, #2
 	pop	bc
-;main.c:488: show_text((char *)flag_string);
+;main.c:467: show_text((char *)flag_string);
 	push	bc
 	call	_show_text
 	add	sp, #2
-;main.c:489: HIDE_WIN;
+;main.c:468: HIDE_WIN;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	b,a
@@ -3635,10 +3469,10 @@ _pass_level_1::
 	ld	d,#0x00
 	ld	hl,#0xFF40
 	ld	(hl),b
-;main.c:492: while (1) {}
+;main.c:471: while (1) {}
 00102$:
 	jr	00102$
-	add	sp, #31
+	add	sp, #33
 	ret
 ___str_0:
 	.ascii "1ST FLAG IS     "
@@ -3652,12 +3486,12 @@ ___str_2:
 ___str_3:
 	.ascii "I'M IN."
 	.db 0x00
-;main.c:495: void fail_level_1()
+;main.c:474: void fail_level_1()
 ;	---------------------------------
 ; Function fail_level_1
 ; ---------------------------------
 _fail_level_1::
-;main.c:497: SHOW_WIN;
+;main.c:476: SHOW_WIN;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -3667,17 +3501,17 @@ _fail_level_1::
 	ld	b,a
 	ld	hl,#0xFF40
 	ld	(hl),b
-;main.c:498: show_text("NO GOOD.");
+;main.c:477: show_text("NO GOOD.");
 	ld	de,#___str_4
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:499: show_text("LET ME TRY SOME THING ELSE.");
+;main.c:478: show_text("LET ME TRY SOME THING ELSE.");
 	ld	de,#___str_5
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:500: HIDE_WIN;
+;main.c:479: HIDE_WIN;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	b,a
@@ -3693,13 +3527,13 @@ ___str_4:
 ___str_5:
 	.ascii "LET ME TRY SOME THING ELSE."
 	.db 0x00
-;main.c:503: void decrypt(UINT32 *v, UINT32 *k)
+;main.c:482: void decrypt(UINT32 *v, UINT32 *k)
 ;	---------------------------------
 ; Function decrypt
 ; ---------------------------------
 _decrypt::
 	add	sp, #-46
-;main.c:505: UINT32 v0=v[0], v1=v[1], sum=0xC6EF3720, i;  /* set up */
+;main.c:484: UINT32 v0=v[0], v1=v[1], sum=0xC6EF3720, i;  /* set up */
 	ldhl	sp,#48
 	ld	a,(hl+)
 	ld	e, (hl)
@@ -3711,7 +3545,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,(de)
-	ldhl	sp,#28
+	ldhl	sp,#4
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -3739,7 +3573,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,(de)
-	ldhl	sp,#8
+	ldhl	sp,#24
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -3750,7 +3584,7 @@ _decrypt::
 	inc	de
 	ld	a,(de)
 	ld	(hl),a
-;main.c:507: UINT32 k0=k[0], k1=k[1], k2=k[2], k3=k[3];   /* cache key */
+;main.c:486: UINT32 k0=k[0], k1=k[1], k2=k[2], k3=k[3];   /* cache key */
 	ldhl	sp,#51
 	dec	hl
 	ld	c,(hl)
@@ -3759,7 +3593,7 @@ _decrypt::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#16
+	ldhl	sp,#20
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -3782,7 +3616,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,(de)
-	ldhl	sp,#20
+	ldhl	sp,#16
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -3805,7 +3639,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,(de)
-	ldhl	sp,#4
+	ldhl	sp,#8
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -3823,7 +3657,7 @@ _decrypt::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#24
+	ldhl	sp,#12
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -3834,7 +3668,7 @@ _decrypt::
 	inc	de
 	ld	a,(de)
 	ld	(hl),a
-;main.c:508: for (i=0; i<32; i++) {                         /* basic cycle start */
+;main.c:487: for (i=0; i<32; i++) {                         /* basic cycle start */
 	ldhl	sp,#0
 	ld	(hl),#0x20
 	xor	a, a
@@ -3842,7 +3676,7 @@ _decrypt::
 	ld	(hl+),a
 	ld	(hl+),a
 	ld	(hl),a
-	ldhl	sp,#12
+	ldhl	sp,#28
 	ld	(hl),#0x20
 	inc	hl
 	ld	(hl),#0x37
@@ -3851,21 +3685,21 @@ _decrypt::
 	inc	hl
 	ld	(hl),#0xC6
 00104$:
-;main.c:509: v1 -= ((v0<<4) + k2) ^ (v0 + sum) ^ ((v0>>5) + k3);
+;main.c:488: v1 -= ((v0<<4) + k2) ^ (v0 + sum) ^ ((v0>>5) + k3);
 	push	af
-	ldhl	sp,#30
+	ldhl	sp,#6
 	ld	a,(hl)
 	ldhl	sp,#38
 	ld	(hl),a
-	ldhl	sp,#31
+	ldhl	sp,#7
 	ld	a,(hl)
 	ldhl	sp,#39
 	ld	(hl),a
-	ldhl	sp,#32
+	ldhl	sp,#8
 	ld	a,(hl)
 	ldhl	sp,#40
 	ld	(hl),a
-	ldhl	sp,#33
+	ldhl	sp,#9
 	ld	a,(hl)
 	ldhl	sp,#41
 	ld	(hl),a
@@ -3889,7 +3723,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#4
+	ldhl	sp,#8
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -3904,7 +3738,7 @@ _decrypt::
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#8
+	ldhl	sp,#12
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -3915,13 +3749,13 @@ _decrypt::
 	ldhl	sp,#39
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#29
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#12
+	ldhl	sp,#28
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -3931,12 +3765,12 @@ _decrypt::
 	ldhl	sp,#35
 	ld	(hl-),a
 	ld	(hl),e
-	dec	hl
+	ldhl	sp,#9
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#16
+	ldhl	sp,#32
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -3970,19 +3804,19 @@ _decrypt::
 	ldhl	sp,#35
 	ld	(hl),a
 	push	af
-	ldhl	sp,#30
+	ldhl	sp,#6
 	ld	a,(hl)
 	ldhl	sp,#38
 	ld	(hl),a
-	ldhl	sp,#31
+	ldhl	sp,#7
 	ld	a,(hl)
 	ldhl	sp,#39
 	ld	(hl),a
-	ldhl	sp,#32
+	ldhl	sp,#8
 	ld	a,(hl)
 	ldhl	sp,#40
 	ld	(hl),a
-	ldhl	sp,#33
+	ldhl	sp,#9
 	ld	a,(hl)
 	ldhl	sp,#41
 	ld	(hl),a
@@ -4003,7 +3837,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#24
+	ldhl	sp,#12
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -4018,7 +3852,7 @@ _decrypt::
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#28
+	ldhl	sp,#16
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -4050,7 +3884,7 @@ _decrypt::
 	xor	a, (hl)
 	ldhl	sp,#35
 	ld	(hl),a
-	ldhl	sp,#9
+	ldhl	sp,#25
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -4063,10 +3897,10 @@ _decrypt::
 	inc	hl
 	sbc	a, (hl)
 	push	af
-	ldhl	sp,#11
+	ldhl	sp,#27
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#13
+	ldhl	sp,#29
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -4079,25 +3913,25 @@ _decrypt::
 	ld	a,d
 	inc	hl
 	sbc	a, (hl)
-	ldhl	sp,#11
+	ldhl	sp,#27
 	ld	(hl-),a
 	ld	(hl),e
-;main.c:510: v0 -= ((v1<<4) + k0) ^ (v1 + sum) ^ ((v1>>5) + k1);
+;main.c:489: v0 -= ((v1<<4) + k0) ^ (v1 + sum) ^ ((v1>>5) + k1);
 	push	af
 	dec	hl
 	dec	hl
 	ld	a,(hl)
 	ldhl	sp,#34
 	ld	(hl),a
-	ldhl	sp,#11
+	ldhl	sp,#27
 	ld	a,(hl)
 	ldhl	sp,#35
 	ld	(hl),a
-	ldhl	sp,#12
+	ldhl	sp,#28
 	ld	a,(hl)
 	ldhl	sp,#36
 	ld	(hl),a
-	ldhl	sp,#13
+	ldhl	sp,#29
 	ld	a,(hl)
 	ldhl	sp,#37
 	ld	(hl),a
@@ -4121,7 +3955,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#16
+	ldhl	sp,#20
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -4136,7 +3970,7 @@ _decrypt::
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#20
+	ldhl	sp,#24
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -4147,13 +3981,13 @@ _decrypt::
 	ldhl	sp,#35
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#9
+	ldhl	sp,#25
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#12
+	ldhl	sp,#28
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -4163,12 +3997,12 @@ _decrypt::
 	ldhl	sp,#39
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#13
+	ldhl	sp,#29
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#16
+	ldhl	sp,#32
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -4201,19 +4035,19 @@ _decrypt::
 	ldhl	sp,#35
 	ld	(hl),a
 	push	af
-	ldhl	sp,#10
+	ldhl	sp,#26
 	ld	a,(hl)
 	ldhl	sp,#38
 	ld	(hl),a
-	ldhl	sp,#11
+	ldhl	sp,#27
 	ld	a,(hl)
 	ldhl	sp,#39
 	ld	(hl),a
-	ldhl	sp,#12
+	ldhl	sp,#28
 	ld	a,(hl)
 	ldhl	sp,#40
 	ld	(hl),a
-	ldhl	sp,#13
+	ldhl	sp,#29
 	ld	a,(hl)
 	ldhl	sp,#41
 	ld	(hl),a
@@ -4234,7 +4068,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#20
+	ldhl	sp,#16
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -4249,7 +4083,7 @@ _decrypt::
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#24
+	ldhl	sp,#20
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -4281,7 +4115,7 @@ _decrypt::
 	xor	a, (hl)
 	ldhl	sp,#35
 	ld	(hl),a
-	ldhl	sp,#29
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -4294,10 +4128,10 @@ _decrypt::
 	inc	hl
 	sbc	a, (hl)
 	push	af
-	ldhl	sp,#31
+	ldhl	sp,#7
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#33
+	ldhl	sp,#9
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -4310,11 +4144,11 @@ _decrypt::
 	ld	a,d
 	inc	hl
 	sbc	a, (hl)
-	ldhl	sp,#31
+	ldhl	sp,#7
 	ld	(hl-),a
 	ld	(hl),e
-;main.c:511: sum -= delta;
-	ldhl	sp,#13
+;main.c:490: sum -= delta;
+	ldhl	sp,#29
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -4327,7 +4161,7 @@ _decrypt::
 	push	af
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#17
+	ldhl	sp,#33
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -4381,7 +4215,7 @@ _decrypt::
 	inc	de
 	ld	a,(de)
 	ld	(hl),a
-;main.c:508: for (i=0; i<32; i++) {                         /* basic cycle start */
+;main.c:487: for (i=0; i<32; i++) {                         /* basic cycle start */
 	ldhl	sp,#35
 	ld	a,(hl-)
 	or	a, (hl)
@@ -4390,13 +4224,13 @@ _decrypt::
 	dec	hl
 	or	a,(hl)
 	jp	NZ,00104$
-;main.c:513: v[0]=v0; v[1]=v1;
+;main.c:492: v[0]=v0; v[1]=v1;
 	ldhl	sp,#45
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#28
+	ldhl	sp,#4
 	ld	a,(hl)
 	ld	(de),a
 	inc	de
@@ -4416,7 +4250,7 @@ _decrypt::
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#8
+	ldhl	sp,#24
 	ld	a,(hl)
 	ld	(de),a
 	inc	de
@@ -4433,18 +4267,18 @@ _decrypt::
 	ld	(de),a
 	add	sp, #46
 	ret
-;main.c:517: void remove_flag_padding()
+;main.c:496: void remove_flag_padding()
 ;	---------------------------------
 ; Function remove_flag_padding
 ; ---------------------------------
 _remove_flag_padding::
 	add	sp, #-3
-;main.c:521: UINT8 flab_b_len = flag_b[FLAG_LEN - 1];
+;main.c:500: UINT8 flab_b_len = flag_b[FLAG_LEN - 1];
 	ld	bc,#_flag_b + 7
 	ld	a,(bc)
 	ldhl	sp,#0
 	ld	(hl),a
-;main.c:522: memset(flag_b + flab_b_len, '\0', FLAG_LEN - flab_b_len);
+;main.c:501: memset(flag_b + flab_b_len, '\0', FLAG_LEN - flab_b_len);
 	ld	c,(hl)
 	ld	b,#0x00
 	ld	de,#0x0008
@@ -4476,12 +4310,12 @@ _remove_flag_padding::
 	add	sp, #6
 	add	sp, #3
 	ret
-;main.c:525: void main()
+;main.c:504: void main()
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;main.c:528: key_a[0] = 0xc2bb5c5b;
+;main.c:507: key_a[0] = 0xc2bb5c5b;
 	ld	hl,#_key_a
 	ld	(hl),#0x5B
 	inc	hl
@@ -4490,18 +4324,18 @@ _main::
 	ld	(hl),#0xBB
 	inc	hl
 	ld	(hl),#0xC2
-;main.c:530: disable_interrupts();
+;main.c:509: disable_interrupts();
 	call	_disable_interrupts
-;main.c:531: DISPLAY_OFF;
+;main.c:510: DISPLAY_OFF;
 	call	_display_off
-;main.c:541: set_win_data(0x80, window_border_len, window_border);
+;main.c:513: set_win_data(0x80U, window_border_len, window_border);
 	ld	de,#_window_border
 	push	de
 	ld	hl,#0x0980
 	push	hl
 	call	_set_win_data
 	add	sp, #4
-;main.c:542: set_win_tiles(0, 0, text_box_width, text_box_height, text_box);
+;main.c:514: set_win_tiles(0, 0, text_box_width, text_box_height, text_box);
 	ld	de,#_text_box
 	push	de
 	ld	hl,#0x0614
@@ -4510,19 +4344,19 @@ _main::
 	push	hl
 	call	_set_win_tiles
 	add	sp, #6
-;main.c:543: move_win(7,96);
+;main.c:515: move_win(0x7U,96);
 	ld	hl,#0x6007
 	push	hl
 	call	_move_win
 	add	sp, #2
-;main.c:546: set_win_data(0U, alphabet_len, alphabet);
+;main.c:518: set_win_data(0U, alphabet_len, alphabet);
 	ld	de,#_alphabet
 	push	de
 	ld	hl,#0x2E00
 	push	hl
 	call	_set_win_data
 	add	sp, #4
-;main.c:547: set_win_tiles(2U, 2U, text_map_width, text_map_height, text_map);
+;main.c:519: set_win_tiles(2U, 2U, text_map_width, text_map_height, text_map);
 	ld	de,#_text_map
 	push	de
 	ld	hl,#0x0210
@@ -4531,7 +4365,7 @@ _main::
 	push	hl
 	call	_set_win_tiles
 	add	sp, #6
-;main.c:550: key_a[1] = 0x93373628;
+;main.c:522: key_a[1] = 0x93373628;
 	ld	hl,#(_key_a + 0x0004)
 	ld	(hl),#0x28
 	inc	hl
@@ -4540,14 +4374,83 @@ _main::
 	ld	(hl),#0x37
 	inc	hl
 	ld	(hl),#0x93
-;main.c:553: set_win_data(arrow_address_1, arrow_tile_len, arrow_tile);
+;main.c:525: set_win_data(arrow_address_1, arrow_tile_len, arrow_tile);
 	ld	de,#_arrow_tile
 	push	de
 	ld	hl,#0x022E
 	push	hl
 	call	_set_win_data
 	add	sp, #4
-;main.c:555: SHOW_BKG;
+;main.c:528: SPRITES_8x16;
+	ld	de,#0xFF40
+	ld	a,(de)
+	ld	e,a
+	ld	d,#0x00
+	ld	a,e
+	set	2, a
+	ld	b,a
+	ld	hl,#0xFF40
+	ld	(hl),b
+;main.c:529: set_sprite_data(0, agent_len, agent);
+	ld	de,#_agent
+	push	de
+	ld	hl,#0x0800
+	push	hl
+	call	_set_sprite_data
+	add	sp, #4
+;main.c:530: set_sprite_tile(0, 0);
+	ld	hl,#0x0000
+	push	hl
+	call	_set_sprite_tile
+	add	sp, #2
+;main.c:531: set_sprite_tile(1, 2);
+	ld	hl,#0x0201
+	push	hl
+	call	_set_sprite_tile
+	add	sp, #2
+;main.c:532: set_sprite_tile(2, 4);
+	ld	hl,#0x0402
+	push	hl
+	call	_set_sprite_tile
+	add	sp, #2
+;main.c:533: set_sprite_tile(3, 6);
+	ld	hl,#0x0603
+	push	hl
+	call	_set_sprite_tile
+	add	sp, #2
+;main.c:534: move_sprite(0, 0x10U, 0x10U);
+	ld	hl,#0x1010
+	push	hl
+	xor	a, a
+	push	af
+	inc	sp
+	call	_move_sprite
+	add	sp, #3
+;main.c:535: move_sprite(1, 0x18U, 0x10U);
+	ld	hl,#0x1018
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_move_sprite
+	add	sp, #3
+;main.c:536: move_sprite(2, 0x10U, 0x20U);
+	ld	hl,#0x2010
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_move_sprite
+	add	sp, #3
+;main.c:537: move_sprite(3, 0x18U, 0x20U);
+	ld	hl,#0x2018
+	push	hl
+	ld	a,#0x03
+	push	af
+	inc	sp
+	call	_move_sprite
+	add	sp, #3
+;main.c:539: SHOW_BKG;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -4557,7 +4460,17 @@ _main::
 	ld	b,a
 	ld	hl,#0xFF40
 	ld	(hl),b
-;main.c:557: DISPLAY_ON;
+;main.c:540: SHOW_SPRITES;
+	ld	de,#0xFF40
+	ld	a,(de)
+	ld	e,a
+	ld	d,#0x00
+	ld	a,e
+	set	1, a
+	ld	b,a
+	ld	l, #0x40
+	ld	(hl),b
+;main.c:541: DISPLAY_ON;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -4567,9 +4480,9 @@ _main::
 	ld	b,a
 	ld	l, #0x40
 	ld	(hl),b
-;main.c:558: enable_interrupts();
+;main.c:542: enable_interrupts();
 	call	_enable_interrupts
-;main.c:561: key_a[2] = 0xd0849af3;
+;main.c:545: key_a[2] = 0xd0849af3;
 	ld	hl,#(_key_a + 0x0008)
 	ld	(hl),#0xF3
 	inc	hl
@@ -4578,17 +4491,17 @@ _main::
 	ld	(hl),#0x84
 	inc	hl
 	ld	(hl),#0xD0
-;main.c:563: while(1) {
+;main.c:547: while(1) {
 00104$:
-;main.c:565: sleep(4);
+;main.c:549: sleep(4);
 	ld	a,#0x04
 	push	af
 	inc	sp
 	call	_sleep
 	inc	sp
-;main.c:566: process_button_press();
+;main.c:550: process_button_press();
 	call	_process_button_press
-;main.c:568: if (input_seq_ctr >= SEQ_LEN) {
+;main.c:552: if (input_seq_ctr >= SEQ_LEN) {
 	ld	hl,#_input_seq_ctr
 	ld	b,(hl)
 	ld	c,#0x00
@@ -4597,7 +4510,7 @@ _main::
 	ld	a,c
 	sbc	a, #0x00
 	jr	C,00104$
-;main.c:570: key_a[3] = 0x04183ac4;
+;main.c:554: key_a[3] = 0x04183ac4;
 	ld	hl,#(_key_a + 0x000c)
 	ld	(hl),#0xC4
 	inc	hl
@@ -4606,9 +4519,9 @@ _main::
 	ld	(hl),#0x18
 	inc	hl
 	ld	(hl),#0x04
-;main.c:574: check_sequence();
+;main.c:558: check_sequence();
 	call	_check_sequence
-;main.c:575: input_seq_ctr = 0;
+;main.c:559: input_seq_ctr = 0;
 	ld	hl,#_input_seq_ctr
 	ld	(hl),#0x00
 	jr	00104$

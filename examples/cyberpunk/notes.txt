@@ -1,11 +1,7 @@
 # CTF Ideas
 
 To Do
-* scatter the key around the ROM
-* collect the keys while executing the program
-* when the good password is entered, decrypt the pw
-* load memory map of that password
-* yayyy should still see password -> but no strings of pw in ROM
+* debounce keys better
 
 Once i get the art
 * load in the background
@@ -33,6 +29,11 @@ Done
 * have a way to show the answer was wrong.
 * show the winning screen
 * encode the final flag - so you can't  find the pw with strings
+* scatter the key around the ROM
+* collect the keys while executing the program
+* when the good password is entered, decrypt the pw
+* load memory map of that password
+* yayyy should still see password -> but no strings of pw in ROM
 
 Won't Do
 * randomize how the tiles are loaded in vram
@@ -42,8 +43,7 @@ Won't Do
 Players have to find the solution sequence to open the door.
 I don't want players to just jump to the final pass function or find the
 solution in ROM, so I'm encrypting the flag and scattering the key
-around the ROM so force the player to execute all of the ROM. LOL Jor called
-that white box crypto.
+around the ROM so force the player to execute all of the ROM. LOL Jor called that white box crypto.
 
 ---
 
@@ -64,6 +64,11 @@ Flag:
     F0R_0UR_FUTUR3
     SUP3R_S3CUR3_1 *
 
+---
+
+## Encryption
+
+https://en.wikipedia.org/wiki/Tiny_Encryption_Algorithm
 
 ---
 
