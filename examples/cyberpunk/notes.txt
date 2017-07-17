@@ -1,8 +1,11 @@
 # CTF Ideas
 
 To Do
-* encode the final flag - so you can't  find the pw with strings
 * scatter the key around the ROM
+* collect the keys while executing the program
+* when the good password is entered, decrypt the pw
+* load memory map of that password
+* yayyy should still see password -> but no strings of pw in ROM
 
 Once i get the art
 * load in the background
@@ -29,6 +32,7 @@ Done
 * update the font data - now with a comma!
 * have a way to show the answer was wrong.
 * show the winning screen
+* encode the final flag - so you can't  find the pw with strings
 
 Won't Do
 * randomize how the tiles are loaded in vram

@@ -18,6 +18,8 @@ void pass_level_1();
 void fail_level_1();
 UINT8 divide_UINT8(UINT8 a, UINT8 b);
 void show_text(char *text);
+void decrypt(UINT32 *v, UINT32 *k);
+void remove_flag_padding();
 
 #define girl_tiles_len 16
 const UINT8 girl_tiles[] =
@@ -243,8 +245,30 @@ const UINT8 solution_seq[] =
 UINT8 input_seq[SEQ_LEN];
 UINT8 input_seq_ctr = 0;
 
-// // Button presses for A, B, Up, Down, Left, Right
-// #define MAIN_BUTTONS 0x3FU
+// Encrypted Flag
+#define FLAG_LEN 8
+UINT8 flag_a[] =
+{
+    0x12, 0x64, 0x88, 0xf7, 0x77, 0x95, 0x8a, 0x5a
+};
+UINT8 flag_b[] =
+{
+    0xe1, 0xd5, 0xfa, 0x93, 0x3e, 0x13, 0x30, 0x5f
+};
+
+
+// Space to load the keys for TEA decryption!
+// UINT32 key_a[4];
+// UINT32 key_b[4];
+
+    // REMOVE ME
+    // 128 bit key
+    UINT32 key_a[4] = { 0xc2bb5c5b, 0x93373628,
+                          0xd0849af3, 0x04183ac4 };
+
+    // Second 128 bit Key
+    UINT32 key_b[4] = { 0x72ae38ba, 0xa106f553,
+                          0x1ea97c53, 0xcfa8e0b3 };
 
 UINT8 divide_UINT8(UINT8 a, UINT8 b)
 {
@@ -411,12 +435,20 @@ void check_sequence()
     UINT8 i;
 
     for (i = 0; i < SEQ_LEN; ++i) {
+        // Scattering the key
+        key_b[0] = 0x72ae38ba;
         if (input_seq[i] & solution_seq[i]) {
             pass++;
+            // Scattering the key
+            key_b[1] = 0xa106f553;
         }
     }
 
     if (pass == SEQ_LEN) {
+
+        // Scattering the key
+        key_b[2] = 0x1ea97c53;
+
         // Show the passing text
         // "That worked. I'm in."
         // "Flag: asdjasldasldasd"
@@ -434,10 +466,28 @@ void check_sequence()
 
 void pass_level_1()
 {
+    UINT8 flag_string[31];
+
+    // Scattering the key
+    key_b[3] = 0xcfa8e0b3;
+
+    // Decrypt
+    decrypt((UINT32 *)flag_a, key_a);
+    decrypt((UINT32 *)flag_b, key_b);
+
+    // Remove padding
+    remove_flag_padding();
+
+    // Concat
+    strcpy((char *)flag_string, "1ST FLAG IS     ");
+    strcat((char *)flag_string, flag_a);
+    strcat((char *)flag_string, flag_b);
+    strcat((char *)flag_string, ".");
+
     SHOW_WIN;
     show_text("THAT WORKED.");
     show_text("I\'M IN.");
-    show_text("1ST FLAG IS     SUP3R~S3CUR3~1");
+    show_text((char *)flag_string);
     HIDE_WIN;
 
     // Go to level 2
@@ -452,8 +502,33 @@ void fail_level_1()
     HIDE_WIN;
 }
 
+void decrypt(UINT32 *v, UINT32 *k)
+{
+    UINT32 v0=v[0], v1=v[1], sum=0xC6EF3720, i;  /* set up */
+    UINT32 delta=0x9e3779b9;                     /* a key schedule constant */
+    UINT32 k0=k[0], k1=k[1], k2=k[2], k3=k[3];   /* cache key */
+    for (i=0; i<32; i++) {                         /* basic cycle start */
+        v1 -= ((v0<<4) + k2) ^ (v0 + sum) ^ ((v0>>5) + k3);
+        v0 -= ((v1<<4) + k0) ^ (v1 + sum) ^ ((v1>>5) + k1);
+        sum -= delta;
+    }                                              /* end cycle */
+    v[0]=v0; v[1]=v1;
+}
+
+// PKCS7 padding style
+void remove_flag_padding()
+{
+    // Assumes that Flag B has been decrypted
+    // Removes the len and adds null terms in its place.
+    UINT8 flab_b_len = flag_b[FLAG_LEN - 1];
+    memset(flag_b + flab_b_len, '\0', FLAG_LEN - flab_b_len);
+}
+
 void main()
 {
+    // Scattering the key
+    key_a[0] = 0xc2bb5c5b;
+
     disable_interrupts();
     DISPLAY_OFF;
 
@@ -473,6 +548,9 @@ void main()
     set_win_data(0U, alphabet_len, alphabet);
     set_win_tiles(2U, 2U, text_map_width, text_map_height, text_map);
 
+    // Scattering the key
+    key_a[1] = 0x93373628;
+
     // Set the arrow in memory
     set_win_data(arrow_address_1, arrow_tile_len, arrow_tile);
 
@@ -481,12 +559,18 @@ void main()
     DISPLAY_ON;
     enable_interrupts();
 
+    // Scattering the key
+    key_a[2] = 0xd0849af3;
+
     while(1) {
         /* Skip four VBLs (slow down animation) */
         sleep(4);
         process_button_press();
 
         if (input_seq_ctr >= SEQ_LEN) {
+            // Scattering the key
+            key_a[3] = 0x04183ac4;
+
             // User has inputted 16 button presses
             // Check if seq is correct
             check_sequence();
