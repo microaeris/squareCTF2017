@@ -1,7 +1,9 @@
 # CTF Ideas
 
 To Do
+* find a way to display which key is pressed
 * debounce keys better
+* FIXME: in the intro text after the ellipseis, the arrow cursor is too far.
 
 Once i get the art
 * load in the background
@@ -16,6 +18,7 @@ Nice to have
 * show sequence of what you've already pressed on screen
 * Level 2 logic!
 * make the encryption optimized for the GBA
+* edit ellipsies character to be at the bottom of the tile, not middle.
 
 Done
 * figure out the password
@@ -78,3 +81,9 @@ She is a hired pen tester. Hacking her way through this VR world.
 Level 1. street, match the password
 Level 2. computer, fake the network packets to the GB
 Level 3. edit the rom in some way lmao
+
+---
+
+How to use the GBMD
+
+The tile offset is in decimal. It wants the offset of where in the bank your tiles start. Need to set 8 bits per plane.
