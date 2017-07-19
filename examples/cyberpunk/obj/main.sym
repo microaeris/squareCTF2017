@@ -7,78 +7,78 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 ___str_0                                                       04A4 R
-  0 ___str_1                                                       04B5 R
-  0 ___str_2                                                       04B7 R
-  0 ___str_3                                                       04C4 R
-  0 ___str_4                                                       04FD R
-  0 ___str_5                                                       0506 R
-  0 ___str_6                                                       0A82 R
-  0 ___str_7                                                       0A9A R
+  0 ___str_0                                                       0594 R
+  0 ___str_1                                                       05A5 R
+  0 ___str_2                                                       05A7 R
+  0 ___str_3                                                       05B4 R
+  0 ___str_4                                                       05D1 R
+  0 ___str_5                                                       05DA R
+  0 ___str_6                                                       0B39 R
+  0 ___str_7                                                       0B51 R
   0 _agent                                                         0012 GR
-  1 _alleyway                                                      0000 GR
-  1 _alleyway_map                                                  00B0 GR
-  1 _alphabet                                                      0320 GR
-  1 _arrow_tile                                                    0600 GR
-  0 _check_sequence                                                0360 GR
-  0 _clear_window                                                  0207 GR
-  0 _decrypt                                                       0522 GR
+  1 _alphabet                                                      0088 GR
+  1 _arrow_tile                                                    0368 GR
+  0 _button                                                        0092 GR
+  0 _check_sequence                                                046B GR
+  0 _clear_window                                                  0268 GR
+  0 _decrypt                                                       05F6 GR
     _delay                                                         **** GX
     _disable_interrupts                                            **** GX
+  0 _display_button_press                                          0422 GR
     _display_off                                                   **** GX
   0 _divide_UINT8                                                  0000 GR
     _enable_interrupts                                             **** GX
-  0 _fail_level_1                                                  04CC GR
-  1 _flag_a                                                        0651 GR
-  1 _flag_b                                                        0659 GR
-  1 _input_seq                                                     0640 GR
-  1 _input_seq_ctr                                                 0650 GR
+  0 _fail_level_1                                                  05BC GR
+  1 _flag_a                                                        03B9 GR
+  1 _flag_b                                                        03C1 GR
+  1 _input_seq                                                     03A8 GR
+  1 _input_seq_ctr                                                 03B8 GR
     _joypad                                                        **** GX
-  1 _key_a                                                         0661 GR
-  1 _key_b                                                         0671 GR
-  0 _main                                                          08E0 GR
+  1 _key_a                                                         03C9 GR
+  1 _key_b                                                         03D9 GR
+  0 _log2                                                          0413 GR
+  0 _main                                                          09B4 GR
     _memcpy                                                        **** GX
     _memset                                                        **** GX
     _move_sprite                                                   **** GX
     _move_win                                                      **** GX
-  0 _pass_level_1                                                  03DC GR
-  0 _process_button_press                                          0339 GR
-  0 _remove_flag_padding                                           08AB GR
-  0 _scroll_text                                                   02D0 GR
-    _set_bkg_data                                                  **** GX
-    _set_bkg_tiles                                                 **** GX
+  0 _number_of_bits_set                                            03DE GR
+  0 _pass_level_1                                                  04E7 GR
+  0 _process_button_press                                          039A GR
+  0 _remove_flag_padding                                           097F GR
+  0 _return_lsb_set                                                03FE GR
+  0 _scroll_text                                                   0331 GR
     _set_sprite_data                                               **** GX
     _set_sprite_tile                                               **** GX
-  0 _set_text_map                                                  00A2 GR
+  0 _set_text_map                                                  0102 GR
     _set_win_data                                                  **** GX
     _set_win_tiles                                                 **** GX
-  0 _show_text                                                     0228 GR
-  0 _sleep                                                         0329 GR
-  0 _solution_seq                                                  0092 GR
+  0 _show_text                                                     0289 GR
+  0 _sleep                                                         038A GR
+  0 _solution_seq                                                  00F2 GR
     _strcat                                                        **** GX
     _strcpy                                                        **** GX
-    _strlen                                                        **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
-  1 _text_box                                                      02A8 GR
-  1 _text_map                                                      0620 GR
+    _strlen                                                        **** GX
+  1 _text_box                                                      0010 GR
+  1 _text_map                                                      0388 GR
     _wait_vbl_done                                                 **** GX
-  1 _window_border                                                 0218 GR
-
+  1 _window_border                                                 0000 GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  AB4   flags    0
-   1 _DATA                                      size  681   flags    0
+   0 _CODE                                      size  B6B   flags    0
+   1 _DATA                                      size  3E9   flags    0
    2 _DABS                                      size    0   flags    8
    3 _HOME                                      size    0   flags    0
-   4 _GSINIT                                    size 1F95   flags    0
+   4 _GSINIT                                    size 129D   flags    0
    5 _GSFINAL                                   size    0   flags    0
    6 _CABS                                      size    0   flags    8
 

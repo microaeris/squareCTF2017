@@ -1,9 +1,9 @@
 # CTF Ideas
 
 To Do
-* find a way to display which key is pressed
-* debounce keys better
 * FIXME: in the intro text after the ellipseis, the arrow cursor is too far.
+* port from GBDK to a custom GB library...
+* fix window to load border from the black space I have already -> why are bg and sprite loaded from separate space from window?
 
 Once i get the art
 * load in the background
@@ -19,6 +19,9 @@ Nice to have
 * Level 2 logic!
 * make the encryption optimized for the GBA
 * edit ellipsies character to be at the bottom of the tile, not middle.
+* UNIT TESTS
+* make sure button presses are ok...
+* if enter konami code, it will say "long live kojima"
 
 Done
 * figure out the password
@@ -37,6 +40,11 @@ Done
 * when the good password is entered, decrypt the pw
 * load memory map of that password
 * yayyy should still see password -> but no strings of pw in ROM
+* find a way to display which key is pressed
+* fix the button display indexing
+* the last button input arrow is being displayed in the wrong place??
+* debounce keys better
+* need to be able to input more than once button at once
 
 Won't Do
 * randomize how the tiles are loaded in vram
