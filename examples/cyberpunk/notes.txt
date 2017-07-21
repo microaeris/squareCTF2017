@@ -1,27 +1,29 @@
 # CTF Ideas
 
 To Do
-* FIXME: in the intro text after the ellipseis, the arrow cursor is too far.
-* port from GBDK to a custom GB library...
-* fix window to load border from the black space I have already -> why are bg and sprite loaded from separate space from window?
+* made code harder to reverse
+    * add dummy success functions -> eg. if you are only partially successful, you get a wrong password.
+    * spread the check around in multiple places.
+    * dummy function -> feed him bad code?
+    * write own custom read joypad function
+* make a blog post on my website to host this puzzle
+* write out the hints
+* write out the recommended tools.
+* submit the puzzle
 
 Once i get the art
-* load in the background
-* write out the dialog
-* figure out best way to load dialog into game (probably hard coded character maps)
-* fix the win screen
+* write out the dialog for both scenes
+* draw walking animation
 
 Nice to have
-* fix (unsigned blah) to const UINT8.
 * Change all UBYTE and UWORD to UINT8 etc
 * change all consts to be defined with 0xFFU
-* show sequence of what you've already pressed on screen
 * Level 2 logic!
 * make the encryption optimized for the GBA
-* edit ellipsies character to be at the bottom of the tile, not middle.
 * UNIT TESTS
-* make sure button presses are ok...
 * if enter konami code, it will say "long live kojima"
+* remove nintendo from the beginning of the game... .-.
+* make gbdk more efficient
 
 Done
 * figure out the password
@@ -29,7 +31,6 @@ Done
 * read in the buttons
 * check for the right sequence
 * debounce the buttons, potentially? is it needed? YES
-* make a new text system so im not translating ascii to character map in the game
 * decide on the flag
 * update the font data - now with a comma!
 * have a way to show the answer was wrong.
@@ -45,9 +46,21 @@ Done
 * the last button input arrow is being displayed in the wrong place??
 * debounce keys better
 * need to be able to input more than once button at once
+* FIXME: in the intro text after the ellipses, the arrow cursor is too far.
+* show sequence of what you've already pressed on screen
+* edit ellipses character to be at the bottom of the tile, not middle.
+* load in the background
+* fix (unsigned blah) to const UINT8.
+* make sure button presses are ok...
+* blinking in animation for agent
+* fix window to load border from the black space I have already -> why are bg and window loaded from separate space from sprites?
+* fix the win screen
 
 Won't Do
 * randomize how the tiles are loaded in vram
+* make a new text system so im not translating ascii to character map in the game
+* figure out best way to load dialog into game (probably hard coded character maps)
+* port from GBDK to a custom GB library...
 
 ---
 
@@ -73,7 +86,7 @@ Flag:
     V3RY_G00D_GU3SS
     N0_H4RM_DONE
     F0R_0UR_FUTUR3
-    SUP3R_S3CUR3_1 *
+    SUinP3R_S3CUR3_1 *
 
 ---
 
@@ -86,6 +99,7 @@ https://en.wikipedia.org/wiki/Tiny_Encryption_Algorithm
 ## Story
 
 She is a hired pen tester. Hacking her way through this VR world.
+She is tracking down a rogue AI who is corrupting the VR world.
 Level 1. street, match the password
 Level 2. computer, fake the network packets to the GB
 Level 3. edit the rom in some way lmao
@@ -95,3 +109,57 @@ Level 3. edit the rom in some way lmao
 How to use the GBMD
 
 The tile offset is in decimal. It wants the offset of where in the bank your tiles start. Need to set 8 bits per plane.
+
+---
+
+Director: Agent, our alt
+reality world is at risk.
+your mission is to track down the rogue AI.
+
+Are you ready?
+
+Agent: You got it boss.
+I'm going in.
+
+L O A D I N G
+A G E N T ...
+
+<flash animation>
+
+This must be the AI's hide out.
+The door needs a code...
+
+
+After success:
+show full screen of text to tell some story!
+
+
+
+
+Failure:
+    I can not die here.
+    I still have so many
+    regrets in life.
+    If only I had more power... (AHEM CLUE)
+
+Success:
+
+    <discuss morality of something>
+
+    Why are you after me?
+    I did nothing wrong!
+
+    Your existence is wrong.
+
+    pew pew (zap?)
+
+    The rogue AI has been terminated.
+    My mission is complete.
+
+    (she walks away as sun is rising on the city)
+
+    She blinks out of existence when she reaches the exit portal.
+
+
+
+
