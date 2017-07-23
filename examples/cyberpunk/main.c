@@ -14,7 +14,8 @@ void clear_window(void);
 void sleep(UINT8 cycles);
 void scroll_text(UINT8 len);
 void process_button_press(void);
-void check_sequence(void);
+void check_door_sequence(void);
+void check_konami_code(void);
 void pass_level_1(void);
 void fail_level_1(void);
 UINT8 divide_UINT8(UINT8 a, UINT8 b);
@@ -462,6 +463,15 @@ UINT8 text_map[] =
 // Empty tile address
 #define EMPTY_TILE_ADDR 0x24U
 
+// Konami Code Sequence for fun
+#define KONAMI_CODE_LEN 0xAU
+const UINT8 konami_code_seq[] =
+{
+    J_UP, J_UP, J_DOWN, J_DOWN, J_LEFT,
+    J_RIGHT, J_LEFT, J_RIGHT, J_B, J_A
+};
+
+
 // Solution sequence for level 1
 #define SEQ_LEN 0x10U
 const UINT8 solution_seq[] =
@@ -733,7 +743,25 @@ void display_button_press(void)
     set_win_tiles(x, 0x2U, 0x1U, 0x1U, &text_map[input_index]);
 }
 
-void check_sequence(void)
+void check_konami_code(void)
+{
+    UINT8 pass = 0;
+    UINT8 i;
+
+    for (i = 0; i < KONAMI_CODE_LEN; ++i) {
+        if (input_seq[i] & konami_code_seq[i]) {
+            pass++;
+        }
+    }
+
+    if (pass == KONAMI_CODE_LEN) {
+        show_text("LONG LIVE       KOJIMA.");
+        input_seq_ctr = 0;
+        clear_window();
+    }
+}
+
+void check_door_sequence(void)
 {
     UINT8 pass = 0;
     UINT8 i;
@@ -837,6 +865,8 @@ void show_flash(void)
 
 void intro_scene(void)
 {
+    show_text("L O A D I N G   A G E N T … ");
+
     move_sprite(0, 0x27U, 0x50U);
     move_sprite(1, 0x2FU, 0x50U);
     move_sprite(2, 0x27U, 0x60U);
@@ -869,7 +899,7 @@ void intro_scene(void)
     show_flash();
     delay(200);
     show_agent();
-    delay(500);
+    delay(1000);
 
     show_text("MY TARGET IS    INSIDE.");
     show_text("THIS DOOR NEEDS A CODE…");
@@ -926,13 +956,17 @@ void main()
         sleep(4);
         process_button_press();
 
+        if (input_seq_ctr == KONAMI_CODE_LEN) {
+            check_konami_code();
+        }
+
         if (input_seq_ctr >= SEQ_LEN) {
             // Scattering the key
             key_a[3] = 0x04183ac4;
 
             // User has inputted 16 button presses
             // Check if seq is correct
-            check_sequence();
+            check_door_sequence();
             input_seq_ctr = 0;
         }
     }

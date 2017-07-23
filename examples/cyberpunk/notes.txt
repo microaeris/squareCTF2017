@@ -5,10 +5,9 @@ To Do
     * add dummy success functions -> eg. if you are only partially successful, you get a wrong password.
     * spread the check around in multiple places.
     * dummy function -> feed him bad code?
+    * You can make the puzzle harder by using a jump table instead of a comparison+conditional jump.
     * write own custom read joypad function
 * make a blog post on my website to host this puzzle
-* write out the hints
-* write out the recommended tools.
 * submit the puzzle
 
 Once i get the art
@@ -16,14 +15,13 @@ Once i get the art
 * draw walking animation
 
 Nice to have
-* Change all UBYTE and UWORD to UINT8 etc
-* change all consts to be defined with 0xFFU
+* change all constants to be defined with 0xFFU
 * Level 2 logic!
-* make the encryption optimized for the GBA
 * UNIT TESTS
-* if enter konami code, it will say "long live kojima"
 * remove nintendo from the beginning of the game... .-.
+* Sounds....
 * make gbdk more efficient
+* make all assets the same line width in the code
 
 Done
 * figure out the password
@@ -55,12 +53,17 @@ Done
 * blinking in animation for agent
 * fix window to load border from the black space I have already -> why are bg and window loaded from separate space from sprites?
 * fix the win screen
+* write out the hints
+* write out the recommended tools.
+* Change all UBYTE and UWORD to UINT8 etc
+* if enter konami code, it will say "long live kojima"
 
 Won't Do
 * randomize how the tiles are loaded in vram
 * make a new text system so im not translating ascii to character map in the game
 * figure out best way to load dialog into game (probably hard coded character maps)
 * port from GBDK to a custom GB library...
+* make the encryption optimized for the GBA
 
 ---
 
@@ -112,13 +115,18 @@ The tile offset is in decimal. It wants the offset of where in the bank your til
 
 ---
 
-Director: Agent, our alt
-reality world is at risk.
-your mission is to track down the rogue AI.
+Boss: Our alt
+reality world
+is at risk.
+
+Your mission is
+to track down
+the rogue AI.
 
 Are you ready?
 
-Agent: You got it boss.
+Agent: You got
+it boss.
 I'm going in.
 
 L O A D I N G
@@ -126,8 +134,10 @@ A G E N T ...
 
 <flash animation>
 
-This must be the AI's hide out.
-The door needs a code...
+My target is
+inside.
+This door needs
+a code...
 
 
 After success:
@@ -161,5 +171,63 @@ Success:
     She blinks out of existence when she reaches the exit portal.
 
 
+---
+
+## Hints
+
+SMALLHINT.txt
+
+You're walking through the street after a long day of chasing your target—but with nothing in hand to show for your work. You stumble through the busy streets of Chinatown, lit by neon lights and filled with the lazy chatter of the crowd.
+
+The person ahead of you seems to be walking home with a steaming bag of Chinese takeout. A fortune cookie tumbles out of her bag. You reach down to return the cookie to its owner, but when you look up, your hungry target has disappeared into the crowd—probably rushing off to enjoy the dinner she had in hand.
+
+"Another target escaped... maybe I really am losing my touch," you scour at your own perceived incompetence.
+
+You were taught to never waste any food, so you crack open the cookie and inside you find your fortune:
+
+07BC are you lucky numbers.  // insert address to where NO GOOD is loaded.
+
+
+
+BIGHINT.txt
+
+You find yourself in a dark and quiet bar—you're not even sure how long you've been here. The digital alcohol distorts your perception of time like no other beverage you've experienced. Suspicion crosses your mind as you wonder how you could be getting drunk in a digital simulation, but another more pressing thought pushes its way through.
+
+This puzzle is still unsolved. Will all your troubles so far go to waste? You are left with no other choice than what you're about to do. You pull up your user space terminal—a holographic blue screen lights up the otherwise colorless bar. You slowly type in the command to start a call with the external world.
+
+"Boss speaking."
+
+You are simultaneously relieved and dreading to hear that voice.
+
+"Boss, I need help. I think this world is rigged—could this all just be a game someone is playing?"
+
+"No time to break the fourth wall Agent, I just received insider information from an anonymous informant. She didn't leave her name, but she did leave us some crucial information about your target. You're looking for a 16 digit code to open the door. She left me with the address 0x______." // insert address of the 16 digit code.
+
+"More magic numbers! The last one barely did me any good."
+
+"It should be enough to see you through. I believe in you, Agent, and I know you won't disappoint."
+
+And with that, the line goes silent.
+
+---
+
+## TOOLS.txt
+
+Agent,
+
+For your upcoming mission, you will need some tools to assist you.
+
+BGB is a robust Game Boy emulator and debugger. You can find the download link below. Depending on your platform, you may need to run it through Wine.
+http://bgb.bircd.org/
+
+Another recommended debugger and emulator is NO$GMB. You can find the link to install it below. Similarly, you may need to run it through Wine.
+http://problemkaputt.de/gmb.htm
+
+Another recommend tool for your arsenal is Radare2. Radare can be used to analyzing binaries, disassembling code, debugging programs, among its many various functions. Installation instructions can be found in the Github project.
+https://github.com/radare/radare2
+
+Best of luck.
+
+- Boss
 
 
