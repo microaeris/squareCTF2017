@@ -7,76 +7,85 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 ___str_0                                                       15EA R
-  0 ___str_1                                                       172B R
-  0 ___str_2                                                       173C R
-  0 ___str_3                                                       173E R
-  0 ___str_4                                                       174B R
-  0 ___str_5                                                       1768 R
-  0 ___str_6                                                       1771 R
-  0 ___str_7                                                       1C95 R
-  0 ___str_8                                                       1CB4 R
-  0 ___str_9                                                       1CCC R
-  0 _agent                                                         0CE2 GR
-  0 _agent_flash                                                   0D62 GR
-  0 _alleyway                                                      0102 GR
-  0 _alleyway_map                                                  0012 GR
-  0 _alphabet                                                      0E5A GR
-  0 _arrow_tile                                                    113A GR
-  0 _button                                                        115A GR
-  0 _check_door_sequence                                           1602 GR
-  0 _check_konami_code                                             158F GR
-  0 _clear_window                                                  1371 GR
-  0 _decrypt                                                       178D GR
+  0 ___str_0                                                       23BE R
+  0 ___str_1                                                       2504 R
+  0 ___str_10                                                      2B4B R
+  0 ___str_11                                                      2B64 R
+  0 ___str_12                                                      2B72 R
+  0 ___str_13                                                      2B91 R
+  0 ___str_14                                                      2BA9 R
+  0 ___str_2                                                       2515 R
+  0 ___str_3                                                       2517 R
+  0 ___str_4                                                       2524 R
+  0 ___str_5                                                       2547 R
+  0 ___str_6                                                       2550 R
+  0 ___str_7                                                       2AE8 R
+  0 ___str_8                                                       2B0E R
+  0 ___str_9                                                       2B3C R
+  0 _agent                                                         1992 GR
+  0 _agent_flash                                                   1A12 GR
+  0 _alleyway                                                      0DB2 GR
+  0 _alleyway_map                                                  0CC2 GR
+  0 _alphabet                                                      1B0A GR
+  0 _animate_and_wait_cursor                                       2189 GR
+  0 _arrow_tile                                                    1DEA GR
+  0 _button                                                        1E0A GR
+  0 _check_door_sequence                                           23D6 GR
+  0 _check_konami_code                                             2363 GR
+  0 _clear_window                                                  2020 GR
+  0 _decrypt                                                       256C GR
     _delay                                                         **** GX
     _disable_interrupts                                            **** GX
-  0 _display_button_press                                          1546 GR
+  0 _display_button_press                                          231A GR
     _display_off                                                   **** GX
   0 _divide_UINT8                                                  0000 GR
     _enable_interrupts                                             **** GX
-  0 _fail_level_1                                                  1753 GR
-  0 _flag_a                                                        11D4 GR
-  0 _flag_b                                                        11DC GR
+  0 _fail_level_1                                                  252C GR
+  1 _flag_a                                                        0031 GR
+  1 _flag_b                                                        0039 GR
   1 _input_seq                                                     0020 GR
   1 _input_seq_ctr                                                 0030 GR
-  0 _intro_scene                                                   1B9C GR
+  0 _intro_scene                                                   297A GR
+  0 _intro_scene_map                                               0012 GR
+  0 _intro_scene_tiles                                             0102 GR
     _joypad                                                        **** GX
-  1 _key_a                                                         0031 GR
-  1 _key_b                                                         0041 GR
-  0 _konami_code_seq                                               11BA GR
-  0 _log2                                                          1537 GR
-  0 _main                                                          1CE6 GR
+  1 _key_a                                                         0041 GR
+  1 _key_b                                                         0051 GR
+  0 _konami_code_seq                                               1E6A GR
+  0 _log2                                                          230B GR
+  0 _main                                                          2BC3 GR
     _memcpy                                                        **** GX
     _memset                                                        **** GX
     _move_sprite                                                   **** GX
     _move_win                                                      **** GX
-  0 _number_of_bits_set                                            1502 GR
-  0 _pass_level_1                                                  167E GR
-  0 _process_button_press                                          14A9 GR
-  0 _remove_flag_padding                                           1B1D GR
-  0 _return_lsb_set                                                1522 GR
-  0 _scroll_text                                                   1440 GR
-    _set_bkg_data                                                  **** GX
-    _set_bkg_tiles                                                 **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
+  0 _number_of_bits_set                                            22D6 GR
+  0 _pass_level_1                                                  2452 GR
+  0 _process_button_press                                          227D GR
+  0 _remove_flag_padding                                           28FB GR
+  0 _return_lsb_set                                                22F6 GR
+  0 _scroll_text                                                   2214 GR
+    _set_bkg_data                                                  **** GX
+    _set_bkg_tiles                                                 **** GX
     _set_sprite_data                                               **** GX
     _set_sprite_tile                                               **** GX
-  0 _set_text_map                                                  11E4 GR
+  0 _set_text_map                                                  1E84 GR
     _set_win_data                                                  **** GX
     _set_win_tiles                                                 **** GX
-  0 _show_agent                                                    1B52 GR
-  0 _show_flash                                                    1B77 GR
-  0 _show_text                                                     1392 GR
-  0 _sleep                                                         1499 GR
-  0 _solution_seq                                                  11C4 GR
+  0 _show_agent                                                    2930 GR
+  0 _show_flash                                                    2955 GR
+  0 _show_long_text                                                207A GR
+  0 _show_text                                                     2041 GR
+  0 _sleep                                                         226D GR
+  0 _solution_seq                                                  1E74 GR
     _strcat                                                        **** GX
     _strcpy                                                        **** GX
     _strlen                                                        **** GX
-  0 _text_box                                                      0DE2 GR
+  0 _text_box                                                      1A92 GR
   1 _text_map                                                      0000 GR
     _wait_vbl_done                                                 **** GX
 
@@ -86,11 +95,11 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 1E25   flags    0
-   1 _DATA                                      size   51   flags    0
+   0 _CODE                                      size 2CFD   flags    0
+   1 _DATA                                      size   61   flags    0
    2 _DABS                                      size    0   flags    8
    3 _HOME                                      size    0   flags    0
-   4 _GSINIT                                    size   A5   flags    0
+   4 _GSINIT                                    size   F5   flags    0
    5 _GSFINAL                                   size    0   flags    0
    6 _CABS                                      size    0   flags    8
 

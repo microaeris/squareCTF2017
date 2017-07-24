@@ -1,27 +1,33 @@
 # CTF Ideas
 
 To Do
+* write out a description for the game - mentioned that boss is a shadowy figure.
 * made code harder to reverse
     * add dummy success functions -> eg. if you are only partially successful, you get a wrong password.
     * spread the check around in multiple places.
     * dummy function -> feed him bad code?
     * You can make the puzzle harder by using a jump table instead of a comparison+conditional jump.
     * write own custom read joypad function
+        * but what if you xor a, ld l,a, dec a, ld h,a and then read ld a,(hl) instead of ld a,($FF00)
 * make a blog post on my website to host this puzzle
 * submit the puzzle
 
-Once i get the art
-* write out the dialog for both scenes
-* draw walking animation
+Bugs
+* buttons presses to advance text still feel finicky.
+* Fix this issue with division: i'm running into the same issue when i replace y = 2 + (counter / 16); with y = 2 + (counter >> 4); o_o
+* File bug with SDCC: left shifting with unsigned literal doesn't work. SDCC *will* compile if you shift by a variable that is unsigned (rather than an literal unsigned number)
 
 Nice to have
+* transition from scene 1 to scene 2 -> a fade to black -> have an animation to load in the VR world.
+* update the text system to take in arrays of lines of text so we don't have to scroll through displaying a bunch of white space characters.
 * change all constants to be defined with 0xFFU
 * Level 2 logic!
+* Dialog for all the scenes
 * UNIT TESTS
-* remove nintendo from the beginning of the game... .-.
+* remove nintendo from the beginning of the game
 * Sounds....
 * make gbdk more efficient
-* make all assets the same line width in the code
+* draw walking animation
 
 Done
 * figure out the password
@@ -57,6 +63,11 @@ Done
 * write out the recommended tools.
 * Change all UBYTE and UWORD to UINT8 etc
 * if enter konami code, it will say "long live kojima"
+* make all assets the same line width in the code
+* write out the dialog for both scenes
+* Finish adding in the intro animation/movie
+* make a way to display text that exceeds 31 characters long.
+* add the dialog for the intro scene
 
 Won't Do
 * randomize how the tiles are loaded in vram
@@ -89,7 +100,7 @@ Flag:
     V3RY_G00D_GU3SS
     N0_H4RM_DONE
     F0R_0UR_FUTUR3
-    SUinP3R_S3CUR3_1 *
+    SUP3R_S3CUR3_1 *
 
 ---
 
@@ -109,15 +120,17 @@ Level 3. edit the rom in some way lmao
 
 ---
 
-How to use the GBMD
+## How to use the GBMD
 
 The tile offset is in decimal. It wants the offset of where in the bank your tiles start. Need to set 8 bits per plane.
 
 ---
 
-Boss: Our alt
-reality world
-is at risk.
+## Dialog
+
+Boss: Our VR
+world is at
+risk.
 
 Your mission is
 to track down
@@ -127,6 +140,7 @@ Are you ready?
 
 Agent: You got
 it boss.
+
 I'm going in.
 
 L O A D I N G
@@ -136,6 +150,7 @@ A G E N T ...
 
 My target is
 inside.
+
 This door needs
 a code...
 
@@ -231,3 +246,25 @@ Best of luck.
 - Boss
 
 
+---
+
+## How to load art into the game
+
+1. Use this tool to generate the map data
+    http://www.chrisantonellis.com/gameboy/gbtdg/
+2. use the testing_tiles.py script to offset the map data from 0x36
+2.5 reformat the huge array to be 8 elements long by line using reformat_tile_data.py
+3. paste new image data into the game
+
+---
+
+# Unit Tests
+
+show_long_text() test cases
+
+// show_long_text("123456789012345.ABCDEFGHIJKL123."); // should return and show nothing.
+// show_long_text("123456789012345.ABCDEFGHIJKL123.HELLO.");
+// show_long_text("123456789012345.ABCDEFGHIJKL123.123456789012345.ABCDEFGHIJKL123.HELLO.");
+// show_long_text("123456789012345.ABCDEFGHIJKL123.123456789012345.ABCDEFGHIJKL123");
+
+---
