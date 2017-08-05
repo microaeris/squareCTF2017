@@ -1,6 +1,9 @@
 # CTF Ideas
 
 To Do
+* scowl, fix grammar for hints,
+* write up readme for hint,
+* think of name for CTF,
 * write out a description for the game - mentioned that boss is a shadowy figure.
 * made code harder to reverse
     * add dummy success functions -> eg. if you are only partially successful, you get a wrong password.
@@ -9,6 +12,8 @@ To Do
     * You can make the puzzle harder by using a jump table instead of a comparison+conditional jump.
     * write own custom read joypad function
         * but what if you xor a, ld l,a, dec a, ld h,a and then read ld a,(hl) instead of ld a,($FF00)
+    * xor the solution sequence,
+    * jump table,
 * make a blog post on my website to host this puzzle
 * submit the puzzle
 
@@ -18,7 +23,6 @@ Bugs
 * File bug with SDCC: left shifting with unsigned literal doesn't work. SDCC *will* compile if you shift by a variable that is unsigned (rather than an literal unsigned number)
 
 Nice to have
-* transition from scene 1 to scene 2 -> a fade to black -> have an animation to load in the VR world.
 * update the text system to take in arrays of lines of text so we don't have to scroll through displaying a bunch of white space characters.
 * change all constants to be defined with 0xFFU
 * Level 2 logic!
@@ -68,6 +72,7 @@ Done
 * Finish adding in the intro animation/movie
 * make a way to display text that exceeds 31 characters long.
 * add the dialog for the intro scene
+* transition from scene 1 to scene 2 -> a fade to black -> have an animation to load in the VR world.
 
 Won't Do
 * randomize how the tiles are loaded in vram
@@ -122,7 +127,9 @@ Level 3. edit the rom in some way lmao
 
 ## How to use the GBMD
 
-The tile offset is in decimal. It wants the offset of where in the bank your tiles start. Need to set 8 bits per plane.
+The tile offset is in decimal. It wants the offset of where in the bank your tiles start.
+Need to set 8 bits per plane.
+Tile number - 7 bits?
 
 ---
 
