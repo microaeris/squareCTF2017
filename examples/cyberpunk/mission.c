@@ -1,4 +1,4 @@
-#include "main.h"
+#include "mission.h"
 #include "map_and_tile_data.h"
 
 UINT8 divide_UINT8(UINT8 a, UINT8 b)
@@ -291,7 +291,7 @@ void process_button_press(void)
     }
 }
 
-// return number of bits set in the input
+// Return number of bits set in the input
 UINT8 number_of_bits_set(UINT8 x)
 {
     UINT8 i = 0x0U;

@@ -25,7 +25,7 @@ void decrypt(UINT32 *v, UINT32 *k);
 void remove_flag_padding(void);
 void intro_scene(void);
 
-// BG animation
+// Background animation animation
 void fade_screen_to_next(const UINT8 *starting_map, const UINT8 *ending_map);
 void overlay_black_tiles(UINT8 *bg_map, UINT8 *black_map, UINT8 screen_size);
 void shift_bg_map(const UINT8 *source_map, UINT8 *dest_map, UINT8 screen_size, UINT8 offset);
@@ -40,7 +40,6 @@ UINT8 text_map[] =
     04,04,04,04,04,04,04,04,04,04,04,04,04,
     04,04,04,04,04,04
 };
-
 
 
 /***************************/
@@ -69,10 +68,10 @@ const UINT8 solution_seq[] =
 
 // Space to save the user inputted sequence for level 1
 UINT8 input_seq[SEQ_LEN];
-UINT8 input_seq_ctr = 0;
+UINT8 input_seq_ctr = 0x0;
 
 // Encrypted Flag
-#define FLAG_LEN 8
+#define FLAG_LEN 0x08
 UINT8 flag_a[] =
 {
     0x12, 0x64, 0x88, 0xf7, 0x77, 0x95, 0x8a, 0x5a

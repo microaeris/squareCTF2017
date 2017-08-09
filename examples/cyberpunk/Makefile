@@ -3,10 +3,10 @@ OBJ=./obj
 
 build:
 	mkdir -p $(OBJ)
-	$(BIN)/gbdk-n-compile.sh -I./ main.c -o $(OBJ)/main.rel
-	$(BIN)/gbdk-n-link.sh $(OBJ)/main.rel -o $(OBJ)/main.ihx
-	$(BIN)/gbdk-n-make-rom.sh $(OBJ)/main.ihx main.gb
+	$(BIN)/gbdk-n-compile.sh -I./ mission.c -o $(OBJ)/mission.rel
+	$(BIN)/gbdk-n-link.sh $(OBJ)/mission.rel -o $(OBJ)/mission.ihx
+	$(BIN)/gbdk-n-make-rom.sh $(OBJ)/mission.ihx mission.gb
 
 clean:
 	rm -rf $(OBJ)
-	rm -f main.gb
+	rm -f mission.gb

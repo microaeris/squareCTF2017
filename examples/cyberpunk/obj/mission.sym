@@ -7,46 +7,46 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 ___str_0                                                       288F R
-  0 ___str_1                                                       29D6 R
-  0 ___str_10                                                      2FE2 R
-  0 ___str_11                                                      2FFB R
-  0 ___str_12                                                      3009 R
-  0 ___str_13                                                      3028 R
-  0 ___str_14                                                      3040 R
-  0 ___str_2                                                       29E7 R
-  0 ___str_3                                                       29E9 R
-  0 ___str_4                                                       29F6 R
-  0 ___str_5                                                       2A19 R
-  0 ___str_6                                                       2A22 R
-  0 ___str_7                                                       2F7F R
-  0 ___str_8                                                       2FA5 R
-  0 ___str_9                                                       2FD3 R
+  0 ___str_0                                                       2891 R
+  0 ___str_1                                                       29D8 R
+  0 ___str_10                                                      2FE1 R
+  0 ___str_11                                                      2FFA R
+  0 ___str_12                                                      3008 R
+  0 ___str_13                                                      3027 R
+  0 ___str_14                                                      303F R
+  0 ___str_2                                                       29E9 R
+  0 ___str_3                                                       29EB R
+  0 ___str_4                                                       29F8 R
+  0 ___str_5                                                       2A1B R
+  0 ___str_6                                                       2A24 R
+  0 ___str_7                                                       2F7E R
+  0 ___str_8                                                       2FA4 R
+  0 ___str_9                                                       2FD2 R
   0 _agent                                                         1C7C GR
   0 _agent_flash                                                   1CFC GR
   0 _alleyway                                                      109C GR
   0 _alleyway_map                                                  0FAC GR
   0 _alphabet                                                      1DF4 GR
-  0 _animate_and_wait_cursor                                       2455 GR
+  0 _animate_and_wait_cursor                                       2457 GR
   0 _arrow_tile                                                    20D4 GR
   0 _button                                                        20F4 GR
-  0 _check_door_sequence                                           28A7 GR
-  0 _check_konami_code                                             2834 GR
+  0 _check_door_sequence                                           28A9 GR
+  0 _check_konami_code                                             2836 GR
   0 _clear_window                                                  22EF GR
-  0 _decrypt                                                       2A3E GR
+  0 _decrypt                                                       2A40 GR
     _delay                                                         **** GX
     _disable_interrupts                                            **** GX
-  0 _display_button_press                                          27EB GR
+  0 _display_button_press                                          27ED GR
     _display_off                                                   **** GX
   0 _divide_UINT8                                                  0000 GR
     _enable_interrupts                                             **** GX
-  0 _fade_screen_to_next                                           25B4 GR
-  0 _fail_level_1                                                  29FE GR
+  0 _fade_screen_to_next                                           25B6 GR
+  0 _fail_level_1                                                  2A00 GR
   1 _flag_a                                                        0031 GR
   1 _flag_b                                                        0039 GR
   1 _input_seq                                                     0020 GR
   1 _input_seq_ctr                                                 0030 GR
-  0 _intro_scene                                                   2E49 GR
+  0 _intro_scene                                                   2E48 GR
   0 _intro_scene_map                                               02FC GR
   0 _intro_scene_tiles                                             03EC GR
     _joypad                                                        **** GX
@@ -54,8 +54,8 @@ Symbol Table
   1 _key_b                                                         0051 GR
   0 _konami_code_seq                                               0012 GR
   1 _level_1_table                                                 0061 GR
-  0 _log2                                                          27DC GR
-  0 _main                                                          305A GR
+  0 _log2                                                          27DE GR
+  0 _main                                                          3059 GR
     _memcpy                                                        **** GX
     _memset                                                        **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
@@ -65,13 +65,13 @@ Symbol Table
 
     _move_sprite                                                   **** GX
     _move_win                                                      **** GX
-  0 _number_of_bits_set                                            27A7 GR
-  0 _overlay_black_tiles                                           257D GR
-  0 _pass_level_1                                                  2924 GR
-  0 _process_button_press                                          274E GR
-  0 _remove_flag_padding                                           2DCA GR
-  0 _return_lsb_set                                                27C7 GR
-  0 _scroll_text                                                   24E1 GR
+  0 _number_of_bits_set                                            27A9 GR
+  0 _overlay_black_tiles                                           257F GR
+  0 _pass_level_1                                                  2926 GR
+  0 _process_button_press                                          2750 GR
+  0 _remove_flag_padding                                           2DC9 GR
+  0 _return_lsb_set                                                27C9 GR
+  0 _scroll_text                                                   24E3 GR
     _set_bkg_data                                                  **** GX
     _set_bkg_tiles                                                 **** GX
     _set_sprite_data                                               **** GX
@@ -79,12 +79,12 @@ Symbol Table
   0 _set_text_map                                                  2154 GR
     _set_win_data                                                  **** GX
     _set_win_tiles                                                 **** GX
-  0 _shift_bg_map                                                  253A GR
-  0 _show_agent                                                    2DFF GR
-  0 _show_flash                                                    2E24 GR
+  0 _shift_bg_map                                                  253C GR
+  0 _show_agent                                                    2DFE GR
+  0 _show_flash                                                    2E23 GR
   0 _show_long_text                                                2349 GR
   0 _show_text                                                     2310 GR
-  0 _sleep                                                         273E GR
+  0 _sleep                                                         2740 GR
   0 _solution_seq                                                  001C GR
     _strcat                                                        **** GX
     _strcpy                                                        **** GX
@@ -101,7 +101,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 3194   flags    0
+   0 _CODE                                      size 3193   flags    0
    1 _DATA                                      size   65   flags    0
    2 _DABS                                      size    0   flags    8
    3 _HOME                                      size    0   flags    0

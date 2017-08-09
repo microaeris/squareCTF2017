@@ -1,9 +1,9 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Mar 24 2016) (Linux)
-; This file was generated Fri Aug  4 23:40:03 2017
+; This file was generated Wed Aug  9 03:18:13 2017
 ;--------------------------------------------------------
-	.module main
+	.module mission
 	.optsdcc -mgbz80
 	
 ;--------------------------------------------------------
@@ -108,7 +108,7 @@ _level_1_table::
 	.area _GSINIT
 	.area _GSFINAL
 	.area _GSINIT
-;main.h:37: UINT8 text_map[] =
+;mission.h:37: UINT8 text_map[] =
 	ld	hl,#_text_map
 	ld	(hl),#0x16
 	ld	hl,#(_text_map + 0x0001)
@@ -173,10 +173,10 @@ _level_1_table::
 	ld	(hl),#0x04
 	ld	hl,#(_text_map + 0x001f)
 	ld	(hl),#0x04
-;main.h:72: UINT8 input_seq_ctr = 0;
+;mission.h:71: UINT8 input_seq_ctr = 0x0;
 	ld	hl,#_input_seq_ctr
 	ld	(hl),#0x00
-;main.h:76: UINT8 flag_a[] =
+;mission.h:75: UINT8 flag_a[] =
 	ld	hl,#_flag_a
 	ld	(hl),#0x12
 	ld	hl,#(_flag_a + 0x0001)
@@ -193,7 +193,7 @@ _level_1_table::
 	ld	(hl),#0x8A
 	ld	hl,#(_flag_a + 0x0007)
 	ld	(hl),#0x5A
-;main.h:80: UINT8 flag_b[] =
+;mission.h:79: UINT8 flag_b[] =
 	ld	hl,#_flag_b
 	ld	(hl),#0xE1
 	ld	hl,#(_flag_b + 0x0001)
@@ -210,7 +210,7 @@ _level_1_table::
 	ld	(hl),#0x30
 	ld	hl,#(_flag_b + 0x0007)
 	ld	(hl),#0x5F
-;main.h:90: void (*level_1_table[2]) (void) =
+;mission.h:89: void (*level_1_table[2]) (void) =
 	ld	hl,#_level_1_table
 	ld	(hl),#<(_pass_level_1)
 	inc	hl
@@ -228,29 +228,29 @@ _level_1_table::
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;main.c:4: UINT8 divide_UINT8(UINT8 a, UINT8 b)
+;mission.c:4: UINT8 divide_UINT8(UINT8 a, UINT8 b)
 ;	---------------------------------
 ; Function divide_UINT8
 ; ---------------------------------
 _divide_UINT8::
-;main.c:8: while (a >= b) {
+;mission.c:8: while (a >= b) {
 	ld	b,#0x00
 00101$:
 	ldhl	sp,#2
 	ld	a,(hl+)
 	sub	a, (hl)
 	jr	C,00103$
-;main.c:9: a -= b;
+;mission.c:9: a -= b;
 	dec	hl
 	ld	a,(hl+)
 	sub	a, (hl)
 	dec	hl
 	ld	(hl),a
-;main.c:10: result++;
+;mission.c:10: result++;
 	inc	b
 	jr	00101$
 00103$:
-;main.c:12: return result;
+;mission.c:12: return result;
 	ld	e,b
 	ret
 _konami_code_seq:
@@ -8782,13 +8782,13 @@ _button:
 	.db #0xFF	; 255
 	.db #0xFF	; 255
 	.db #0xFF	; 255
-;main.c:28: void set_text_map(char *text, UINT8 *len)
+;mission.c:28: void set_text_map(char *text, UINT8 *len)
 ;	---------------------------------
 ; Function set_text_map
 ; ---------------------------------
 _set_text_map::
 	add	sp, #-7
-;main.c:33: memset(text_map, EMPTY_TILE_ADDR, text_map_width*text_map_height);
+;mission.c:33: memset(text_map, EMPTY_TILE_ADDR, text_map_width*text_map_height);
 	ld	de,#_text_map
 	ld	hl,#0x0020
 	push	hl
@@ -8797,7 +8797,7 @@ _set_text_map::
 	push	de
 	call	_memset
 	add	sp, #6
-;main.c:36: if (!text || *len > 0x20U || *len <= 0x0U) {
+;mission.c:36: if (!text || *len > 0x20U || *len <= 0x0U) {
 	ldhl	sp,#10
 	ld	a,(hl-)
 	or	a,(hl)
@@ -8828,13 +8828,13 @@ _set_text_map::
 	jp	C,00143$
 	ld	a,b
 	or	a, a
-;main.c:37: return;
-;main.c:40: for (i = 0; i < *len; ++i) {
+;mission.c:37: return;
+;mission.c:40: for (i = 0; i < *len; ++i) {
 	jp	Z,00143$
 	ldhl	sp,#0
 	ld	(hl),#0x00
 00141$:
-;main.c:36: if (!text || *len > 0x20U || *len <= 0x0U) {
+;mission.c:36: if (!text || *len > 0x20U || *len <= 0x0U) {
 	ldhl	sp,#2
 	dec	hl
 	ld	e,(hl)
@@ -8842,13 +8842,13 @@ _set_text_map::
 	ld	d,(hl)
 	ld	a,(de)
 	ld	b,a
-;main.c:40: for (i = 0; i < *len; ++i) {
+;mission.c:40: for (i = 0; i < *len; ++i) {
 	dec	hl
 	dec	hl
 	ld	a,(hl)
 	sub	a, b
 	jp	NC,00137$
-;main.c:42: if (text[i] >= 'A' && text[i] <= 'Z') {
+;mission.c:42: if (text[i] >= 'A' && text[i] <= 'Z') {
 	ldhl	sp,#10
 	dec	hl
 	ld	e,(hl)
@@ -8869,7 +8869,7 @@ _set_text_map::
 	ld	d,(hl)
 	ld	a,(de)
 	ld	b,a
-;main.c:43: text_map[i] = text[i] - 'A' + 0xAU; // eg. character A - ascii value of A + index of A in VRAM
+;mission.c:43: text_map[i] = text[i] - 'A' + 0xAU; // eg. character A - ascii value of A + index of A in VRAM
 	ld	de,#_text_map
 	ldhl	sp,#0
 	ld	l,(hl)
@@ -8880,7 +8880,7 @@ _set_text_map::
 	ldhl	sp,#5
 	ld	(hl+),a
 	ld	(hl),d
-;main.c:42: if (text[i] >= 'A' && text[i] <= 'Z') {
+;mission.c:42: if (text[i] >= 'A' && text[i] <= 'Z') {
 	ld	a,#0x41
 	ld	e,a
 	ld	a,b
@@ -8907,7 +8907,7 @@ _set_text_map::
 	scf
 00219$:
 	jr	C,00106$
-;main.c:43: text_map[i] = text[i] - 'A' + 0xAU; // eg. character A - ascii value of A + index of A in VRAM
+;mission.c:43: text_map[i] = text[i] - 'A' + 0xAU; // eg. character A - ascii value of A + index of A in VRAM
 	ld	a,b
 	add	a, #0xC9
 	ld	b,a
@@ -8917,7 +8917,7 @@ _set_text_map::
 	ld	l,a
 	ld	(hl),b
 00106$:
-;main.c:47: if (text[i] >= '0' && text[i] <= '9') {
+;mission.c:47: if (text[i] >= '0' && text[i] <= '9') {
 	ldhl	sp,#4
 	dec	hl
 	ld	e,(hl)
@@ -8951,7 +8951,7 @@ _set_text_map::
 	scf
 00221$:
 	jr	C,00109$
-;main.c:48: text_map[i] = text[i] - '0';
+;mission.c:48: text_map[i] = text[i] - '0';
 	ld	a,b
 	add	a,#0xD0
 	ld	b,a
@@ -8961,7 +8961,7 @@ _set_text_map::
 	ld	l,a
 	ld	(hl),b
 00109$:
-;main.c:52: if (text[i] == '~') {
+;mission.c:52: if (text[i] == '~') {
 	ldhl	sp,#4
 	dec	hl
 	ld	e,(hl)
@@ -8971,7 +8971,7 @@ _set_text_map::
 	ld	b,a
 	sub	a, #0x7E
 	jr	NZ,00135$
-;main.c:53: text_map[i] = 0x25U;
+;mission.c:53: text_map[i] = 0x25U;
 	inc	hl
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -8979,11 +8979,11 @@ _set_text_map::
 	ld	(hl),#0x25
 	jp	00142$
 00135$:
-;main.c:54: } else if (text[i] == '_') {
+;mission.c:54: } else if (text[i] == '_') {
 	ld	a,b
 	sub	a, #0x5F
 	jr	NZ,00132$
-;main.c:55: text_map[i] = 0x26U;
+;mission.c:55: text_map[i] = 0x26U;
 	ldhl	sp,#5
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -8991,11 +8991,11 @@ _set_text_map::
 	ld	(hl),#0x26
 	jp	00142$
 00132$:
-;main.c:56: } else if (text[i] == '!') {
+;mission.c:56: } else if (text[i] == '!') {
 	ld	a,b
 	sub	a, #0x21
 	jr	NZ,00129$
-;main.c:57: text_map[i] = 0x27U;
+;mission.c:57: text_map[i] = 0x27U;
 	ldhl	sp,#5
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -9003,11 +9003,11 @@ _set_text_map::
 	ld	(hl),#0x27
 	jp	00142$
 00129$:
-;main.c:58: } else if (text[i] == '?') {
+;mission.c:58: } else if (text[i] == '?') {
 	ld	a,b
 	sub	a, #0x3F
 	jr	NZ,00126$
-;main.c:59: text_map[i] = 0x28U;
+;mission.c:59: text_map[i] = 0x28U;
 	ldhl	sp,#5
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -9015,11 +9015,11 @@ _set_text_map::
 	ld	(hl),#0x28
 	jp	00142$
 00126$:
-;main.c:60: } else if (text[i] == '\'') {
+;mission.c:60: } else if (text[i] == '\'') {
 	ld	a,b
 	sub	a, #0x27
 	jr	NZ,00123$
-;main.c:61: text_map[i] = 0x29U;
+;mission.c:61: text_map[i] = 0x29U;
 	ldhl	sp,#5
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -9027,11 +9027,11 @@ _set_text_map::
 	ld	(hl),#0x29
 	jp	00142$
 00123$:
-;main.c:62: } else if (text[i] == '.') {
+;mission.c:62: } else if (text[i] == '.') {
 	ld	a,b
 	sub	a, #0x2E
 	jr	NZ,00120$
-;main.c:63: text_map[i] = 0x2AU;
+;mission.c:63: text_map[i] = 0x2AU;
 	ldhl	sp,#5
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -9039,11 +9039,11 @@ _set_text_map::
 	ld	(hl),#0x2A
 	jp	00142$
 00120$:
-;main.c:64: } else if (text[i] == ',') {
+;mission.c:64: } else if (text[i] == ',') {
 	ld	a,b
 	sub	a, #0x2C
 	jr	NZ,00117$
-;main.c:65: text_map[i] = 0x2BU;
+;mission.c:65: text_map[i] = 0x2BU;
 	ldhl	sp,#5
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -9051,17 +9051,17 @@ _set_text_map::
 	ld	(hl),#0x2B
 	jp	00142$
 00117$:
-;main.c:66: } else if (text[i] == '…') {
+;mission.c:66: } else if (text[i] == '…') {
 	ld	a,b
 	sub	a, #0xE2
 	jr	NZ,00114$
-;main.c:67: text_map[i] = 0x2CU;
+;mission.c:67: text_map[i] = 0x2CU;
 	ldhl	sp,#5
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2C
-;main.c:71: *len -= 2;
+;mission.c:71: *len -= 2;
 	ldhl	sp,#2
 	dec	hl
 	ld	e,(hl)
@@ -9078,23 +9078,23 @@ _set_text_map::
 	ld	(hl),b
 	jr	00142$
 00114$:
-;main.c:72: } else if (text[i] == ':') {
+;mission.c:72: } else if (text[i] == ':') {
 	ld	a,b
 	sub	a, #0x3A
 	jr	NZ,00142$
-;main.c:73: text_map[i] = 0x2DU;
+;mission.c:73: text_map[i] = 0x2DU;
 	ldhl	sp,#5
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x2D
 00142$:
-;main.c:40: for (i = 0; i < *len; ++i) {
+;mission.c:40: for (i = 0; i < *len; ++i) {
 	ldhl	sp,#0
 	inc	(hl)
 	jp	00141$
 00137$:
-;main.c:77: if (*len < 0x2U) {
+;mission.c:77: if (*len < 0x2U) {
 	ldhl	sp,#5
 	ld	(hl),b
 	inc	hl
@@ -9106,7 +9106,7 @@ _set_text_map::
 	ld	a, (hl)
 	sbc	a, #0x00
 	jr	NC,00143$
-;main.c:79: text_map[*len] = arrow_address_1;
+;mission.c:79: text_map[*len] = arrow_address_1;
 	ld	a,#<(_text_map)
 	add	a, b
 	ld	c,a
@@ -9118,12 +9118,12 @@ _set_text_map::
 00143$:
 	add	sp, #7
 	ret
-;main.c:85: void clear_window(void)
+;mission.c:85: void clear_window(void)
 ;	---------------------------------
 ; Function clear_window
 ; ---------------------------------
 _clear_window::
-;main.c:87: memset(text_map, EMPTY_TILE_ADDR, text_map_width * text_map_height);
+;mission.c:87: memset(text_map, EMPTY_TILE_ADDR, text_map_width * text_map_height);
 	ld	de,#_text_map
 	ld	hl,#0x0020
 	push	hl
@@ -9132,7 +9132,7 @@ _clear_window::
 	push	de
 	call	_memset
 	add	sp, #6
-;main.c:88: set_win_tiles(0x2U, 0x2U, text_map_width, text_map_height, text_map);
+;mission.c:88: set_win_tiles(0x2U, 0x2U, text_map_width, text_map_height, text_map);
 	ld	de,#_text_map
 	push	de
 	ld	hl,#0x0210
@@ -9142,13 +9142,13 @@ _clear_window::
 	call	_set_win_tiles
 	add	sp, #6
 	ret
-;main.c:92: void show_text(char *text)
+;mission.c:92: void show_text(char *text)
 ;	---------------------------------
 ; Function show_text
 ; ---------------------------------
 _show_text::
 	dec	sp
-;main.c:94: UINT8 text_len = strlen(text);
+;mission.c:94: UINT8 text_len = strlen(text);
 	ldhl	sp,#3
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -9158,9 +9158,9 @@ _show_text::
 	add	sp, #2
 	ldhl	sp,#0
 	ld	(hl),e
-;main.c:97: clear_window();
+;mission.c:97: clear_window();
 	call	_clear_window
-;main.c:98: set_text_map(text, &text_len);
+;mission.c:98: set_text_map(text, &text_len);
 	ldhl	sp,#0
 	ld	e,l
 	ld	d,h
@@ -9172,14 +9172,14 @@ _show_text::
 	push	hl
 	call	_set_text_map
 	add	sp, #4
-;main.c:99: cursor_index = text_len;
+;mission.c:99: cursor_index = text_len;
 	ldhl	sp,#0
 	ld	d,(hl)
-;main.c:102: text_len++;
+;mission.c:102: text_len++;
 	ld	a,d
 	inc	a
 	ld	(hl),a
-;main.c:103: scroll_text(text_len);
+;mission.c:103: scroll_text(text_len);
 	push	de
 	ld	a,(hl)
 	push	af
@@ -9187,23 +9187,23 @@ _show_text::
 	call	_scroll_text
 	inc	sp
 	pop	de
-;main.c:104: animate_and_wait_cursor(cursor_index);
+;mission.c:104: animate_and_wait_cursor(cursor_index);
 	push	de
 	inc	sp
 	call	_animate_and_wait_cursor
 	inc	sp
 	inc	sp
 	ret
-;main.c:114: void show_long_text(char *text)
+;mission.c:114: void show_long_text(char *text)
 ;	---------------------------------
 ; Function show_long_text
 ; ---------------------------------
 _show_long_text::
 	add	sp, #-40
-;main.c:117: UINT8 temp_text_len = 32;
-	ldhl	sp,#35
+;mission.c:117: UINT8 temp_text_len = 32;
+	ldhl	sp,#34
 	ld	(hl),#0x20
-;main.c:118: UINT8 text_len = strlen(text);
+;mission.c:118: UINT8 text_len = strlen(text);
 	ldhl	sp,#42
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -9211,22 +9211,22 @@ _show_long_text::
 	push	hl
 	call	_strlen
 	add	sp, #2
-	ldhl	sp,#33
+	ldhl	sp,#32
 	ld	(hl),e
-;main.c:123: if (text_len < 33) {
+;mission.c:123: if (text_len < 33) {
 	ld	a,(hl)
 	sub	a, #0x21
-;main.c:124: return;
+;mission.c:124: return;
 	jp	C,00107$
-;main.c:129: num_text_windows = text_len / 32;
-	ldhl	sp,#33
+;mission.c:129: num_text_windows = text_len / 32;
+	ldhl	sp,#32
 	ld	a,(hl)
 	swap	a
 	rrca
 	and	a,#0x07
-	dec	hl
+	ldhl	sp,#35
 	ld	(hl),a
-;main.c:133: for (i = 0; i < num_text_windows; ++i) {
+;mission.c:133: for (i = 0; i < num_text_windows; ++i) {
 	ldhl	sp,#0
 	ld	a,l
 	ld	d,h
@@ -9239,17 +9239,17 @@ _show_long_text::
 	ldhl	sp,#36
 	ld	(hl+),a
 	ld	(hl),e
-	ldhl	sp,#34
+	ldhl	sp,#33
 	ld	(hl),#0x00
 00105$:
-	ldhl	sp,#34
-	ld	a,(hl-)
-	dec	hl
+	ldhl	sp,#33
+	ld	a,(hl+)
+	inc	hl
 	sub	a, (hl)
 	jp	NC,00103$
-;main.c:134: memcpy(&temp_text, text + (i * 32), 32);
-	inc	hl
-	inc	hl
+;mission.c:134: memcpy(&temp_text, text + (i * 32), 32);
+	dec	hl
+	dec	hl
 	ld	c,(hl)
 	ld	b,#0x00
 	sla	c
@@ -9280,13 +9280,13 @@ _show_long_text::
 	push	de
 	call	_memcpy
 	add	sp, #6
-;main.c:138: temp_text_len = 32;
-	ldhl	sp,#35
+;mission.c:138: temp_text_len = 32;
+	ldhl	sp,#34
 	ld	(hl),#0x20
-;main.c:140: clear_window();
+;mission.c:140: clear_window();
 	call	_clear_window
-;main.c:141: set_text_map(temp_text, &temp_text_len);
-	ldhl	sp,#35
+;mission.c:141: set_text_map(temp_text, &temp_text_len);
+	ldhl	sp,#34
 	ld	e,l
 	ld	d,h
 	ldhl	sp,#37
@@ -9298,34 +9298,36 @@ _show_long_text::
 	push	bc
 	call	_set_text_map
 	add	sp, #4
-;main.c:142: scroll_text(temp_text_len);
-	ldhl	sp,#35
+;mission.c:142: scroll_text(temp_text_len);
+	ldhl	sp,#34
 	ld	a,(hl)
 	push	af
 	inc	sp
 	call	_scroll_text
 	inc	sp
-;main.c:143: delay(200);
+;mission.c:143: delay(200);
 	ld	hl,#0x00C8
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:133: for (i = 0; i < num_text_windows; ++i) {
-	ldhl	sp,#34
+;mission.c:133: for (i = 0; i < num_text_windows; ++i) {
+	ldhl	sp,#33
 	inc	(hl)
 	jp	00105$
 00103$:
-;main.c:147: temp_text_len = text_len % 32;
-	ldhl	sp,#33
+;mission.c:147: temp_text_len = text_len % 32;
+	ldhl	sp,#32
 	ld	a,(hl)
 	and	a, #0x1F
 	inc	hl
 	inc	hl
-;main.c:148: memcpy(&temp_text, text + (num_text_windows * 32), temp_text_len);
+;mission.c:148: memcpy(&temp_text, text + (num_text_windows * 32), temp_text_len);
 	ld	(hl+),a
+	inc	hl
 	ld	(hl+),a
 	ld	(hl),#0x00
-	ldhl	sp,#32
+	dec	hl
+	dec	hl
 	ld	c,(hl)
 	ld	b,#0x00
 	sla	c
@@ -9359,10 +9361,10 @@ _show_long_text::
 	push	de
 	call	_memcpy
 	add	sp, #6
-;main.c:149: clear_window();
+;mission.c:149: clear_window();
 	call	_clear_window
-;main.c:150: set_text_map(temp_text, &temp_text_len);
-	ldhl	sp,#35
+;mission.c:150: set_text_map(temp_text, &temp_text_len);
+	ldhl	sp,#34
 	ld	e,l
 	ld	d,h
 	ldhl	sp,#39
@@ -9374,14 +9376,14 @@ _show_long_text::
 	push	bc
 	call	_set_text_map
 	add	sp, #4
-;main.c:151: cursor_index = temp_text_len;
-	ldhl	sp,#35
+;mission.c:151: cursor_index = temp_text_len;
+	ldhl	sp,#34
 	ld	d,(hl)
-;main.c:153: temp_text_len++;
+;mission.c:153: temp_text_len++;
 	ld	a,d
 	inc	a
 	ld	(hl),a
-;main.c:154: scroll_text(temp_text_len);
+;mission.c:154: scroll_text(temp_text_len);
 	push	de
 	ld	a,(hl)
 	push	af
@@ -9389,7 +9391,7 @@ _show_long_text::
 	call	_scroll_text
 	inc	sp
 	pop	de
-;main.c:155: animate_and_wait_cursor(cursor_index);
+;mission.c:155: animate_and_wait_cursor(cursor_index);
 	push	de
 	inc	sp
 	call	_animate_and_wait_cursor
@@ -9397,23 +9399,23 @@ _show_long_text::
 00107$:
 	add	sp, #40
 	ret
-;main.c:158: void animate_and_wait_cursor(UINT8 cursor_index)
+;mission.c:158: void animate_and_wait_cursor(UINT8 cursor_index)
 ;	---------------------------------
 ; Function animate_and_wait_cursor
 ; ---------------------------------
 _animate_and_wait_cursor::
 	add	sp, #-3
-;main.c:161: UINT8 cursor_state = 0x0;
+;mission.c:161: UINT8 cursor_state = 0x0;
 	ldhl	sp,#1
 	ld	(hl),#0x00
-;main.c:165: x = 2 + (cursor_index % 16);
+;mission.c:165: x = 2 + (cursor_index % 16);
 	ldhl	sp,#5
 	ld	a,(hl)
 	and	a, #0x0F
 	add	a, #0x02
 	ldhl	sp,#0
 	ld	(hl),a
-;main.c:167: y = 2 + divide_UINT8(cursor_index, 16);
+;mission.c:167: y = 2 + divide_UINT8(cursor_index, 16);
 	ld	a,#0x10
 	push	af
 	inc	sp
@@ -9427,7 +9429,7 @@ _animate_and_wait_cursor::
 	add	a, #0x02
 	ldhl	sp,#2
 	ld	(hl),a
-;main.c:169: while (!joypad()) {
+;mission.c:169: while (!joypad()) {
 	ld	de,#_text_map
 	ldhl	sp,#5
 	ld	l,(hl)
@@ -9442,21 +9444,21 @@ _animate_and_wait_cursor::
 	pop	bc
 	or	a, a
 	jp	NZ,00106$
-;main.c:170: if (cursor_state == 0) {
+;mission.c:170: if (cursor_state == 0) {
 	ldhl	sp,#1
 	ld	a,(hl)
 	or	a, a
 	jr	NZ,00102$
-;main.c:171: text_map[cursor_index] = arrow_address_2;
+;mission.c:171: text_map[cursor_index] = arrow_address_2;
 	ld	a,#0x2F
 	ld	(bc),a
 	jr	00103$
 00102$:
-;main.c:173: text_map[cursor_index] = arrow_address_1;
+;mission.c:173: text_map[cursor_index] = arrow_address_1;
 	ld	a,#0x2E
 	ld	(bc),a
 00103$:
-;main.c:176: set_win_tiles(x, y, 1, 1, &text_map[cursor_index]);
+;mission.c:176: set_win_tiles(x, y, 1, 1, &text_map[cursor_index]);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -9475,21 +9477,21 @@ _animate_and_wait_cursor::
 	call	_set_win_tiles
 	add	sp, #6
 	pop	bc
-;main.c:177: cursor_state = !cursor_state;
+;mission.c:177: cursor_state = !cursor_state;
 	ldhl	sp,#1
 	ld	a,(hl)
 	sub	a,#0x01
 	ld	a,#0x00
 	rla
 	ld	(hl),a
-;main.c:178: delay(50);
+;mission.c:178: delay(50);
 	push	bc
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
 	pop	bc
-;main.c:179: sleep(4);
+;mission.c:179: sleep(4);
 	push	bc
 	ld	a,#0x04
 	push	af
@@ -9499,33 +9501,33 @@ _animate_and_wait_cursor::
 	pop	bc
 	jp	00104$
 00106$:
-;main.c:181: delay(50);
+;mission.c:181: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
 	add	sp, #3
 	ret
-;main.c:189: void scroll_text(UINT8 len)
+;mission.c:189: void scroll_text(UINT8 len)
 ;	---------------------------------
 ; Function scroll_text
 ; ---------------------------------
 _scroll_text::
 	add	sp, #-3
-;main.c:192: for (counter = 0; counter < len; ++counter) {
+;mission.c:192: for (counter = 0; counter < len; ++counter) {
 	ld	b,#0x00
 00103$:
 	ld	a,b
 	ldhl	sp,#5
 	sub	a, (hl)
 	jp	NC,00105$
-;main.c:193: x = 2 + (counter % 16);
+;mission.c:193: x = 2 + (counter % 16);
 	ld	a,b
 	and	a, #0x0F
 	add	a, #0x02
 	ldhl	sp,#0
 	ld	(hl),a
-;main.c:194: y = 2 + divide_UINT8(counter, 16);
+;mission.c:194: y = 2 + divide_UINT8(counter, 16);
 	push	bc
 	ld	a,#0x10
 	push	af
@@ -9538,7 +9540,7 @@ _scroll_text::
 	ld	c,e
 	inc	c
 	inc	c
-;main.c:198: set_win_tiles(x, y, 1, 1, &text_map[counter]);
+;mission.c:198: set_win_tiles(x, y, 1, 1, &text_map[counter]);
 	ld	de,#_text_map
 	ld	l,b
 	ld	h,#0x00
@@ -9566,7 +9568,7 @@ _scroll_text::
 	call	_set_win_tiles
 	add	sp, #6
 	pop	bc
-;main.c:199: sleep(4);
+;mission.c:199: sleep(4);
 	push	bc
 	ld	a,#0x04
 	push	af
@@ -9574,19 +9576,19 @@ _scroll_text::
 	call	_sleep
 	inc	sp
 	pop	bc
-;main.c:192: for (counter = 0; counter < len; ++counter) {
+;mission.c:192: for (counter = 0; counter < len; ++counter) {
 	inc	b
 	jp	00103$
 00105$:
 	add	sp, #3
 	ret
-;main.c:203: void shift_bg_map(const UINT8 *source_map, UINT8 *dest_map, UINT8 screen_size, UINT8 offset)
+;mission.c:203: void shift_bg_map(const UINT8 *source_map, UINT8 *dest_map, UINT8 screen_size, UINT8 offset)
 ;	---------------------------------
 ; Function shift_bg_map
 ; ---------------------------------
 _shift_bg_map::
 	add	sp, #-3
-;main.c:206: for (i = 0; i < screen_size; ++i) {
+;mission.c:206: for (i = 0; i < screen_size; ++i) {
 	ldhl	sp,#0
 	ld	(hl),#0x00
 00103$:
@@ -9595,7 +9597,7 @@ _shift_bg_map::
 	ldhl	sp,#9
 	sub	a, (hl)
 	jp	NC,00105$
-;main.c:207: dest_map[i] = source_map[i] + offset;
+;mission.c:207: dest_map[i] = source_map[i] + offset;
 	dec	hl
 	dec	hl
 	ld	e,(hl)
@@ -9631,20 +9633,20 @@ _shift_bg_map::
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),b
-;main.c:206: for (i = 0; i < screen_size; ++i) {
+;mission.c:206: for (i = 0; i < screen_size; ++i) {
 	ldhl	sp,#0
 	inc	(hl)
 	jp	00103$
 00105$:
 	add	sp, #3
 	ret
-;main.c:215: void overlay_black_tiles(UINT8 *bg_map, UINT8 *black_map, UINT8 screen_size)
+;mission.c:215: void overlay_black_tiles(UINT8 *bg_map, UINT8 *black_map, UINT8 screen_size)
 ;	---------------------------------
 ; Function overlay_black_tiles
 ; ---------------------------------
 _overlay_black_tiles::
 	dec	sp
-;main.c:218: for (i = 0; i < screen_size; ++i) {
+;mission.c:218: for (i = 0; i < screen_size; ++i) {
 	ldhl	sp,#0
 	ld	(hl),#0x00
 00105$:
@@ -9653,7 +9655,7 @@ _overlay_black_tiles::
 	ldhl	sp,#7
 	sub	a, (hl)
 	jr	NC,00107$
-;main.c:219: if (black_map[i] == 0) {
+;mission.c:219: if (black_map[i] == 0) {
 	dec	hl
 	dec	hl
 	ld	e,(hl)
@@ -9668,7 +9670,7 @@ _overlay_black_tiles::
 	ld	a,(bc)
 	or	a, a
 	jr	NZ,00106$
-;main.c:220: bg_map[i] = EMPTY_TILE_ADDR;
+;mission.c:220: bg_map[i] = EMPTY_TILE_ADDR;
 	ldhl	sp,#4
 	dec	hl
 	ld	e,(hl)
@@ -9683,14 +9685,14 @@ _overlay_black_tiles::
 	ld	a,#0x24
 	ld	(bc),a
 00106$:
-;main.c:218: for (i = 0; i < screen_size; ++i) {
+;mission.c:218: for (i = 0; i < screen_size; ++i) {
 	ldhl	sp,#0
 	inc	(hl)
 	jp	00105$
 00107$:
 	inc	sp
 	ret
-;main.c:228: void fade_screen_to_next(const UINT8 *starting_map, const UINT8 *ending_map)
+;mission.c:228: void fade_screen_to_next(const UINT8 *starting_map, const UINT8 *ending_map)
 ;	---------------------------------
 ; Function fade_screen_to_next
 ; ---------------------------------
@@ -9699,7 +9701,7 @@ _fade_screen_to_next::
 	add	sp, #-128
 	add	sp, #-128
 	add	sp, #-100
-;main.c:232: memcpy(temp_map, starting_map, screen_tile_size);
+;mission.c:232: memcpy(temp_map, starting_map, screen_tile_size);
 	ld	hl,#0x01E6
 	add	hl,sp
 	ld	a,(hl+)
@@ -9726,7 +9728,7 @@ _fade_screen_to_next::
 	call	_memcpy
 	add	sp, #6
 	pop	bc
-;main.c:235: overlay_black_tiles(temp_map, tv_static_1_map, screen_tile_size);
+;mission.c:235: overlay_black_tiles(temp_map, tv_static_1_map, screen_tile_size);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -9739,7 +9741,7 @@ _fade_screen_to_next::
 	call	_overlay_black_tiles
 	add	sp, #5
 	pop	bc
-;main.c:236: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, temp_map);
+;mission.c:236: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, temp_map);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -9751,14 +9753,14 @@ _fade_screen_to_next::
 	call	_set_bkg_tiles
 	add	sp, #6
 	pop	bc
-;main.c:237: delay(500);
+;mission.c:237: delay(500);
 	push	bc
 	ld	hl,#0x01F4
 	push	hl
 	call	_delay
 	add	sp, #2
 	pop	bc
-;main.c:239: shift_bg_map(intro_scene_map, shift_map, screen_tile_size, 20);
+;mission.c:239: shift_bg_map(intro_scene_map, shift_map, screen_tile_size, 20);
 	ld	hl,#0x00F0
 	add	hl,sp
 	ld	a,l
@@ -9780,7 +9782,7 @@ _fade_screen_to_next::
 	call	_shift_bg_map
 	add	sp, #6
 	pop	bc
-;main.c:240: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, shift_map);
+;mission.c:240: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, shift_map);
 	ld	hl,#0x01E1
 	add	hl,sp
 	dec	hl
@@ -9796,7 +9798,7 @@ _fade_screen_to_next::
 	call	_set_bkg_tiles
 	add	sp, #6
 	pop	bc
-;main.c:241: memcpy(temp_map, starting_map, screen_tile_size);
+;mission.c:241: memcpy(temp_map, starting_map, screen_tile_size);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -9812,14 +9814,14 @@ _fade_screen_to_next::
 	call	_memcpy
 	add	sp, #6
 	pop	bc
-;main.c:242: delay(500);
+;mission.c:242: delay(500);
 	push	bc
 	ld	hl,#0x01F4
 	push	hl
 	call	_delay
 	add	sp, #2
 	pop	bc
-;main.c:245: overlay_black_tiles(temp_map, tv_static_2_map, screen_tile_size);
+;mission.c:245: overlay_black_tiles(temp_map, tv_static_2_map, screen_tile_size);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -9832,7 +9834,7 @@ _fade_screen_to_next::
 	call	_overlay_black_tiles
 	add	sp, #5
 	pop	bc
-;main.c:246: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, temp_map);
+;mission.c:246: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, temp_map);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -9844,14 +9846,14 @@ _fade_screen_to_next::
 	call	_set_bkg_tiles
 	add	sp, #6
 	pop	bc
-;main.c:247: delay(200);
+;mission.c:247: delay(200);
 	push	bc
 	ld	hl,#0x00C8
 	push	hl
 	call	_delay
 	add	sp, #2
 	pop	bc
-;main.c:249: shift_bg_map(intro_scene_map, shift_map, screen_tile_size, 8);
+;mission.c:249: shift_bg_map(intro_scene_map, shift_map, screen_tile_size, 8);
 	ld	hl,#0x01E1
 	add	hl,sp
 	dec	hl
@@ -9867,7 +9869,7 @@ _fade_screen_to_next::
 	call	_shift_bg_map
 	add	sp, #6
 	pop	bc
-;main.c:250: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, shift_map);
+;mission.c:250: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, shift_map);
 	ld	hl,#0x01E1
 	add	hl,sp
 	dec	hl
@@ -9883,7 +9885,7 @@ _fade_screen_to_next::
 	call	_set_bkg_tiles
 	add	sp, #6
 	pop	bc
-;main.c:251: memcpy(temp_map, starting_map, screen_tile_size);
+;mission.c:251: memcpy(temp_map, starting_map, screen_tile_size);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -9899,14 +9901,14 @@ _fade_screen_to_next::
 	call	_memcpy
 	add	sp, #6
 	pop	bc
-;main.c:252: delay(100);
+;mission.c:252: delay(100);
 	push	bc
 	ld	hl,#0x0064
 	push	hl
 	call	_delay
 	add	sp, #2
 	pop	bc
-;main.c:255: overlay_black_tiles(temp_map, tv_static_3_map, screen_tile_size);
+;mission.c:255: overlay_black_tiles(temp_map, tv_static_3_map, screen_tile_size);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -9919,7 +9921,7 @@ _fade_screen_to_next::
 	call	_overlay_black_tiles
 	add	sp, #5
 	pop	bc
-;main.c:256: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, temp_map);
+;mission.c:256: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, temp_map);
 	push	bc
 	ld	hl,#0x0C14
 	push	hl
@@ -9927,19 +9929,19 @@ _fade_screen_to_next::
 	push	hl
 	call	_set_bkg_tiles
 	add	sp, #6
-;main.c:257: delay(50);
+;mission.c:257: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:260: set_bkg_data(0x36U, alleyway_len, alleyway);
+;mission.c:260: set_bkg_data(0x36U, alleyway_len, alleyway);
 	ld	de,#_alleyway
 	push	de
 	ld	hl,#0xBE36
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
-;main.c:261: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, ending_map);
+;mission.c:261: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, ending_map);
 	ld	hl,#0x01E8
 	add	hl,sp
 	ld	a,(hl+)
@@ -9957,40 +9959,40 @@ _fade_screen_to_next::
 	add	sp, #127
 	add	sp, #103
 	ret
-;main.c:264: void sleep(UINT8 cycles)
+;mission.c:264: void sleep(UINT8 cycles)
 ;	---------------------------------
 ; Function sleep
 ; ---------------------------------
 _sleep::
-;main.c:267: for(counter = 0; counter < cycles; ++counter){
+;mission.c:267: for(counter = 0; counter < cycles; ++counter){
 	ld	b,#0x00
 00103$:
 	ld	a,b
 	ldhl	sp,#2
 	sub	a, (hl)
 	ret	NC
-;main.c:268: wait_vbl_done();
+;mission.c:268: wait_vbl_done();
 	push	bc
 	call	_wait_vbl_done
 	pop	bc
-;main.c:267: for(counter = 0; counter < cycles; ++counter){
+;mission.c:267: for(counter = 0; counter < cycles; ++counter){
 	inc	b
 	jr	00103$
 	ret
-;main.c:272: void process_button_press(void)
+;mission.c:272: void process_button_press(void)
 ;	---------------------------------
 ; Function process_button_press
 ; ---------------------------------
 _process_button_press::
 	add	sp, #-2
-;main.c:274: UINT8 input = joypad();
+;mission.c:274: UINT8 input = joypad();
 	call	_joypad
 	ld	b,e
-;main.c:275: if (input) {
+;mission.c:275: if (input) {
 	ld	a,b
 	or	a, a
 	jp	Z,00108$
-;main.c:276: if (number_of_bits_set(input) > 1) {
+;mission.c:276: if (number_of_bits_set(input) > 1) {
 	push	bc
 	push	bc
 	inc	sp
@@ -10002,14 +10004,14 @@ _process_button_press::
 	ld	a,#0x01
 	sub	a, c
 	jr	NC,00102$
-;main.c:277: input = return_lsb_set(input);
+;mission.c:277: input = return_lsb_set(input);
 	push	bc
 	inc	sp
 	call	_return_lsb_set
 	inc	sp
 	ld	b,e
 00102$:
-;main.c:280: if (input == J_START || input == J_SELECT) {
+;mission.c:280: if (input == J_START || input == J_SELECT) {
 	ld	d,b
 	ld	e,#0x00
 	ld	a,d
@@ -10024,10 +10026,10 @@ _process_button_press::
 	jr	NZ,00104$
 	ld	a,e
 	or	a, a
-;main.c:281: return;
+;mission.c:281: return;
 	jr	Z,00108$
 00104$:
-;main.c:284: input_seq[input_seq_ctr] = input;
+;mission.c:284: input_seq[input_seq_ctr] = input;
 	ld	de,#_input_seq
 	ld	hl,#_input_seq_ctr
 	ld	l,(hl)
@@ -10039,12 +10041,12 @@ _process_button_press::
 	pop	hl
 	push	hl
 	ld	(hl),b
-;main.c:285: input_seq_ctr++;
+;mission.c:285: input_seq_ctr++;
 	ld	hl,#_input_seq_ctr
 	inc	(hl)
-;main.c:286: display_button_press();
+;mission.c:286: display_button_press();
 	call	_display_button_press
-;main.c:290: delay(50);
+;mission.c:290: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
@@ -10052,106 +10054,106 @@ _process_button_press::
 00108$:
 	add	sp, #2
 	ret
-;main.c:295: UINT8 number_of_bits_set(UINT8 x)
+;mission.c:295: UINT8 number_of_bits_set(UINT8 x)
 ;	---------------------------------
 ; Function number_of_bits_set
 ; ---------------------------------
 _number_of_bits_set::
-;main.c:299: UINT8 mask = 0x1U;
+;mission.c:299: UINT8 mask = 0x1U;
 	ld	b,#0x01
-;main.c:301: if (x == 0x0U) {
+;mission.c:301: if (x == 0x0U) {
 	ldhl	sp,#2
 	ld	a,(hl)
-;main.c:302: return result;
+;mission.c:302: return result;
 	or	a,a
 	jr	NZ,00102$
 	ld	e,a
 	ret
 00102$:
-;main.c:305: for (i = 0x0U; i < 0x8U; ++i) {
+;mission.c:305: for (i = 0x0U; i < 0x8U; ++i) {
 	ld	d,#0x08
 	ld	c,#0x00
 00108$:
-;main.c:306: if (mask & x) {
+;mission.c:306: if (mask & x) {
 	ld	a,b
 	ldhl	sp,#2
 	and	a,(hl)
 	jr	Z,00104$
-;main.c:307: result++;
+;mission.c:307: result++;
 	inc	c
 00104$:
-;main.c:309: mask = mask << 0x1;
+;mission.c:309: mask = mask << 0x1;
 	sla	b
 	ld	a,d
 	add	a,#0xFF
 	ld	d,a
-;main.c:305: for (i = 0x0U; i < 0x8U; ++i) {
+;mission.c:305: for (i = 0x0U; i < 0x8U; ++i) {
 	or	a, a
 	jr	NZ,00108$
-;main.c:312: return result;
+;mission.c:312: return result;
 	ld	e,c
 	ret
-;main.c:318: UINT8 return_lsb_set(UINT8 x)
+;mission.c:318: UINT8 return_lsb_set(UINT8 x)
 ;	---------------------------------
 ; Function return_lsb_set
 ; ---------------------------------
 _return_lsb_set::
-;main.c:320: UINT8 mask = 0x1U;
+;mission.c:320: UINT8 mask = 0x1U;
 	ld	e,#0x01
-;main.c:322: if (x == 0x0U) {
+;mission.c:322: if (x == 0x0U) {
 	ldhl	sp,#2
 	ld	a,(hl)
-;main.c:323: return 0x0U;
+;mission.c:323: return 0x0U;
 	or	a,a
 	jr	NZ,00103$
 	ld	e,a
 	ret
-;main.c:326: while (!(mask & x)) {
+;mission.c:326: while (!(mask & x)) {
 00103$:
 	ld	a,e
 	ldhl	sp,#2
 	and	a,(hl)
 	jr	NZ,00105$
-;main.c:327: mask = mask << 0x1;
+;mission.c:327: mask = mask << 0x1;
 	sla	e
 	jr	00103$
 00105$:
-;main.c:330: return mask;
+;mission.c:330: return mask;
 	ret
-;main.c:335: UINT8 log2(UINT8 x)
+;mission.c:335: UINT8 log2(UINT8 x)
 ;	---------------------------------
 ; Function log2
 ; ---------------------------------
 _log2::
-;main.c:338: UINT8 mask = 0x1U;
+;mission.c:338: UINT8 mask = 0x1U;
 	ld	d,#0x01
-;main.c:340: while (mask != x) {
+;mission.c:340: while (mask != x) {
 	ld	e,#0x00
 00101$:
 	ldhl	sp,#2
 	ld	a,(hl)
 	sub	a, d
 	ret	Z
-;main.c:341: result++;
+;mission.c:341: result++;
 	inc	e
-;main.c:342: mask = mask << 0x1;
+;mission.c:342: mask = mask << 0x1;
 	sla	d
 	jr	00101$
-;main.c:345: return result;
+;mission.c:345: return result;
 	ret
-;main.c:350: void display_button_press(void)
+;mission.c:350: void display_button_press(void)
 ;	---------------------------------
 ; Function display_button_press
 ; ---------------------------------
 _display_button_press::
 	add	sp, #-2
-;main.c:357: input_index = input_seq_ctr - 1;
+;mission.c:357: input_index = input_seq_ctr - 1;
 	ld	hl,#_input_seq_ctr
 	ld	a,(hl)
 	add	a,#0xFF
 	ldhl	sp,#0
 	ld	(hl),a
-;main.c:358: button_pressed = input_seq[input_index];
+;mission.c:358: button_pressed = input_seq[input_index];
 	ld	de,#_input_seq
 	ld	l,(hl)
 	ld	h,#0x00
@@ -10159,7 +10161,7 @@ _display_button_press::
 	ld	c,l
 	ld	b,h
 	ld	a,(bc)
-;main.c:359: button_address = button_address_start + log2(button_pressed);
+;mission.c:359: button_address = button_address_start + log2(button_pressed);
 	push	af
 	inc	sp
 	call	_log2
@@ -10168,7 +10170,7 @@ _display_button_press::
 	add	a, #0x30
 	ldhl	sp,#1
 	ld	(hl),a
-;main.c:360: text_map[input_index] = button_address;
+;mission.c:360: text_map[input_index] = button_address;
 	ld	de,#_text_map
 	dec	hl
 	ld	l,(hl)
@@ -10179,14 +10181,14 @@ _display_button_press::
 	ldhl	sp,#1
 	ld	a,(hl)
 	ld	(bc),a
-;main.c:361: x = 2 + (input_index % 16);
+;mission.c:361: x = 2 + (input_index % 16);
 	dec	hl
 	ld	a,(hl)
 	and	a, #0x0F
 	ld	d,a
 	inc	d
 	inc	d
-;main.c:362: set_win_tiles(x, 0x2U, 0x1U, 0x1U, &text_map[input_index]);
+;mission.c:362: set_win_tiles(x, 0x2U, 0x1U, 0x1U, &text_map[input_index]);
 	push	bc
 	ld	hl,#0x0101
 	push	hl
@@ -10199,19 +10201,19 @@ _display_button_press::
 	add	sp, #6
 	add	sp, #2
 	ret
-;main.c:365: void check_konami_code(void)
+;mission.c:365: void check_konami_code(void)
 ;	---------------------------------
 ; Function check_konami_code
 ; ---------------------------------
 _check_konami_code::
 	add	sp, #-3
-;main.c:370: for (i = 0; i < KONAMI_CODE_LEN; ++i) {
+;mission.c:370: for (i = 0; i < KONAMI_CODE_LEN; ++i) {
 	ldhl	sp,#1
 	ld	(hl),#0x00
 	dec	hl
 	ld	(hl),#0x00
 00106$:
-;main.c:371: if (input_seq[i] & konami_code_seq[i]) {
+;mission.c:371: if (input_seq[i] & konami_code_seq[i]) {
 	ld	de,#_input_seq
 	ldhl	sp,#0
 	ld	l,(hl)
@@ -10234,11 +10236,11 @@ _check_konami_code::
 	ldhl	sp,#2
 	and	a,(hl)
 	jr	Z,00107$
-;main.c:372: pass++;
+;mission.c:372: pass++;
 	dec	hl
 	inc	(hl)
 00107$:
-;main.c:370: for (i = 0; i < KONAMI_CODE_LEN; ++i) {
+;mission.c:370: for (i = 0; i < KONAMI_CODE_LEN; ++i) {
 	ldhl	sp,#0
 	inc	(hl)
 	ld	b,(hl)
@@ -10248,7 +10250,7 @@ _check_konami_code::
 	ld	a,c
 	sbc	a, #0x00
 	jp	C,00106$
-;main.c:376: if (pass == KONAMI_CODE_LEN) {
+;mission.c:376: if (pass == KONAMI_CODE_LEN) {
 	inc	hl
 	ld	d,(hl)
 	ld	e,#0x00
@@ -10258,15 +10260,15 @@ _check_konami_code::
 	ld	a,e
 	or	a, a
 	jr	NZ,00108$
-;main.c:377: show_text("LONG LIVE       KOJIMA.");
+;mission.c:377: show_text("LONG LIVE       KOJIMA.");
 	ld	de,#___str_0
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:378: input_seq_ctr = 0;
+;mission.c:378: input_seq_ctr = 0;
 	ld	hl,#_input_seq_ctr
 	ld	(hl),#0x00
-;main.c:379: clear_window();
+;mission.c:379: clear_window();
 	call	_clear_window
 00108$:
 	add	sp, #3
@@ -10274,19 +10276,19 @@ _check_konami_code::
 ___str_0:
 	.ascii "LONG LIVE       KOJIMA."
 	.db 0x00
-;main.c:383: void check_door_sequence(void)
+;mission.c:383: void check_door_sequence(void)
 ;	---------------------------------
 ; Function check_door_sequence
 ; ---------------------------------
 _check_door_sequence::
 	add	sp, #-3
-;main.c:388: for (i = 0; i < SEQ_LEN; ++i) {
-	ldhl	sp,#1
+;mission.c:388: for (i = 0; i < SEQ_LEN; ++i) {
+	ldhl	sp,#0
 	ld	(hl),#0x00
-	dec	hl
+	inc	hl
 	ld	(hl),#0x00
 00107$:
-;main.c:390: key_b[0] = 0x72ae38ba;
+;mission.c:390: key_b[0] = 0x72ae38ba;
 	ld	hl,#_key_b
 	ld	(hl),#0xBA
 	inc	hl
@@ -10295,9 +10297,9 @@ _check_door_sequence::
 	ld	(hl),#0xAE
 	inc	hl
 	ld	(hl),#0x72
-;main.c:392: if (input_seq[i] & solution_seq[i]) {
+;mission.c:392: if (input_seq[i] & solution_seq[i]) {
 	ld	de,#_input_seq
-	ldhl	sp,#0
+	ldhl	sp,#1
 	ld	l,(hl)
 	ld	h,#0x00
 	add	hl,de
@@ -10308,7 +10310,6 @@ _check_door_sequence::
 	ld	(hl),a
 	ld	de,#_solution_seq
 	dec	hl
-	dec	hl
 	ld	l,(hl)
 	ld	h,#0x00
 	add	hl,de
@@ -10318,10 +10319,11 @@ _check_door_sequence::
 	ldhl	sp,#2
 	and	a,(hl)
 	jr	Z,00108$
-;main.c:393: pass++;
+;mission.c:393: pass++;
+	dec	hl
 	dec	hl
 	inc	(hl)
-;main.c:396: key_b[1] = 0xa106f553;
+;mission.c:396: key_b[1] = 0xa106f553;
 	ld	hl,#(_key_b + 0x0004)
 	ld	(hl),#0x53
 	inc	hl
@@ -10331,8 +10333,8 @@ _check_door_sequence::
 	inc	hl
 	ld	(hl),#0xA1
 00108$:
-;main.c:388: for (i = 0; i < SEQ_LEN; ++i) {
-	ldhl	sp,#0
+;mission.c:388: for (i = 0; i < SEQ_LEN; ++i) {
+	ldhl	sp,#1
 	inc	(hl)
 	ld	b,(hl)
 	ld	c,#0x00
@@ -10341,7 +10343,7 @@ _check_door_sequence::
 	ld	a,c
 	sbc	a, #0x00
 	jp	C,00107$
-;main.c:401: key_b[2] = 0x1ea97c53;
+;mission.c:401: key_b[2] = 0x1ea97c53;
 	ld	hl,#(_key_b + 0x0008)
 	ld	(hl),#0x53
 	inc	hl
@@ -10350,8 +10352,8 @@ _check_door_sequence::
 	ld	(hl),#0xA9
 	inc	hl
 	ld	(hl),#0x1E
-;main.c:408: if (pass == SEQ_LEN) {
-	ldhl	sp,#1
+;mission.c:408: if (pass == SEQ_LEN) {
+	ldhl	sp,#0
 	ld	d,(hl)
 	ld	e,#0x00
 	ld	a,d
@@ -10360,22 +10362,22 @@ _check_door_sequence::
 	ld	a,e
 	or	a, a
 	jr	NZ,00105$
-;main.c:409: pass_level_1();
+;mission.c:409: pass_level_1();
 	call	_pass_level_1
 	jr	00109$
 00105$:
-;main.c:411: fail_level_1();
+;mission.c:411: fail_level_1();
 	call	_fail_level_1
 00109$:
 	add	sp, #3
 	ret
-;main.c:415: void pass_level_1(void)
+;mission.c:415: void pass_level_1(void)
 ;	---------------------------------
 ; Function pass_level_1
 ; ---------------------------------
 _pass_level_1::
 	add	sp, #-33
-;main.c:420: key_b[3] = 0xcfa8e0b3;
+;mission.c:420: key_b[3] = 0xcfa8e0b3;
 	ld	hl,#(_key_b + 0x000c)
 	ld	(hl),#0xB3
 	inc	hl
@@ -10384,23 +10386,23 @@ _pass_level_1::
 	ld	(hl),#0xA8
 	inc	hl
 	ld	(hl),#0xCF
-;main.c:423: decrypt((UINT32 *)flag_a, key_a);
+;mission.c:423: decrypt((UINT32 *)flag_a, key_a);
 	ld	de,#_flag_a
 	ld	hl,#_key_a
 	push	hl
 	push	de
 	call	_decrypt
 	add	sp, #4
-;main.c:424: decrypt((UINT32 *)flag_b, key_b);
+;mission.c:424: decrypt((UINT32 *)flag_b, key_b);
 	ld	de,#_flag_b
 	ld	hl,#_key_b
 	push	hl
 	push	de
 	call	_decrypt
 	add	sp, #4
-;main.c:427: remove_flag_padding();
+;mission.c:427: remove_flag_padding();
 	call	_remove_flag_padding
-;main.c:430: strcpy((char *)flag_string, "1ST FLAG IS     ");
+;mission.c:430: strcpy((char *)flag_string, "1ST FLAG IS     ");
 	ldhl	sp,#0
 	ld	c,l
 	ld	b,h
@@ -10413,7 +10415,7 @@ _pass_level_1::
 	call	_strcpy
 	add	sp, #4
 	pop	bc
-;main.c:431: memcpy(flag_string + 0x10U, flag_a, FLAG_LEN);
+;mission.c:431: memcpy(flag_string + 0x10U, flag_a, FLAG_LEN);
 	ld	hl,#0x0010
 	add	hl,bc
 	ld	a,l
@@ -10434,7 +10436,7 @@ _pass_level_1::
 	call	_memcpy
 	add	sp, #6
 	pop	bc
-;main.c:432: flag_string[0x18U] = '\0';
+;mission.c:432: flag_string[0x18U] = '\0';
 	ld	hl,#0x0018
 	add	hl,bc
 	ld	a,l
@@ -10447,7 +10449,7 @@ _pass_level_1::
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x00
-;main.c:433: strcat((char *)flag_string, flag_b);
+;mission.c:433: strcat((char *)flag_string, flag_b);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -10457,7 +10459,7 @@ _pass_level_1::
 	call	_strcat
 	add	sp, #4
 	pop	bc
-;main.c:434: strcat((char *)flag_string, ".");
+;mission.c:434: strcat((char *)flag_string, ".");
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -10467,30 +10469,30 @@ _pass_level_1::
 	call	_strcat
 	add	sp, #4
 	pop	bc
-;main.c:436: show_text("THAT WORKED.");
+;mission.c:436: show_text("THAT WORKED.");
 	ld	de,#___str_3
 	push	bc
 	push	de
 	call	_show_text
 	add	sp, #2
 	pop	bc
-;main.c:437: show_text("I\'M IN.");
+;mission.c:437: show_text("I\'M IN.");
 	ld	de,#___str_4
 	push	bc
 	push	de
 	call	_show_text
 	add	sp, #2
 	pop	bc
-;main.c:438: show_text((char *)flag_string);
+;mission.c:438: show_text((char *)flag_string);
 	push	bc
 	call	_show_text
 	add	sp, #2
-;main.c:439: clear_window();
+;mission.c:439: clear_window();
 	call	_clear_window
-;main.c:440: input_seq_ctr = 0;
+;mission.c:440: input_seq_ctr = 0;
 	ld	hl,#_input_seq_ctr
 	ld	(hl),#0x00
-;main.c:443: while (1) {}
+;mission.c:443: while (1) {}
 00102$:
 	jr	00102$
 	add	sp, #33
@@ -10507,24 +10509,24 @@ ___str_3:
 ___str_4:
 	.ascii "I'M IN."
 	.db 0x00
-;main.c:446: void fail_level_1(void)
+;mission.c:446: void fail_level_1(void)
 ;	---------------------------------
 ; Function fail_level_1
 ; ---------------------------------
 _fail_level_1::
-;main.c:448: show_text("NO GOOD.");
+;mission.c:448: show_text("NO GOOD.");
 	ld	de,#___str_5
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:449: show_text("LET ME TRY SOME THING ELSE.");
+;mission.c:449: show_text("LET ME TRY SOME THING ELSE.");
 	ld	de,#___str_6
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:450: clear_window();
+;mission.c:450: clear_window();
 	call	_clear_window
-;main.c:451: input_seq_ctr = 0;
+;mission.c:451: input_seq_ctr = 0;
 	ld	hl,#_input_seq_ctr
 	ld	(hl),#0x00
 	ret
@@ -10534,13 +10536,13 @@ ___str_5:
 ___str_6:
 	.ascii "LET ME TRY SOME THING ELSE."
 	.db 0x00
-;main.c:454: void decrypt(UINT32 *v, UINT32 *k)
+;mission.c:454: void decrypt(UINT32 *v, UINT32 *k)
 ;	---------------------------------
 ; Function decrypt
 ; ---------------------------------
 _decrypt::
 	add	sp, #-46
-;main.c:456: UINT32 v0=v[0], v1=v[1], sum=0xC6EF3720, i;     /* set up */
+;mission.c:456: UINT32 v0=v[0], v1=v[1], sum=0xC6EF3720, i;     /* set up */
 	ldhl	sp,#48
 	ld	a,(hl+)
 	ld	e, (hl)
@@ -10552,7 +10554,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,(de)
-	ldhl	sp,#28
+	ldhl	sp,#0
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -10580,7 +10582,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,(de)
-	ldhl	sp,#12
+	ldhl	sp,#4
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -10591,7 +10593,7 @@ _decrypt::
 	inc	de
 	ld	a,(de)
 	ld	(hl),a
-;main.c:458: UINT32 k0=k[0], k1=k[1], k2=k[2], k3=k[3];      /* cache key */
+;mission.c:458: UINT32 k0=k[0], k1=k[1], k2=k[2], k3=k[3];      /* cache key */
 	ldhl	sp,#51
 	dec	hl
 	ld	c,(hl)
@@ -10600,7 +10602,7 @@ _decrypt::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#16
+	ldhl	sp,#20
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -10623,7 +10625,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,(de)
-	ldhl	sp,#20
+	ldhl	sp,#12
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -10646,7 +10648,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,(de)
-	ldhl	sp,#24
+	ldhl	sp,#16
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -10675,8 +10677,8 @@ _decrypt::
 	inc	de
 	ld	a,(de)
 	ld	(hl),a
-;main.c:459: for (i=0; i<32; i++) {                          /* basic cycle start */
-	ldhl	sp,#0
+;mission.c:459: for (i=0; i<32; i++) {                          /* basic cycle start */
+	ldhl	sp,#24
 	ld	(hl),#0x20
 	xor	a, a
 	inc	hl
@@ -10691,21 +10693,21 @@ _decrypt::
 	inc	hl
 	ld	(hl),#0xC6
 00104$:
-;main.c:460: v1 -= ((v0<<4) + k2) ^ (v0 + sum) ^ ((v0>>5) + k3);
+;mission.c:460: v1 -= ((v0<<4) + k2) ^ (v0 + sum) ^ ((v0>>5) + k3);
 	push	af
-	ldhl	sp,#30
+	ldhl	sp,#2
 	ld	a,(hl)
 	ldhl	sp,#38
 	ld	(hl),a
-	ldhl	sp,#31
+	ldhl	sp,#3
 	ld	a,(hl)
 	ldhl	sp,#39
 	ld	(hl),a
-	ldhl	sp,#32
+	ldhl	sp,#4
 	ld	a,(hl)
 	ldhl	sp,#40
 	ld	(hl),a
-	ldhl	sp,#33
+	ldhl	sp,#5
 	ld	a,(hl)
 	ldhl	sp,#41
 	ld	(hl),a
@@ -10729,7 +10731,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#24
+	ldhl	sp,#16
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -10744,7 +10746,7 @@ _decrypt::
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#28
+	ldhl	sp,#20
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -10755,13 +10757,10 @@ _decrypt::
 	ldhl	sp,#39
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#29
-	dec	hl
-	ld	e,(hl)
-	inc	hl
-	ld	d,(hl)
+	pop	de
+	push	de
 	ld	a,e
-	ldhl	sp,#4
+	ldhl	sp,#28
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -10771,12 +10770,12 @@ _decrypt::
 	ldhl	sp,#35
 	ld	(hl-),a
 	ld	(hl),e
-	dec	hl
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#8
+	ldhl	sp,#32
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -10810,19 +10809,19 @@ _decrypt::
 	ldhl	sp,#35
 	ld	(hl),a
 	push	af
-	ldhl	sp,#30
+	ldhl	sp,#2
 	ld	a,(hl)
 	ldhl	sp,#38
 	ld	(hl),a
-	ldhl	sp,#31
+	ldhl	sp,#3
 	ld	a,(hl)
 	ldhl	sp,#39
 	ld	(hl),a
-	ldhl	sp,#32
+	ldhl	sp,#4
 	ld	a,(hl)
 	ldhl	sp,#40
 	ld	(hl),a
-	ldhl	sp,#33
+	ldhl	sp,#5
 	ld	a,(hl)
 	ldhl	sp,#41
 	ld	(hl),a
@@ -10890,7 +10889,7 @@ _decrypt::
 	xor	a, (hl)
 	ldhl	sp,#35
 	ld	(hl),a
-	ldhl	sp,#13
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -10903,10 +10902,10 @@ _decrypt::
 	inc	hl
 	sbc	a, (hl)
 	push	af
-	ldhl	sp,#15
+	ldhl	sp,#7
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#17
+	ldhl	sp,#9
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -10919,25 +10918,25 @@ _decrypt::
 	ld	a,d
 	inc	hl
 	sbc	a, (hl)
-	ldhl	sp,#15
+	ldhl	sp,#7
 	ld	(hl-),a
 	ld	(hl),e
-;main.c:461: v0 -= ((v1<<4) + k0) ^ (v1 + sum) ^ ((v1>>5) + k1);
+;mission.c:461: v0 -= ((v1<<4) + k0) ^ (v1 + sum) ^ ((v1>>5) + k1);
 	push	af
 	dec	hl
 	dec	hl
 	ld	a,(hl)
 	ldhl	sp,#34
 	ld	(hl),a
-	ldhl	sp,#15
+	ldhl	sp,#7
 	ld	a,(hl)
 	ldhl	sp,#35
 	ld	(hl),a
-	ldhl	sp,#16
+	ldhl	sp,#8
 	ld	a,(hl)
 	ldhl	sp,#36
 	ld	(hl),a
-	ldhl	sp,#17
+	ldhl	sp,#9
 	ld	a,(hl)
 	ldhl	sp,#37
 	ld	(hl),a
@@ -10961,7 +10960,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#16
+	ldhl	sp,#20
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -10976,7 +10975,7 @@ _decrypt::
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#20
+	ldhl	sp,#24
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -10987,13 +10986,13 @@ _decrypt::
 	ldhl	sp,#35
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#13
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#4
+	ldhl	sp,#28
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -11003,12 +11002,12 @@ _decrypt::
 	ldhl	sp,#39
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#17
+	ldhl	sp,#9
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#8
+	ldhl	sp,#32
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -11041,19 +11040,19 @@ _decrypt::
 	ldhl	sp,#35
 	ld	(hl),a
 	push	af
-	ldhl	sp,#14
+	ldhl	sp,#6
 	ld	a,(hl)
 	ldhl	sp,#38
 	ld	(hl),a
-	ldhl	sp,#15
+	ldhl	sp,#7
 	ld	a,(hl)
 	ldhl	sp,#39
 	ld	(hl),a
-	ldhl	sp,#16
+	ldhl	sp,#8
 	ld	a,(hl)
 	ldhl	sp,#40
 	ld	(hl),a
-	ldhl	sp,#17
+	ldhl	sp,#9
 	ld	a,(hl)
 	ldhl	sp,#41
 	ld	(hl),a
@@ -11074,7 +11073,7 @@ _decrypt::
 	inc	hl
 	ld	d,(hl)
 	ld	a,e
-	ldhl	sp,#20
+	ldhl	sp,#12
 	add	a, (hl)
 	ld	e,a
 	ld	a,d
@@ -11089,7 +11088,7 @@ _decrypt::
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#24
+	ldhl	sp,#16
 	pop	af
 	ld	a,e
 	adc	a, (hl)
@@ -11121,11 +11120,8 @@ _decrypt::
 	xor	a, (hl)
 	ldhl	sp,#35
 	ld	(hl),a
-	ldhl	sp,#29
-	dec	hl
-	ld	e,(hl)
-	inc	hl
-	ld	d,(hl)
+	pop	de
+	push	de
 	ld	a,e
 	ldhl	sp,#32
 	sub	a, (hl)
@@ -11134,10 +11130,10 @@ _decrypt::
 	inc	hl
 	sbc	a, (hl)
 	push	af
-	ldhl	sp,#31
+	ldhl	sp,#3
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#33
+	ldhl	sp,#5
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -11150,11 +11146,11 @@ _decrypt::
 	ld	a,d
 	inc	hl
 	sbc	a, (hl)
-	ldhl	sp,#31
+	ldhl	sp,#3
 	ld	(hl-),a
 	ld	(hl),e
-;main.c:462: sum -= delta;
-	ldhl	sp,#5
+;mission.c:462: sum -= delta;
+	ldhl	sp,#29
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -11167,7 +11163,7 @@ _decrypt::
 	push	af
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#9
+	ldhl	sp,#33
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -11180,8 +11176,11 @@ _decrypt::
 	sbc	a, #0x9E
 	ld	(hl-),a
 	ld	(hl),e
-	pop	de
-	push	de
+	ldhl	sp,#25
+	dec	hl
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
 	ld	a,e
 	sub	a, #0x01
 	ld	e,a
@@ -11191,7 +11190,7 @@ _decrypt::
 	ldhl	sp,#35
 	ld	(hl-),a
 	ld	(hl),e
-	ldhl	sp,#5
+	ldhl	sp,#29
 	dec	hl
 	ld	e,(hl)
 	inc	hl
@@ -11209,7 +11208,7 @@ _decrypt::
 	dec	hl
 	ld	d,h
 	ld	e,l
-	ldhl	sp,#0
+	ldhl	sp,#24
 	ld	a,(de)
 	ld	(hl+),a
 	inc	de
@@ -11221,7 +11220,7 @@ _decrypt::
 	inc	de
 	ld	a,(de)
 	ld	(hl),a
-;main.c:459: for (i=0; i<32; i++) {                          /* basic cycle start */
+;mission.c:459: for (i=0; i<32; i++) {                          /* basic cycle start */
 	ldhl	sp,#35
 	ld	a,(hl-)
 	or	a, (hl)
@@ -11230,13 +11229,13 @@ _decrypt::
 	dec	hl
 	or	a,(hl)
 	jp	NZ,00104$
-;main.c:464: v[0]=v0; v[1]=v1;
+;mission.c:464: v[0]=v0; v[1]=v1;
 	ldhl	sp,#45
 	dec	hl
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#28
+	ldhl	sp,#0
 	ld	a,(hl)
 	ld	(de),a
 	inc	de
@@ -11256,7 +11255,7 @@ _decrypt::
 	ld	e,(hl)
 	inc	hl
 	ld	d,(hl)
-	ldhl	sp,#12
+	ldhl	sp,#4
 	ld	a,(hl)
 	ld	(de),a
 	inc	de
@@ -11273,18 +11272,18 @@ _decrypt::
 	ld	(de),a
 	add	sp, #46
 	ret
-;main.c:468: void remove_flag_padding(void)
+;mission.c:468: void remove_flag_padding(void)
 ;	---------------------------------
 ; Function remove_flag_padding
 ; ---------------------------------
 _remove_flag_padding::
 	add	sp, #-3
-;main.c:472: UINT8 flab_b_len = flag_b[FLAG_LEN - 1];
+;mission.c:472: UINT8 flab_b_len = flag_b[FLAG_LEN - 1];
 	ld	bc,#_flag_b + 7
 	ld	a,(bc)
 	ldhl	sp,#0
 	ld	(hl),a
-;main.c:473: memset(flag_b + flab_b_len, '\0', FLAG_LEN - flab_b_len);
+;mission.c:473: memset(flag_b + flab_b_len, '\0', FLAG_LEN - flab_b_len);
 	ld	c,(hl)
 	ld	b,#0x00
 	ld	de,#0x0008
@@ -11316,103 +11315,103 @@ _remove_flag_padding::
 	add	sp, #6
 	add	sp, #3
 	ret
-;main.c:476: void show_agent(void)
+;mission.c:476: void show_agent(void)
 ;	---------------------------------
 ; Function show_agent
 ; ---------------------------------
 _show_agent::
-;main.c:478: set_sprite_tile(0, 0);
+;mission.c:478: set_sprite_tile(0, 0);
 	ld	hl,#0x0000
 	push	hl
 	call	_set_sprite_tile
 	add	sp, #2
-;main.c:479: set_sprite_tile(1, 2);
+;mission.c:479: set_sprite_tile(1, 2);
 	ld	hl,#0x0201
 	push	hl
 	call	_set_sprite_tile
 	add	sp, #2
-;main.c:480: set_sprite_tile(2, 4);
+;mission.c:480: set_sprite_tile(2, 4);
 	ld	hl,#0x0402
 	push	hl
 	call	_set_sprite_tile
 	add	sp, #2
-;main.c:481: set_sprite_tile(3, 6);
+;mission.c:481: set_sprite_tile(3, 6);
 	ld	hl,#0x0603
 	push	hl
 	call	_set_sprite_tile
 	add	sp, #2
 	ret
-;main.c:484: void show_flash(void)
+;mission.c:484: void show_flash(void)
 ;	---------------------------------
 ; Function show_flash
 ; ---------------------------------
 _show_flash::
-;main.c:486: set_sprite_tile(0, 0x8);
+;mission.c:486: set_sprite_tile(0, 0x8);
 	ld	hl,#0x0800
 	push	hl
 	call	_set_sprite_tile
 	add	sp, #2
-;main.c:487: set_sprite_tile(1, 0xA);
+;mission.c:487: set_sprite_tile(1, 0xA);
 	ld	hl,#0x0A01
 	push	hl
 	call	_set_sprite_tile
 	add	sp, #2
-;main.c:488: set_sprite_tile(2, 0xC);
+;mission.c:488: set_sprite_tile(2, 0xC);
 	ld	hl,#0x0C02
 	push	hl
 	call	_set_sprite_tile
 	add	sp, #2
-;main.c:489: set_sprite_tile(3, 0xE);
+;mission.c:489: set_sprite_tile(3, 0xE);
 	ld	hl,#0x0E03
 	push	hl
 	call	_set_sprite_tile
 	add	sp, #2
 	ret
-;main.c:492: void intro_scene(void)
+;mission.c:492: void intro_scene(void)
 ;	---------------------------------
 ; Function intro_scene
 ; ---------------------------------
 _intro_scene::
-;main.c:494: show_long_text("BOSS: OUR VR    WORLD IS AT     RISK.");
+;mission.c:494: show_long_text("BOSS: OUR VR    WORLD IS AT     RISK.");
 	ld	de,#___str_7
 	push	de
 	call	_show_long_text
 	add	sp, #2
-;main.c:495: show_long_text("YOUR MISSION IS TO TRACK DOWN   THE ROGUE AI.");
+;mission.c:495: show_long_text("YOUR MISSION IS TO TRACK DOWN   THE ROGUE AI.");
 	ld	de,#___str_8
 	push	de
 	call	_show_long_text
 	add	sp, #2
-;main.c:496: show_text("ARE YOU READY?");
+;mission.c:496: show_text("ARE YOU READY?");
 	ld	de,#___str_9
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:497: show_text("AGENT: YOU GOT  IT BOSS.");
+;mission.c:497: show_text("AGENT: YOU GOT  IT BOSS.");
 	ld	de,#___str_10
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:498: show_text("I'M GOING IN.");
+;mission.c:498: show_text("I'M GOING IN.");
 	ld	de,#___str_11
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:499: clear_window();
+;mission.c:499: clear_window();
 	call	_clear_window
-;main.c:501: fade_screen_to_next(intro_scene_map, alleyway_map);
+;mission.c:501: fade_screen_to_next(intro_scene_map, alleyway_map);
 	ld	de,#_intro_scene_map
 	ld	hl,#_alleyway_map
 	push	hl
 	push	de
 	call	_fade_screen_to_next
 	add	sp, #4
-;main.c:503: show_text("L O A D I N G   A G E N T … ");
+;mission.c:503: show_text("L O A D I N G   A G E N T … ");
 	ld	de,#___str_12
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:505: move_sprite(0, 0x27U, 0x50U);
+;mission.c:505: move_sprite(0, 0x27U, 0x50U);
 	ld	hl,#0x5027
 	push	hl
 	xor	a, a
@@ -11420,7 +11419,7 @@ _intro_scene::
 	inc	sp
 	call	_move_sprite
 	add	sp, #3
-;main.c:506: move_sprite(1, 0x2FU, 0x50U);
+;mission.c:506: move_sprite(1, 0x2FU, 0x50U);
 	ld	hl,#0x502F
 	push	hl
 	ld	a,#0x01
@@ -11428,7 +11427,7 @@ _intro_scene::
 	inc	sp
 	call	_move_sprite
 	add	sp, #3
-;main.c:507: move_sprite(2, 0x27U, 0x60U);
+;mission.c:507: move_sprite(2, 0x27U, 0x60U);
 	ld	hl,#0x6027
 	push	hl
 	ld	a,#0x02
@@ -11436,7 +11435,7 @@ _intro_scene::
 	inc	sp
 	call	_move_sprite
 	add	sp, #3
-;main.c:508: move_sprite(3, 0x2FU, 0x60U);
+;mission.c:508: move_sprite(3, 0x2FU, 0x60U);
 	ld	hl,#0x602F
 	push	hl
 	ld	a,#0x03
@@ -11444,115 +11443,115 @@ _intro_scene::
 	inc	sp
 	call	_move_sprite
 	add	sp, #3
-;main.c:510: show_flash();
+;mission.c:510: show_flash();
 	call	_show_flash
-;main.c:511: delay(50);
+;mission.c:511: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:512: show_agent();
+;mission.c:512: show_agent();
 	call	_show_agent
-;main.c:513: delay(50);
+;mission.c:513: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:514: show_flash();
+;mission.c:514: show_flash();
 	call	_show_flash
-;main.c:515: delay(50);
+;mission.c:515: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:516: show_agent();
+;mission.c:516: show_agent();
 	call	_show_agent
-;main.c:517: delay(50);
+;mission.c:517: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:518: show_flash();
+;mission.c:518: show_flash();
 	call	_show_flash
-;main.c:519: delay(50);
+;mission.c:519: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:520: show_agent();
+;mission.c:520: show_agent();
 	call	_show_agent
-;main.c:521: delay(50);
+;mission.c:521: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:522: show_flash();
+;mission.c:522: show_flash();
 	call	_show_flash
-;main.c:523: delay(50);
+;mission.c:523: delay(50);
 	ld	hl,#0x0032
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:524: show_agent();
+;mission.c:524: show_agent();
 	call	_show_agent
-;main.c:525: delay(100);
+;mission.c:525: delay(100);
 	ld	hl,#0x0064
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:526: show_flash();
+;mission.c:526: show_flash();
 	call	_show_flash
-;main.c:527: delay(100);
+;mission.c:527: delay(100);
 	ld	hl,#0x0064
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:528: show_agent();
+;mission.c:528: show_agent();
 	call	_show_agent
-;main.c:529: delay(100);
+;mission.c:529: delay(100);
 	ld	hl,#0x0064
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:530: show_flash();
+;mission.c:530: show_flash();
 	call	_show_flash
-;main.c:531: delay(100);
+;mission.c:531: delay(100);
 	ld	hl,#0x0064
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:532: show_agent();
+;mission.c:532: show_agent();
 	call	_show_agent
-;main.c:533: delay(200);
+;mission.c:533: delay(200);
 	ld	hl,#0x00C8
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:534: show_flash();
+;mission.c:534: show_flash();
 	call	_show_flash
-;main.c:535: delay(200);
+;mission.c:535: delay(200);
 	ld	hl,#0x00C8
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:536: show_agent();
+;mission.c:536: show_agent();
 	call	_show_agent
-;main.c:537: delay(1000);
+;mission.c:537: delay(1000);
 	ld	hl,#0x03E8
 	push	hl
 	call	_delay
 	add	sp, #2
-;main.c:539: show_text("MY TARGET IS    INSIDE.");
+;mission.c:539: show_text("MY TARGET IS    INSIDE.");
 	ld	de,#___str_13
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:540: show_text("THIS DOOR NEEDS A CODE…");
+;mission.c:540: show_text("THIS DOOR NEEDS A CODE…");
 	ld	de,#___str_14
 	push	de
 	call	_show_text
 	add	sp, #2
-;main.c:541: clear_window();
+;mission.c:541: clear_window();
 	jp	_clear_window
 ___str_7:
 	.ascii "BOSS: OUR VR    WORLD IS AT     RISK."
@@ -11585,12 +11584,12 @@ ___str_14:
 	.db 0x80
 	.db 0xA6
 	.db 0x00
-;main.c:544: void main()
+;mission.c:544: void main()
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;main.c:547: key_a[0] = 0xc2bb5c5b;
+;mission.c:547: key_a[0] = 0xc2bb5c5b;
 	ld	hl,#_key_a
 	ld	(hl),#0x5B
 	inc	hl
@@ -11599,18 +11598,18 @@ _main::
 	ld	(hl),#0xBB
 	inc	hl
 	ld	(hl),#0xC2
-;main.c:549: disable_interrupts();
+;mission.c:549: disable_interrupts();
 	call	_disable_interrupts
-;main.c:550: DISPLAY_OFF;
+;mission.c:550: DISPLAY_OFF;
 	call	_display_off
-;main.c:553: set_bkg_data(0x36U, intro_scene_tiles_len, intro_scene_tiles);
+;mission.c:553: set_bkg_data(0x36U, intro_scene_tiles_len, intro_scene_tiles);
 	ld	de,#_intro_scene_tiles
 	push	de
 	ld	hl,#0xBC36
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
-;main.c:554: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, intro_scene_map);
+;mission.c:554: set_bkg_tiles(0, 0, bg_map_width, bg_map_height, intro_scene_map);
 	ld	de,#_intro_scene_map
 	push	de
 	ld	hl,#0x0C14
@@ -11619,7 +11618,7 @@ _main::
 	push	hl
 	call	_set_bkg_tiles
 	add	sp, #6
-;main.c:557: set_win_tiles(0, 0, text_box_width, text_box_height, text_box);
+;mission.c:557: set_win_tiles(0, 0, text_box_width, text_box_height, text_box);
 	ld	de,#_text_box
 	push	de
 	ld	hl,#0x0614
@@ -11628,28 +11627,28 @@ _main::
 	push	hl
 	call	_set_win_tiles
 	add	sp, #6
-;main.c:558: move_win(7,96);
+;mission.c:558: move_win(7,96);
 	ld	hl,#0x6007
 	push	hl
 	call	_move_win
 	add	sp, #2
-;main.c:561: set_win_data(0U, alphabet_len, alphabet);
+;mission.c:561: set_win_data(0U, alphabet_len, alphabet);
 	ld	de,#_alphabet
 	push	de
 	ld	hl,#0x2E00
 	push	hl
 	call	_set_win_data
 	add	sp, #4
-;main.c:562: clear_window();
+;mission.c:562: clear_window();
 	call	_clear_window
-;main.c:565: set_win_data(button_address_start, button_len, button);
+;mission.c:565: set_win_data(button_address_start, button_len, button);
 	ld	de,#_button
 	push	de
 	ld	hl,#0x0630
 	push	hl
 	call	_set_win_data
 	add	sp, #4
-;main.c:568: key_a[1] = 0x93373628;
+;mission.c:568: key_a[1] = 0x93373628;
 	ld	hl,#(_key_a + 0x0004)
 	ld	(hl),#0x28
 	inc	hl
@@ -11658,14 +11657,14 @@ _main::
 	ld	(hl),#0x37
 	inc	hl
 	ld	(hl),#0x93
-;main.c:571: set_win_data(arrow_address_1, arrow_tile_len, arrow_tile);
+;mission.c:571: set_win_data(arrow_address_1, arrow_tile_len, arrow_tile);
 	ld	de,#_arrow_tile
 	push	de
 	ld	hl,#0x022E
 	push	hl
 	call	_set_win_data
 	add	sp, #4
-;main.c:574: SPRITES_8x16;
+;mission.c:574: SPRITES_8x16;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -11675,21 +11674,21 @@ _main::
 	ld	b,a
 	ld	hl,#0xFF40
 	ld	(hl),b
-;main.c:575: set_sprite_data(0, agent_len, agent);
+;mission.c:575: set_sprite_data(0, agent_len, agent);
 	ld	de,#_agent
 	push	de
 	ld	hl,#0x0800
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-;main.c:576: set_sprite_data(0x8, agent_flash_len, agent_flash);
+;mission.c:576: set_sprite_data(0x8, agent_flash_len, agent_flash);
 	ld	de,#_agent_flash
 	push	de
 	ld	hl,#0x0808
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-;main.c:578: SHOW_BKG;
+;mission.c:578: SHOW_BKG;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -11699,7 +11698,7 @@ _main::
 	ld	b,a
 	ld	hl,#0xFF40
 	ld	(hl),b
-;main.c:579: SHOW_SPRITES;
+;mission.c:579: SHOW_SPRITES;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -11709,7 +11708,7 @@ _main::
 	ld	b,a
 	ld	l, #0x40
 	ld	(hl),b
-;main.c:580: SHOW_WIN;
+;mission.c:580: SHOW_WIN;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -11719,7 +11718,7 @@ _main::
 	ld	b,a
 	ld	l, #0x40
 	ld	(hl),b
-;main.c:581: DISPLAY_ON;
+;mission.c:581: DISPLAY_ON;
 	ld	de,#0xFF40
 	ld	a,(de)
 	ld	e,a
@@ -11729,9 +11728,9 @@ _main::
 	ld	b,a
 	ld	l, #0x40
 	ld	(hl),b
-;main.c:582: enable_interrupts();
+;mission.c:582: enable_interrupts();
 	call	_enable_interrupts
-;main.c:585: key_a[2] = 0xd0849af3;
+;mission.c:585: key_a[2] = 0xd0849af3;
 	ld	hl,#(_key_a + 0x0008)
 	ld	(hl),#0xF3
 	inc	hl
@@ -11740,19 +11739,19 @@ _main::
 	ld	(hl),#0x84
 	inc	hl
 	ld	(hl),#0xD0
-;main.c:587: intro_scene();
+;mission.c:587: intro_scene();
 	call	_intro_scene
-;main.c:589: while(1) {
+;mission.c:589: while(1) {
 00106$:
-;main.c:591: sleep(4);
+;mission.c:591: sleep(4);
 	ld	a,#0x04
 	push	af
 	inc	sp
 	call	_sleep
 	inc	sp
-;main.c:592: process_button_press();
+;mission.c:592: process_button_press();
 	call	_process_button_press
-;main.c:594: if (input_seq_ctr == KONAMI_CODE_LEN) {
+;mission.c:594: if (input_seq_ctr == KONAMI_CODE_LEN) {
 	ld	hl,#_input_seq_ctr
 	ld	d,(hl)
 	ld	e,#0x00
@@ -11762,10 +11761,10 @@ _main::
 	ld	a,e
 	or	a, a
 	jr	NZ,00102$
-;main.c:595: check_konami_code();
+;mission.c:595: check_konami_code();
 	call	_check_konami_code
 00102$:
-;main.c:598: if (input_seq_ctr >= SEQ_LEN) {
+;mission.c:598: if (input_seq_ctr >= SEQ_LEN) {
 	ld	hl,#_input_seq_ctr
 	ld	b,(hl)
 	ld	c,#0x00
@@ -11774,7 +11773,7 @@ _main::
 	ld	a,c
 	sbc	a, #0x00
 	jr	C,00106$
-;main.c:600: key_a[3] = 0x04183ac4;
+;mission.c:600: key_a[3] = 0x04183ac4;
 	ld	hl,#(_key_a + 0x000c)
 	ld	(hl),#0xC4
 	inc	hl
@@ -11783,7 +11782,7 @@ _main::
 	ld	(hl),#0x18
 	inc	hl
 	ld	(hl),#0x04
-;main.c:604: check_door_sequence();
+;mission.c:604: check_door_sequence();
 	call	_check_door_sequence
 	jp	00106$
 	ret

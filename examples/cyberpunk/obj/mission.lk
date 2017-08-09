@@ -1,5 +1,5 @@
 -mjwx
--i ./obj/main.ihx
+-i ./obj/mission.ihx
 -b _CODE = 0x0200
 -b _DATA = 0xc0a0
 -k /home/ahris/Dropbox/LinuxDocuments/AdultWork/CTF2017/squareCTF2017/bin/../lib
@@ -8,6 +8,6 @@
 -l gb.lib
 -l gbz80
 /home/ahris/Dropbox/LinuxDocuments/AdultWork/CTF2017/squareCTF2017/bin/../lib/crt0.rel
-./obj/main.rel
+./obj/mission.rel
 
 -e

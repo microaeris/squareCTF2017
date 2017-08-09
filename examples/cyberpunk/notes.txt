@@ -14,6 +14,7 @@ To Do
         * but what if you xor a, ld l,a, dec a, ld h,a and then read ld a,(hl) instead of ld a,($FF00)
     * xor the solution sequence,
     * jump table,
+        Yes. You use a comparison instruction (or simply some math) to get e.g. 0 or 1 in a register. Then you have an unconditional jump to *(some_memory address + your register). Some processors have instructions (e.g. lea on x86) that fit this use-case pretty nicely. I doubt the z80 had anything like that but you can use various instructions to achieve the same result. Does any of this make sense?
 * make a blog post on my website to host this puzzle
 * submit the puzzle
 
@@ -117,11 +118,21 @@ https://en.wikipedia.org/wiki/Tiny_Encryption_Algorithm
 
 ## Story
 
+Night City
+Cyberspace
+
+She is apart of the Turing organization that chases down AIs that are too smart, so like
+the antagonist of the MCs of Neuromancer .
+From Neuromancer! The name of the game should be the name of the AI. Wintermute? lolol.
+The book did refer to another super AI at the end -- that can be my character! ha!
+What else?
+
 She is a hired pen tester. Hacking her way through this VR world.
 She is tracking down a rogue AI who is corrupting the VR world.
 Level 1. street, match the password
 Level 2. computer, fake the network packets to the GB
 Level 3. edit the rom in some way lmao
+
 
 ---
 
@@ -275,3 +286,17 @@ show_long_text() test cases
 // show_long_text("123456789012345.ABCDEFGHIJKL123.123456789012345.ABCDEFGHIJKL123");
 
 ---
+
+README notes
+
+email roulette
+A small stack of files sit in your
+talk about the files: there's a mission rom, a readme, and hints.
+talk about her role as a turing agent - she stops AI.
+
+Tone: excited to jump in.
+
+your workbench is an amiga 500
+open up computer to work - see new mission.
+mission files are the zip folder
+you're ready to jump in, boss walks into you office
